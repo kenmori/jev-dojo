@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:40.981Z"
   },
   "request": {
     "method": "POST",
@@ -53,55 +52,57 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f2baf773c3b9ccca6caced6fd6"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "intent": {
           "type": "choice",
           "choice": "lostItem",
-          "confidence": 0.78,
+          "confidence": 1,
           "probabilities": {
-            "answer": 0.04,
-            "fix": 0.02,
-            "lostItem": 0.92,
+            "answer": 0,
+            "fix": 0,
             "thanks": 0,
-            "none": 0.02
+            "none": 0,
+            "lostItem": 1
           }
         },
         "lostItemFound": {
           "type": "choice",
           "choice": "lost",
-          "confidence": 0.79,
+          "confidence": 0.97,
           "probabilities": {
-            "lost": 0.95,
-            "found": 0.03,
-            "notApplicable": 0.02
+            "found": 0.02,
+            "notApplicable": 0,
+            "lost": 0.98
           }
         },
         "fixNeedsStaffNow": {
           "type": "noul",
-          "noul": 0.21
+          "noul": 0.33
         },
         "answerFromFaq": {
           "type": "score",
-          "score": 0.5,
-          "confidence": 0.18,
+          "score": 0.34,
+          "confidence": 0.49,
           "legend": {
             "0": "FAQ では答えられない。個別の確認が必要",
             "1": "FAQ で一部は答えられる",
             "2": "FAQ でそのまま答えられる"
           },
           "probabilities": {
-            "0": 0.61,
-            "1": 0.28,
-            "2": 0.11
+            "0": 0.79,
+            "1": 0.09,
+            "2": 0.12
           }
         }
       },
       "usage": {
-        "input_tokens": 380,
-        "output_tokens": 0
+        "input_tokens": 802,
+        "output_tokens": 137
       }
     }
   }

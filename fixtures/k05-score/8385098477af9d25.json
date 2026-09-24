@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:10.996Z"
   },
   "request": {
     "method": "POST",
@@ -25,29 +24,31 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f245307d469115bbb58dee9251"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "urgency": {
           "type": "score",
-          "score": 1,
-          "confidence": 0.18,
+          "score": 1.14,
+          "confidence": 0.63,
           "legend": {
             "0": "急がない。お祭りが終わってからの対応でよい",
             "1": "今日中に対応したい",
             "2": "今すぐ対応が必要。人の安全や体調にかかわる"
           },
           "probabilities": {
-            "0": 0.18,
-            "1": 0.64,
-            "2": 0.18
+            "0": 0.05,
+            "1": 0.75,
+            "2": 0.2
           }
         }
       },
       "usage": {
-        "input_tokens": 143,
-        "output_tokens": 0
+        "input_tokens": 415,
+        "output_tokens": 18
       }
     }
   }

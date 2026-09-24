@@ -3,22 +3,22 @@
 <text x="16" y="24" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="15" font-weight="bold" fill="#111827">p11 の担当の確率</text>
 <text x="112" y="59" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">honbu</text>
 <rect x="120" y="47" width="300" height="16" fill="#f3f4f6"/>
-<rect x="120" y="47" width="213.0" height="16" fill="#2563eb"/>
-<text x="428" y="59" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.71</text>
-<text x="112" y="85" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">yatai</text>
+<rect x="120" y="47" width="297.0" height="16" fill="#2563eb"/>
+<text x="428" y="59" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.99</text>
+<text x="112" y="85" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">kyugo</text>
 <rect x="120" y="73" width="300" height="16" fill="#f3f4f6"/>
-<rect x="120" y="73" width="51.0" height="16" fill="#2563eb"/>
-<text x="428" y="85" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.17</text>
-<text x="112" y="111" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">kotsu</text>
+<rect x="120" y="73" width="0.0" height="16" fill="#2563eb"/>
+<text x="428" y="85" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.00</text>
+<text x="112" y="111" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">yatai</text>
 <rect x="120" y="99" width="300" height="16" fill="#f3f4f6"/>
-<rect x="120" y="99" width="24.0" height="16" fill="#2563eb"/>
-<text x="428" y="111" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.08</text>
+<rect x="120" y="99" width="0.0" height="16" fill="#2563eb"/>
+<text x="428" y="111" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.00</text>
 <text x="112" y="137" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">otoshimono</text>
 <rect x="120" y="125" width="300" height="16" fill="#f3f4f6"/>
-<rect x="120" y="125" width="3.0" height="16" fill="#2563eb"/>
-<text x="428" y="137" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.01</text>
-<text x="112" y="163" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">kyugo</text>
+<rect x="120" y="125" width="0.0" height="16" fill="#2563eb"/>
+<text x="428" y="137" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.00</text>
+<text x="112" y="163" text-anchor="end" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">kotsu</text>
 <rect x="120" y="151" width="300" height="16" fill="#f3f4f6"/>
-<rect x="120" y="151" width="9.0" height="16" fill="#2563eb"/>
-<text x="428" y="163" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.03</text>
+<rect x="120" y="151" width="3.0" height="16" fill="#2563eb"/>
+<text x="428" y="163" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#111827">0.01</text>
 </svg>

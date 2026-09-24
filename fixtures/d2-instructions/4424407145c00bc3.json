@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:17.724Z"
   },
   "request": {
     "method": "POST",
@@ -49,17 +48,19 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f25fff786d9ca443b760105cab"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "bare": {
           "type": "noul",
-          "noul": 0.38
+          "noul": 0.47
         },
         "withCriteria": {
           "type": "noul",
-          "noul": 0.61
+          "noul": 0.42
         },
         "structured": {
           "type": "noul",
@@ -67,8 +68,8 @@
         }
       },
       "usage": {
-        "input_tokens": 287,
-        "output_tokens": 0
+        "input_tokens": 602,
+        "output_tokens": 55
       }
     }
   }

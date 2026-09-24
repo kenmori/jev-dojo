@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:52.091Z"
   },
   "request": {
     "method": "POST",
@@ -36,36 +35,38 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f2e5c5722c85d67f093eca768b"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "direction": {
           "type": "choice",
           "choice": "found",
-          "confidence": 0.7,
+          "confidence": 1,
           "probabilities": {
-            "lost": 0.04,
-            "found": 0.92,
-            "neither": 0.04
+            "neither": 0,
+            "lost": 0,
+            "found": 1
           }
         },
         "item": {
           "type": "choice",
           "choice": "key",
-          "confidence": 0.76,
+          "confidence": 1,
           "probabilities": {
-            "bottle": 0.02,
-            "phone": 0.02,
-            "key": 0.92,
-            "wallet": 0.02,
-            "other": 0.02
+            "other": 0,
+            "phone": 0,
+            "bottle": 0,
+            "wallet": 0,
+            "key": 1
           }
         }
       },
       "usage": {
-        "input_tokens": 188,
-        "output_tokens": 0
+        "input_tokens": 527,
+        "output_tokens": 90
       }
     }
   }

@@ -18,10 +18,10 @@
 <rect x="60.0" y="80.7" width="22.0" height="183.3" fill="#2563eb"/>
 <rect x="84.0" y="80.7" width="22.0" height="183.3" fill="#f59e0b"/>
 <text x="84" y="282" text-anchor="middle" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">苦情</text>
-<rect x="132.0" y="80.7" width="22.0" height="183.3" fill="#2563eb"/>
-<rect x="156.0" y="80.7" width="22.0" height="183.3" fill="#f59e0b"/>
+<rect x="132.0" y="70.7" width="22.0" height="193.3" fill="#2563eb"/>
+<rect x="156.0" y="70.7" width="22.0" height="193.3" fill="#f59e0b"/>
 <text x="156" y="282" text-anchor="middle" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">担当</text>
-<rect x="204.0" y="70.7" width="22.0" height="193.3" fill="#2563eb"/>
-<rect x="228.0" y="70.7" width="22.0" height="193.3" fill="#f59e0b"/>
+<rect x="204.0" y="107.3" width="22.0" height="156.7" fill="#2563eb"/>
+<rect x="228.0" y="104.0" width="22.0" height="160.0" fill="#f59e0b"/>
 <text x="228" y="282" text-anchor="middle" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">緊急度</text>
 </svg>

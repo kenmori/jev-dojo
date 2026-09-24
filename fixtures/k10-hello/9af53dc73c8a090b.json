@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:02.805Z"
   },
   "request": {
     "method": "POST",
@@ -20,18 +19,20 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f2250e7747b91ebf1fb29958c7"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "isQuestion": {
           "type": "noul",
-          "noul": 0.97
+          "noul": 0.52
         }
       },
       "usage": {
-        "input_tokens": 62,
-        "output_tokens": 0
+        "input_tokens": 299,
+        "output_tokens": 23
       }
     }
   }

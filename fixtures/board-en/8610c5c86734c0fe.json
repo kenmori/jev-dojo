@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:29.825Z"
   },
   "request": {
     "method": "POST",
@@ -45,46 +44,48 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f28e3d7f3a9907023b5dd1c8d0"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "isComplaint": {
           "type": "noul",
-          "noul": 0.93
+          "noul": 0.85
         },
         "department": {
           "type": "choice",
-          "choice": "kyugo",
-          "confidence": 0.48,
+          "choice": "honbu",
+          "confidence": 0.71,
           "probabilities": {
-            "honbu": 0.06,
-            "yatai": 0.04,
-            "kotsu": 0.05,
-            "otoshimono": 0.04,
-            "kyugo": 0.76,
-            "sonota": 0.05
+            "sonota": 0.04,
+            "honbu": 0.76,
+            "otoshimono": 0,
+            "yatai": 0,
+            "kotsu": 0.19,
+            "kyugo": 0.01
           }
         },
         "urgency": {
           "type": "score",
-          "score": 0.42,
-          "confidence": 0.32,
+          "score": 0.47,
+          "confidence": 0.29,
           "legend": {
             "0": "急がない。後日の対応や、手の空いたときの返信でよい",
             "1": "今日中に対応したい。いま困っている人がいる、または放っておくと悪化する",
             "2": "今すぐ対応が必要。人の安全や体調にかかわる"
           },
           "probabilities": {
-            "0": 0.74,
-            "1": 0.1,
-            "2": 0.16
+            "0": 0.57,
+            "1": 0.38,
+            "2": 0.05
           }
         }
       },
       "usage": {
-        "input_tokens": 368,
-        "output_tokens": 0
+        "input_tokens": 755,
+        "output_tokens": 101
       }
     }
   }

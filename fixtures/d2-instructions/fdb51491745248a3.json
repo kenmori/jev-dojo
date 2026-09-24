@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:18.372Z"
   },
   "request": {
     "method": "POST",
@@ -39,39 +38,41 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f262a774c2b416d80d02b91b00"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "without": {
           "type": "choice",
           "choice": "honbu",
-          "confidence": 0.16,
+          "confidence": 0.99,
           "probabilities": {
-            "honbu": 0.46,
-            "yatai": 0.22,
-            "kotsu": 0.08,
-            "otoshimono": 0.05,
-            "kyugo": 0.19
+            "kotsu": 0,
+            "otoshimono": 0,
+            "yatai": 0.01,
+            "kyugo": 0,
+            "honbu": 0.99
           }
         },
         "withOther": {
           "type": "choice",
           "choice": "sonota",
-          "confidence": 0.64,
+          "confidence": 1,
           "probabilities": {
-            "honbu": 0.08,
-            "yatai": 0.04,
-            "kotsu": 0.02,
-            "otoshimono": 0.01,
-            "kyugo": 0.01,
-            "sonota": 0.84
+            "kotsu": 0,
+            "otoshimono": 0,
+            "yatai": 0,
+            "honbu": 0,
+            "sonota": 1,
+            "kyugo": 0
           }
         }
       },
       "usage": {
-        "input_tokens": 282,
-        "output_tokens": 0
+        "input_tokens": 727,
+        "output_tokens": 127
       }
     }
   }

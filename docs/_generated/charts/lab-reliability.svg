@@ -24,14 +24,16 @@
 <line x1="56" y1="324" x2="316" y2="64" stroke="#9ca3af" stroke-dasharray="4 4"/>
 <text x="186" y="360" text-anchor="middle" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151">予測した確率</text>
 <text x="16" y="194" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="12" fill="#374151" transform="rotate(-90 16 194)" text-anchor="middle">実際の割合</text>
-<polyline fill="none" stroke="#2563eb" stroke-width="2" points="77.9,307.8 124.5,276.7 236.4,96.5 295.5,64.0"/>
-<circle cx="77.9" cy="307.8" r="8.7" fill="#2563eb" fill-opacity="0.7"/>
-<circle cx="124.5" cy="276.7" r="6.3" fill="#2563eb" fill-opacity="0.7"/>
-<circle cx="236.4" cy="96.5" r="5.8" fill="#2563eb" fill-opacity="0.7"/>
-<circle cx="295.5" cy="64.0" r="6.0" fill="#2563eb" fill-opacity="0.7"/>
-<polyline fill="none" stroke="#f59e0b" stroke-width="2" points="77.9,307.8 124.5,276.7 236.4,96.5 295.5,64.0"/>
-<circle cx="77.9" cy="307.8" r="8.7" fill="#f59e0b" fill-opacity="0.7"/>
-<circle cx="124.5" cy="276.7" r="6.3" fill="#f59e0b" fill-opacity="0.7"/>
-<circle cx="236.4" cy="96.5" r="5.8" fill="#f59e0b" fill-opacity="0.7"/>
-<circle cx="295.5" cy="64.0" r="6.0" fill="#f59e0b" fill-opacity="0.7"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="2" points="67.9,317.3 116.7,237.3 180.8,64.0 225.0,64.0 291.2,64.0"/>
+<circle cx="67.9" cy="317.3" r="9.0" fill="#2563eb" fill-opacity="0.7"/>
+<circle cx="116.7" cy="237.3" r="4.7" fill="#2563eb" fill-opacity="0.7"/>
+<circle cx="180.8" cy="64.0" r="5.0" fill="#2563eb" fill-opacity="0.7"/>
+<circle cx="225.0" cy="64.0" r="4.7" fill="#2563eb" fill-opacity="0.7"/>
+<circle cx="291.2" cy="64.0" r="6.3" fill="#2563eb" fill-opacity="0.7"/>
+<polyline fill="none" stroke="#f59e0b" stroke-width="2" points="70.5,317.3 128.8,194.0 180.8,64.0 238.0,64.0 291.6,64.0"/>
+<circle cx="70.5" cy="317.3" r="9.0" fill="#f59e0b" fill-opacity="0.7"/>
+<circle cx="128.8" cy="194.0" r="5.0" fill="#f59e0b" fill-opacity="0.7"/>
+<circle cx="180.8" cy="64.0" r="5.0" fill="#f59e0b" fill-opacity="0.7"/>
+<circle cx="238.0" cy="64.0" r="4.7" fill="#f59e0b" fill-opacity="0.7"/>
+<circle cx="291.6" cy="64.0" r="6.2" fill="#f59e0b" fill-opacity="0.7"/>
 </svg>

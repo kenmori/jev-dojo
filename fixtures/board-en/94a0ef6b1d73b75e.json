@@ -1,8 +1,7 @@
 {
   "meta": {
-    "source": "synthetic",
-    "recordedAt": null,
-    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+    "source": "live",
+    "recordedAt": "2026-09-24T05:45:30.911Z"
   },
   "request": {
     "method": "POST",
@@ -45,31 +44,33 @@
   },
   "response": {
     "status": 200,
-    "headers": {},
+    "headers": {
+      "x-typesafe-request-id": "req_01a0d1f28bb37967a7756161217367bd"
+    },
     "body": {
       "model": "jev-1.13.0",
       "answers": {
         "isComplaint": {
           "type": "noul",
-          "noul": 0.9
+          "noul": 0.43
         },
         "department": {
           "type": "choice",
           "choice": "kyugo",
-          "confidence": 0.68,
+          "confidence": 0.99,
           "probabilities": {
-            "honbu": 0.01,
-            "yatai": 0.05,
-            "kotsu": 0.02,
-            "otoshimono": 0.02,
-            "kyugo": 0.87,
-            "sonota": 0.03
+            "kotsu": 0,
+            "honbu": 0,
+            "kyugo": 0.99,
+            "otoshimono": 0,
+            "sonota": 0.01,
+            "yatai": 0
           }
         },
         "urgency": {
           "type": "score",
-          "score": 1.02,
-          "confidence": 0.91,
+          "score": 1.92,
+          "confidence": 0.88,
           "legend": {
             "0": "急がない。後日の対応や、手の空いたときの返信でよい",
             "1": "今日中に対応したい。いま困っている人がいる、または放っておくと悪化する",
@@ -77,14 +78,14 @@
           },
           "probabilities": {
             "0": 0,
-            "1": 0.98,
-            "2": 0.02
+            "1": 0.07,
+            "2": 0.93
           }
         }
       },
       "usage": {
-        "input_tokens": 375,
-        "output_tokens": 0
+        "input_tokens": 758,
+        "output_tokens": 101
       }
     }
   }
