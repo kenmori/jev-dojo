@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Quick start](https://docs.typesafe.ai/introduction/quickstart) / [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript)
 - この章でできるようになること: `git clone` → `npm install` → `npm run check` が通る
 
-## APIキーがなくても、記録済みの答えで全章が動く
+## APIキーがなくても、記録済みの答えでサンプルが動く
 
 🔴 揮発
 
@@ -21,7 +21,7 @@ APIキーを取る前に、まず手元で動くところまで進めます。
 git clone https://github.com/kenmori/jev-dojo
 cd jev-dojo
 npm install
-npm run demo     # 全章のサンプルを再生。APIキー不要・費用ゼロ
+npm run demo     # 17章分のサンプルを続けて再生。APIキー不要・費用ゼロ
 npm run check    # 型チェック・lint・テスト。全部緑になれば準備完了
 ```
 

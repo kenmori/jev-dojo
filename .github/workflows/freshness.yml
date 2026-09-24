@@ -103,8 +103,11 @@ jobs:
       - uses: lycheeverse/lychee-action@v2
         id: lychee
         with:
-          args: --no-progress --exclude-path node_modules README.md plan.md "docs/**/*.md"
+          # チェック対象を先に並べる（--exclude-path の後ろに置くと、除外するパスとして読まれる）
+          args: --no-progress README.md plan.md "docs/**/*.md"
           fail: false
       - name: リンク切れがあれば Issue
         if: steps.lychee.outputs.exit_code != '0'
-        run: gh issue create --title "freshness: リンク切れがあります（$(date -u +%F)）" --body-file ./lychee/out.md
+        # 値に「: 」を含むので、ブロック形式で書く（1行で書くと YAML として解釈できなくなる）
+        run: |
+          gh issue create --title "freshness: リンク切れがあります（$(date -u +%F)）" --body-file ./lychee/out.md

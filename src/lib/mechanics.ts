@@ -5,7 +5,8 @@
 
 /** シャノンエントロピー（自然対数）。分布が平らなほど大きい */
 export function entropy(probabilities: number[]): number {
-  return -probabilities.filter((p) => p > 0).reduce((acc, p) => acc + p * Math.log(p), 0);
+  // 0 - x にするのは、確率が一か所に集中したとき -0 ではなく 0 を返すため
+  return 0 - probabilities.filter((p) => p > 0).reduce((acc, p) => acc + p * Math.log(p), 0);
 }
 
 /**
