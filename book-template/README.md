@@ -33,6 +33,7 @@ npm run epub -- --book ../jev-dojo-book    # dist/jev-dojo-book.epub ができ�
 - 「もっと深く（プロ向け）」の折りたたみは、囲みの節として展開する
 - 賞味期限の目印は消す
 - 章どうしのリンクは本の中のリンクに、リポジトリのコードへのリンクは GitHub の URL になる
+- `{{facts.lastVerified}}` や `{{facts.model.pinned}}` と書くと、`data/facts.json` の値（検証日・モデルのバージョンなど）が入る。改訂のときに本文を直し忘れない
 - 本文中で `repo:` から始まるパスを使うと、リポジトリのファイル（生成されたグラフなど）を指せる
 
 ## 入稿の前に

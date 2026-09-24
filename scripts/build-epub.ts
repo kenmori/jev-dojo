@@ -16,6 +16,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, extname, join, normalize, relative, resolve } from "node:path";
 import JSZip from "jszip";
 import { marked } from "marked";
+import facts from "../data/facts.json" with { type: "json" };
 import pkg from "../package.json" with { type: "json" };
 import { ROOT } from "../src/lib/fixtures.js";
 import { LANG, type Lang, t } from "../src/lib/i18n.js";
@@ -88,6 +89,27 @@ export function stableIdentifier(m: BookManifest): string {
  * - 折りたたみ（もっと深く）は、普通の囲みの節にする
  * - 章どうしのリンクは EPUB 内のファイルへ、それ以外のリポジトリ内のファイルは GitHub へ
  */
+/**
+ * 原稿の `{{facts.model.pinned}}` のような書き方を、data/facts.json の値に置き換える。
+ * 検証日やモデルのバージョンを本文に手で書かずにすむ（改訂のときに直し忘れない）。
+ */
+export function fillFacts(markdown: string, source: unknown = facts): string {
+  return markdown.replace(/\{\{facts\.([\w.]+)\}\}/g, (_, key: string) => {
+    const value = key
+      .split(".")
+      .reduce<unknown>(
+        (v, k) => (v && typeof v === "object" ? (v as Record<string, unknown>)[k] : undefined),
+        source,
+      );
+    if (value === undefined || (typeof value === "object" && value !== null)) {
+      throw new Error(
+        t(`data/facts.json に「${key}」がありません`, `"${key}" is not a value in data/facts.json`),
+      );
+    }
+    return String(value);
+  });
+}
+
 export function prepareMarkdown(
   markdown: string,
   path: string,
@@ -95,7 +117,7 @@ export function prepareMarkdown(
 ): { markdown: string; images: string[] } {
   const images: string[] = [];
   const dir = dirname(path);
-  const md = markdown
+  const md = fillFacts(markdown)
     .replace(/^<!-- freshness: [\w-]+ -->\n?/gm, "")
     .replace(
       /<details><summary>(.*?)<\/summary>/g,

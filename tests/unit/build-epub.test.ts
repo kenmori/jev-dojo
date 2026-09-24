@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   contentOpf,
   defaultManifest,
+  fillFacts,
   navXhtml,
   prepareMarkdown,
   resolveChapters,
@@ -82,5 +83,18 @@ describe("build-epub", () => {
     expect(navXhtml("en", [{ title: "Kyu 10", xhtml: "ch01.xhtml" }])).toContain(
       '<a href="text/ch01.xhtml">Kyu 10</a>',
     );
+  });
+});
+
+describe("fillFacts", () => {
+  it("{{facts.…}} を facts.json の値に置き換える", () => {
+    const src = { lastVerified: "2026-01-01", model: { pinned: "jev-9" } };
+    expect(fillFacts("検証日 {{facts.lastVerified}}／{{facts.model.pinned}}", src)).toBe(
+      "検証日 2026-01-01／jev-9",
+    );
+  });
+  it("ない値やオブジェクトはエラーにする", () => {
+    expect(() => fillFacts("{{facts.nope}}", {})).toThrow();
+    expect(() => fillFacts("{{facts.model}}", { model: { a: 1 } })).toThrow();
   });
 });
