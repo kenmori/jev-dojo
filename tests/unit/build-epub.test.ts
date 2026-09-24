@@ -7,6 +7,7 @@ import {
   defaultManifest,
   fillFacts,
   groupByPart,
+  insertKeyVisual,
   navXhtml,
   prepareMarkdown,
   resolveChapters,
@@ -127,6 +128,16 @@ describe("目次", () => {
     expect(page).toContain('<p class="toc-part">第1部</p>');
     expect(page).toContain('<a href="ch03.xhtml">第2章</a>');
     expect(page).not.toContain("sec-1");
+  });
+});
+
+describe("insertKeyVisual", () => {
+  it("章の見出しのすぐ下に画像を入れ、ほかの見出しには入れない", () => {
+    const md = "# 第5章 Noul\n\n本文\n\n## 節\n";
+    const out = insertKeyVisual(md, "../images/ch05-key.png", "第5章 Noulの扉の絵");
+    expect(out).toBe(
+      "# 第5章 Noul\n\n![第5章 Noulの扉の絵](../images/ch05-key.png)\n\n\n本文\n\n## 節\n",
+    );
   });
 });
 

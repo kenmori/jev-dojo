@@ -13,7 +13,7 @@
  */
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, extname, join, normalize, relative, resolve } from "node:path";
+import { basename, dirname, extname, join, normalize, relative, resolve } from "node:path";
 import JSZip from "jszip";
 import { marked } from "marked";
 import facts from "../data/facts.json" with { type: "json" };
@@ -39,6 +39,11 @@ export interface BookManifest {
   cover?: string;
   /** 章の並び。"repo:docs/..." はこのリポジトリのファイル、それ以外は book.json からの相対パス */
   chapters: { src: string; part?: string }[];
+  /**
+   * 章の扉に置くキービジュアルの場所（book.json からの相対パス）。{nn} は章のファイル名の先頭の番号
+   * （chapters/05-noul.md なら 05）に置き換わる。ファイルがある章だけ、見出しのすぐ下に入る
+   */
+  keyVisual?: string;
   /** 出力ファイル名（dist/ の下） */
   output?: string;
 }
@@ -50,6 +55,8 @@ export interface ResolvedChapter {
   xhtml: string;
   /** この章から始まる部の名前（目次で章をまとめる） */
   part?: string;
+  /** 章の扉に置くキービジュアル（絶対パス。ファイルがあるときだけ） */
+  keyVisual?: string;
 }
 
 /** 目次の 1 項目。sections は章の中の見出し（h2） */
@@ -84,7 +91,20 @@ export function resolveChapters(m: BookManifest, bookDir: string): ResolvedChapt
     path: resolveSrc(c.src, bookDir),
     xhtml: `ch${String(i + 1).padStart(2, "0")}.xhtml`,
     ...(c.part !== undefined ? { part: c.part } : {}),
+    ...keyVisualFor(m, c.src, bookDir),
   }));
+}
+
+function keyVisualFor(m: BookManifest, src: string, bookDir: string): { keyVisual?: string } {
+  const nn = basename(src).match(/^(\d+)/)?.[1];
+  if (!m.keyVisual || !nn) return {};
+  const file = resolve(bookDir, m.keyVisual.replaceAll("{nn}", nn));
+  return existsSync(file) ? { keyVisual: file } : {};
+}
+
+/** 章の見出し（最初の # の行）のすぐ下に、キービジュアルの画像を入れる */
+export function insertKeyVisual(markdown: string, imagePath: string, alt: string): string {
+  return markdown.replace(/^(# .+)$/m, `$1\n\n![${alt}](${imagePath})\n`);
 }
 
 /** タイトルと著者から、版をまたいで変わらない urn:uuid を作る */
@@ -415,7 +435,19 @@ async function main() {
       .join("");
 
     for (const [i, c] of chapters.entries()) {
-      const prepared = prepareMarkdown(readFileSync(c.path, "utf8"), c.path, byPath);
+      const source = readFileSync(c.path, "utf8");
+      const chapterTitle = source.match(/^# (.+)$/m)?.[1]?.trim() ?? "";
+      const prepared = prepareMarkdown(
+        c.keyVisual
+          ? insertKeyVisual(
+              source,
+              relative(dirname(c.path), c.keyVisual),
+              `${chapterTitle}の扉の絵`,
+            )
+          : source,
+        c.path,
+        byPath,
+      );
       let html = (marked.parse(prepared.markdown, { async: false }) as string).replace(
         /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
         (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
