@@ -1,0 +1,41 @@
+{
+  "name": "jev-dojo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Jev（TypeSafe AI の System One モデル）を級・段で学ぶハンズオン教材",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "demo": "JEV_MODE=replay tsx src/demo.ts",
+    "doctor": "tsx src/doctor.ts",
+    "k10": "tsx src/steps/k10-hello.ts",
+    "k08": "tsx src/steps/k08-raw.ts",
+    "k07": "tsx src/steps/k07-noul.ts",
+    "k06": "tsx src/steps/k06-choice.ts",
+    "k05": "tsx src/steps/k05-score.ts",
+    "k04": "tsx src/steps/k04-batch.ts",
+    "record": "tsx scripts/record.ts",
+    "facts": "tsx scripts/render-facts.ts",
+    "facts:verify": "tsx scripts/verify-facts.ts",
+    "docmap": "tsx scripts/sync-doc-map.ts",
+    "lint": "biome check . && tsx scripts/lint-docs.ts",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project unit --project contract",
+    "test:eval": "vitest run --project eval",
+    "check": "npm run typecheck && npm run lint && tsx scripts/render-facts.ts --check && npm test"
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "0.6.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.1"
+  }
+}

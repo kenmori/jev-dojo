@@ -1,0 +1,4 @@
+{
+  "meta": { "source": "synthetic", "recordedAt": null, "note": "リクエストの形が不正なときの見本。本文の形は実APIと異なる可能性がある" },
+  "response": { "status": 422, "headers": {}, "body": { "error": { "message": "questions.department.criteria: expected an object" } } }
+}

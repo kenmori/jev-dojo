@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "model": "jev-1.13.0",
+      "state": "ボランティアの集合時間は何時ですか？",
+      "questions": {
+        "isQuestion": {
+          "type": "noul",
+          "instructions": "この投稿は、運営への質問ですか？"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isQuestion": {
+          "type": "noul",
+          "noul": 0.98
+        }
+      },
+      "usage": {
+        "input_tokens": 64,
+        "output_tokens": 0
+      }
+    }
+  }
+}

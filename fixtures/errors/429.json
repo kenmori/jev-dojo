@@ -1,0 +1,4 @@
+{
+  "meta": { "source": "synthetic", "recordedAt": null, "note": "レート制限に当たったときの見本。本文の形は実APIと異なる可能性がある" },
+  "response": { "status": 429, "headers": { "retry-after-ms": "10" }, "body": { "error": { "message": "Rate limit exceeded" } } }
+}

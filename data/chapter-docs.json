@@ -1,0 +1,61 @@
+{
+  "baseUrl": "https://docs.typesafe.ai",
+  "chapters": [
+    {
+      "chapter": "10級",
+      "file": "docs/kyu/10-what-is-jev.md",
+      "paths": ["/introduction", "/concepts/system-one"]
+    },
+    {
+      "chapter": "9級",
+      "file": "docs/kyu/09-setup.md",
+      "paths": ["/introduction/quickstart", "/sdk/javascript"]
+    },
+    {
+      "chapter": "8級",
+      "file": "docs/kyu/08-first-call.md",
+      "paths": ["/introduction/quickstart", "/api"]
+    },
+    {
+      "chapter": "7級",
+      "file": "docs/kyu/07-noul.md",
+      "paths": ["/primitives", "/primitives/noul"]
+    },
+    {
+      "chapter": "6級",
+      "file": "docs/kyu/06-choice.md",
+      "paths": ["/primitives", "/primitives/choice"]
+    },
+    {
+      "chapter": "5級",
+      "file": "docs/kyu/05-score.md",
+      "paths": ["/primitives", "/primitives/score"]
+    },
+    {
+      "chapter": "4級",
+      "file": "docs/kyu/04-batch.md",
+      "paths": ["/patterns/fan-out", "/cookbooks/parallel_questions"]
+    },
+    { "chapter": "初段", "file": null, "paths": ["/concepts/state"] },
+    { "chapter": "二段", "file": null, "paths": ["/primitives/advanced"] },
+    { "chapter": "三段", "file": null, "paths": ["/confidence", "/patterns/confidence-routing"] },
+    {
+      "chapter": "四段",
+      "file": null,
+      "paths": ["/patterns", "/patterns/composite-scoring", "/patterns/intent-routing"]
+    },
+    { "chapter": "五段", "file": null, "paths": ["/concepts/how-to-build-with-system-one"] },
+    {
+      "chapter": "六〜七段",
+      "file": null,
+      "paths": [
+        "/introduction/machine-learning-primer",
+        "/cookbooks/classification_using_confidence"
+      ]
+    },
+    { "chapter": "八段", "file": null, "paths": ["/models", "/model-jaggedness/jev-1.13"] },
+    { "chapter": "九段", "file": null, "paths": ["/models", "/api", "/sdk/javascript"] },
+    { "chapter": "十段", "file": null, "paths": ["/model-jaggedness/jev-1.13", "/legal"] },
+    { "chapter": "応用D", "file": null, "paths": ["/agent-skill"] }
+  ]
+}

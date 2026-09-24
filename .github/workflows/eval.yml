@@ -1,0 +1,57 @@
+# 週次のライブ評価。キーあり。結果は「合否」ではなく「記録」（plan.md §7.3, §8）
+name: eval
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # 毎週月曜 09:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      - name: キーの確認
+        run: |
+          if [ -z "$TYPESAFE_API_KEY" ]; then
+            echo "::warning::TYPESAFE_API_KEY が未設定のため eval をスキップします"
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: ライブ評価
+        id: eval
+        if: env.SKIP != '1'
+        continue-on-error: true
+        run: EVAL_WRITE_HISTORY=1 npm run test:eval
+
+      - name: 失敗したら Issue を立てる
+        if: env.SKIP != '1' && steps.eval.outcome == 'failure'
+        run: |
+          title="eval: ライブ評価が失敗しました"
+          if [ -z "$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+            gh issue create --title "$title" --body "実行ログ: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+
+      - name: 履歴を PR にする
+        if: env.SKIP != '1'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/eval-history
+          commit-message: "chore: eval 履歴を更新"
+          title: "chore: eval 履歴を更新"
+          body: 週次のライブ評価の結果を `docs/_generated/eval-history.md` に追記しました。
+          add-paths: docs/_generated/eval-history.md

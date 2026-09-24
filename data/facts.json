@@ -1,0 +1,10 @@
+{
+  "lastVerified": "2026-09-24",
+  "model": { "pinned": "jev-1.13.0", "aliases": ["jev-latest", "jev-preview"] },
+  "pricing": { "inputPerMtok": 0.042, "outputPerMtok": 0 },
+  "rateLimits": { "tokensPerSecond": 250000, "requestsPerMinute": 1200 },
+  "context": { "totalTokens": 65536, "statePlusLongestQuestion": 32768 },
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "sdk": { "js": "@typesafe-ai/sdk", "jsVersion": "0.6.0", "python": "typesafe-sdk" },
+  "signup": { "waitlist": false, "startingCredit": "$5" }
+}
