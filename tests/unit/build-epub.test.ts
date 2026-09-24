@@ -151,8 +151,12 @@ describe("applyFootnotes", () => {
     expect(out).toContain('href="#fn-2" id="fnref-2">※2</a>');
     expect(out).toContain('href="#fn-1" id="fnref-3">※1</a>');
     expect(out).toContain(
-      '<aside class="footnote" epub:type="footnote" id="fn-1"><p>※1　モデル</p></aside>',
+      '<p class="footnote" epub:type="endnote" id="fn-1"><a href="#fnref-1">※1</a>　モデル</p>',
     );
+    // 2 つ目の注は、本文で最初に出てきた ※2（fnref-2）へ戻る
+    expect(out).toContain('<a href="#fnref-2">※2</a>　窓口');
+    expect(out).toContain('<section class="footnotes" epub:type="endnotes">');
+    expect(out).not.toContain("<aside");
     expect(out).not.toContain("[^b]:");
   });
   it("説明のない注はエラーにする", () => {

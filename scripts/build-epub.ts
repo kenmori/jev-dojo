@@ -136,21 +136,27 @@ export function applyFootnotes(markdown: string): string {
     },
   );
   const order: string[] = [];
+  /** 注ごとに、本文で最初に出てきた場所（注から戻るリンクの行き先） */
+  const firstRef = new Map<string, number>();
   let refs = 0;
   const withRefs = body.replace(/\[\^([\w-]+)\]/g, (_m, key: string) => {
     if (!defs.has(key)) throw new Error(`脚注の説明がありません: [^${key}]`);
     let n = order.indexOf(key) + 1;
     if (n === 0) n = order.push(key);
-    return `<a class="noteref" epub:type="noteref" href="#fn-${n}" id="fnref-${++refs}">※${n}</a>`;
+    refs += 1;
+    if (!firstRef.has(key)) firstRef.set(key, refs);
+    return `<a class="noteref" epub:type="noteref" href="#fn-${n}" id="fnref-${refs}">※${n}</a>`;
   });
   if (order.length === 0) return withRefs;
   const notes = order
     .map(
       (key, i) =>
-        `<aside class="footnote" epub:type="footnote" id="fn-${i + 1}"><p>※${i + 1}　${marked.parseInline(defs.get(key) ?? "", { async: false }) as string}</p></aside>`,
+        // aside＋footnote にすると、Apple Books などは中身を隠してポップアップだけにする。
+        // 章末の「注」を必ず読めるよう、ふつうの段落＋endnote にし、番号から本文へ戻れるようにする
+        `<p class="footnote" epub:type="endnote" id="fn-${i + 1}"><a href="#fnref-${firstRef.get(key)}">※${i + 1}</a>　${marked.parseInline(defs.get(key) ?? "", { async: false }) as string}</p>`,
     )
     .join("\n");
-  return `${withRefs.trimEnd()}\n\n<section class="footnotes" epub:type="footnotes">\n<p class="footnotes-title">注</p>\n${notes}\n</section>\n`;
+  return `${withRefs.trimEnd()}\n\n<section class="footnotes" epub:type="endnotes">\n<p class="footnotes-title">注</p>\n${notes}\n</section>\n`;
 }
 
 export function prepareMarkdown(
@@ -212,7 +218,7 @@ img { max-width: 100%; }
 a.noteref { font-size: 0.75em; vertical-align: super; text-decoration: none; }
 .footnotes { margin-top: 2em; border-top: 1px solid #999; font-size: 0.85em; }
 .footnotes-title { font-weight: bold; }
-aside.footnote p { margin: 0.4em 0; }
+p.footnote { margin: 0.4em 0; }
 `;
 
 const esc = (s: string) =>
