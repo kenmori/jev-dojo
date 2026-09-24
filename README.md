@@ -70,6 +70,8 @@ flowchart LR
 | `npm run d1` 〜 `npm run d10` | 段・高段のサンプルを実行 |
 | `npm run ob` | 応用B（Jev ＋ Claude） |
 | `npm run okugi` | 記録済みの応答から、答えの「形」の性質を検証する（奥義） |
+| `npm run show -- p22` | 1 件の投稿について、記録済みの答えを全部表示する（三段〜八段） |
+| `npm run lab:complaint` | 苦情の質問を直す前と後を、同じリクエストで比べる（APIキーが必要） |
 | `npm run exam` | 免許皆伝の最終試験を採点する |
 | `npm run pdf` | 教材本文から PDF 版を作る（`dist/jev-dojo.pdf`。Chrome / Chromium が必要）。`JEV_LANG=en` を付けると英語版（`dist/jev-dojo.en.pdf`） |
 | `npm run label` | 評価データに自分でラベルを付ける（六段） |

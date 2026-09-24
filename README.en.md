@@ -74,6 +74,8 @@ The full list of chapters is in [docs/en/00-index.md](docs/en/00-index.md).
 | `npm run d1` to `npm run d10` | Runs the Dan and high Dan samples |
 | `npm run ob` | Advanced B (Jev + Claude) |
 | `npm run okugi` | Checks properties of the "shape" of answers from recorded responses (Okugi) |
+| `npm run show -- p22` | Shows every recorded answer for one post (3rd–8th Dan) |
+| `npm run lab:complaint` | Compares the complaint question before and after a fix, in the same request (needs an API key) |
 | `npm run exam` | Grades the final exam |
 | `JEV_LANG=en npm run pdf` | Builds the English PDF from the course text (`dist/jev-dojo.en.pdf`; needs Chrome / Chromium). Without `JEV_LANG=en` it builds the Japanese PDF |
 | `npm run label` | Label the evaluation dataset yourself (6th Dan) |
