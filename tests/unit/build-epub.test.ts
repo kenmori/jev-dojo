@@ -6,10 +6,12 @@ import {
   contentOpf,
   defaultManifest,
   fillFacts,
+  groupByPart,
   navXhtml,
   prepareMarkdown,
   resolveChapters,
   stableIdentifier,
+  tocPageBody,
 } from "../../scripts/build-epub.js";
 import { ROOT } from "../../src/lib/fixtures.js";
 
@@ -84,6 +86,47 @@ describe("build-epub", () => {
     expect(navXhtml("en", [{ title: "Kyu 10", xhtml: "ch01.xhtml" }])).toContain(
       '<a href="text/ch01.xhtml">Kyu 10</a>',
     );
+  });
+});
+
+describe("目次", () => {
+  const entries = [
+    { title: "はじめに", xhtml: "ch01.xhtml" },
+    {
+      title: "第1章",
+      xhtml: "ch02.xhtml",
+      part: "第1部",
+      sections: [{ title: "節 & 1", id: "sec-1" }],
+    },
+    { title: "第2章", xhtml: "ch03.xhtml" },
+    { title: "付録A", xhtml: "ch04.xhtml", part: "付録" },
+    { title: "奥付", xhtml: "ch05.xhtml", part: "" },
+  ];
+
+  it("part のある章から部が始まり、空文字の章は部の外に出る", () => {
+    expect(groupByPart(entries).map((g) => [g.part, g.chapters.map((c) => c.title)])).toEqual([
+      [undefined, ["はじめに"]],
+      ["第1部", ["第1章", "第2章"]],
+      ["付録", ["付録A"]],
+      [undefined, ["奥付"]],
+    ]);
+  });
+
+  it("メニューの目次は部 → 章 → 見出しの入れ子にし、landmarks を付ける", () => {
+    const nav = navXhtml("ja", entries, [{ type: "toc", href: "text/toc.xhtml", title: "目次" }]);
+    expect(nav).toContain(
+      '<li><a href="text/ch02.xhtml">第1部</a><ol><li><a href="text/ch02.xhtml">第1章</a>',
+    );
+    expect(nav).toContain('<a href="text/ch02.xhtml#sec-1">節 &amp; 1</a>');
+    expect(nav).toContain('<nav epub:type="landmarks"');
+    expect(nav).toContain('<a epub:type="toc" href="text/toc.xhtml">目次</a>');
+  });
+
+  it("目次のページは部 → 章の 2 段で、見出しは入れない", () => {
+    const page = tocPageBody("ja", entries);
+    expect(page).toContain('<p class="toc-part">第1部</p>');
+    expect(page).toContain('<a href="ch03.xhtml">第2章</a>');
+    expect(page).not.toContain("sec-1");
   });
 });
 

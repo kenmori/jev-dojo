@@ -38,7 +38,7 @@ export interface BookManifest {
   /** 表紙の画像（book.json からの相対パス）。KDP では表紙は別途アップロードもできる */
   cover?: string;
   /** 章の並び。"repo:docs/..." はこのリポジトリのファイル、それ以外は book.json からの相対パス */
-  chapters: { src: string }[];
+  chapters: { src: string; part?: string }[];
   /** 出力ファイル名（dist/ の下） */
   output?: string;
 }
@@ -48,6 +48,16 @@ export interface ResolvedChapter {
   path: string;
   /** EPUB 内のファイル名 */
   xhtml: string;
+  /** この章から始まる部の名前（目次で章をまとめる） */
+  part?: string;
+}
+
+/** 目次の 1 項目。sections は章の中の見出し（h2） */
+export interface TocEntry {
+  title: string;
+  xhtml: string;
+  part?: string;
+  sections?: { title: string; id: string }[];
 }
 
 /** 公開中の教材だけで作る、試し刷り用の book.json */
@@ -73,6 +83,7 @@ export function resolveChapters(m: BookManifest, bookDir: string): ResolvedChapt
   return m.chapters.map((c, i) => ({
     path: resolveSrc(c.src, bookDir),
     xhtml: `ch${String(i + 1).padStart(2, "0")}.xhtml`,
+    ...(c.part !== undefined ? { part: c.part } : {}),
   }));
 }
 
@@ -179,6 +190,9 @@ export function prepareMarkdown(
 const CSS = `
 body { line-height: 1.7; }
 h1 { font-size: 1.5em; margin: 0 0 1em; }
+.toc-part { font-weight: bold; margin: 1.2em 0 0.3em; }
+ul.toc { list-style: none; margin: 0; padding-left: 1em; }
+ul.toc li { margin: 0.3em 0; }
 h2 { font-size: 1.25em; margin: 1.6em 0 0.6em; border-bottom: 1px solid #999; }
 h3 { font-size: 1.1em; margin: 1.2em 0 0.4em; }
 /* 番号付きの問題の中の選択肢（(a)(b)…）には、箇条書きの記号を付けない */
@@ -215,11 +229,47 @@ ${body}
 `;
 }
 
-export function navXhtml(lang: Lang, entries: { title: string; xhtml: string }[]): string {
+/**
+ * 部ごとにまとめる。part を持つ章から新しい部が始まり、part のない章は直前の部に入る。
+ * part が空文字の章は、部の外に出る（奥付など）。最初の部より前の章も部の外。
+ */
+export function groupByPart(entries: TocEntry[]): { part?: string; chapters: TocEntry[] }[] {
+  const groups: { part?: string; chapters: TocEntry[] }[] = [];
+  for (const e of entries) {
+    const last = groups[groups.length - 1];
+    if (e.part) groups.push({ part: e.part, chapters: [e] });
+    else if (e.part === undefined && last) last.chapters.push(e);
+    else if (last && !last.part) last.chapters.push(e);
+    else groups.push({ chapters: [e] });
+  }
+  return groups;
+}
+
+/** Kindle のメニューから開く目次（部 → 章 → 見出し）。landmarks は「最初から読む」などの目印 */
+export function navXhtml(
+  lang: Lang,
+  entries: TocEntry[],
+  landmarks: { type: string; href: string; title: string }[] = [],
+): string {
   const heading = lang === "ja" ? "目次" : "Contents";
-  const items = entries
-    .map((e) => `<li><a href="text/${e.xhtml}">${esc(e.title)}</a></li>`)
+  const chapter = (e: TocEntry) => {
+    const secs = (e.sections ?? [])
+      .map((s) => `<li><a href="text/${e.xhtml}#${s.id}">${esc(s.title)}</a></li>`)
+      .join("");
+    return `<li><a href="text/${e.xhtml}">${esc(e.title)}</a>${secs ? `<ol>${secs}</ol>` : ""}</li>`;
+  };
+  const items = groupByPart(entries)
+    .map((g) =>
+      g.part
+        ? `<li><a href="text/${g.chapters[0]?.xhtml}">${esc(g.part)}</a><ol>${g.chapters.map(chapter).join("\n")}</ol></li>`
+        : g.chapters.map(chapter).join("\n"),
+    )
     .join("\n");
+  const marks = landmarks.length
+    ? `\n<nav epub:type="landmarks" id="landmarks" hidden=""><ol>${landmarks
+        .map((l) => `<li><a epub:type="${l.type}" href="${l.href}">${esc(l.title)}</a></li>`)
+        .join("")}</ol></nav>`
+    : "";
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="${lang}" lang="${lang}">
@@ -227,10 +277,24 @@ export function navXhtml(lang: Lang, entries: { title: string; xhtml: string }[]
 <body>
 <nav epub:type="toc" id="toc"><h1>${heading}</h1><ol>
 ${items}
-</ol></nav>
+</ol></nav>${marks}
 </body>
 </html>
 `;
+}
+
+/** 本文の中に置く、めくって読める目次のページ（部 → 章の 2 段） */
+export function tocPageBody(lang: Lang, entries: TocEntry[]): string {
+  const heading = lang === "ja" ? "目次" : "Contents";
+  const li = (e: TocEntry) => `<li><a href="${e.xhtml}">${esc(e.title)}</a></li>`;
+  const blocks = groupByPart(entries)
+    .map((g) =>
+      g.part
+        ? `<p class="toc-part">${esc(g.part)}</p><ul class="toc">${g.chapters.map(li).join("")}</ul>`
+        : `<ul class="toc">${g.chapters.map(li).join("")}</ul>`,
+    )
+    .join("\n");
+  return `<h1>${heading}</h1>\n${blocks}`;
 }
 
 export function contentOpf(
@@ -303,7 +367,7 @@ async function main() {
     { id: "css", href: "style.css", type: "text/css" },
   ];
   const spine: string[] = [];
-  const toc: { title: string; xhtml: string }[] = [];
+  const toc: TocEntry[] = [];
 
   const coverPath = manifest.cover ? resolve(baseDir, manifest.cover) : undefined;
   if (coverPath && !existsSync(coverPath)) {
@@ -407,7 +471,7 @@ async function main() {
         });
         names.push(name);
       }
-      const body = await page.evaluate((imgNames: string[]) => {
+      const { body, sections } = await page.evaluate((imgNames: string[]) => {
         const figs = Array.from(document.querySelectorAll(".mermaid, .figure"));
         figs.forEach((el, k) => {
           const div = document.createElement("div");
@@ -418,10 +482,18 @@ async function main() {
           div.appendChild(img);
           el.replaceWith(div);
         });
+        // 章の中の見出し（h2）に ID を振り、目次から飛べるようにする
+        const sections = Array.from(document.querySelectorAll("h2")).map((h, k) => {
+          h.id = `sec-${k + 1}`;
+          return { title: (h.textContent ?? "").trim(), id: h.id };
+        });
         const s = new XMLSerializer();
-        return Array.from(document.body.childNodes)
-          .map((node) => s.serializeToString(node))
-          .join("");
+        return {
+          body: Array.from(document.body.childNodes)
+            .map((node) => s.serializeToString(node))
+            .join(""),
+          sections,
+        };
       }, names);
       const title = (
         readFileSync(c.path, "utf8").match(/^# (.+)$/m)?.[1] ?? `Chapter ${i + 1}`
@@ -430,13 +502,44 @@ async function main() {
       const id = c.xhtml.replace(".xhtml", "");
       items.push({ id, href: `text/${c.xhtml}`, type: "application/xhtml+xml" });
       spine.push(id);
-      toc.push({ title, xhtml: c.xhtml });
+      toc.push({
+        title,
+        xhtml: c.xhtml,
+        sections,
+        ...(c.part !== undefined ? { part: c.part } : {}),
+      });
     }
   } finally {
     await browser.close();
   }
 
-  zip.file("OEBPS/nav.xhtml", navXhtml(manifest.language, toc));
+  // めくって読める目次のページを、表紙のすぐ後ろに置く
+  zip.file(
+    "OEBPS/text/toc.xhtml",
+    xhtmlDoc(
+      manifest.language,
+      manifest.language === "ja" ? "目次" : "Contents",
+      tocPageBody(manifest.language, toc),
+    ),
+  );
+  items.push({ id: "toc-page", href: "text/toc.xhtml", type: "application/xhtml+xml" });
+  spine.splice(spine.includes("cover") ? 1 : 0, 0, "toc-page");
+  const landmarks = [
+    ...(spine.includes("cover")
+      ? [{ type: "cover", href: "text/cover.xhtml", title: manifest.title }]
+      : []),
+    {
+      type: "toc",
+      href: "text/toc.xhtml",
+      title: manifest.language === "ja" ? "目次" : "Contents",
+    },
+    {
+      type: "bodymatter",
+      href: `text/${toc[0]?.xhtml ?? "toc.xhtml"}`,
+      title: manifest.language === "ja" ? "本文" : "Start",
+    },
+  ];
+  zip.file("OEBPS/nav.xhtml", navXhtml(manifest.language, toc, landmarks));
   const modified = `${new Date().toISOString().slice(0, 19)}Z`;
   zip.file("OEBPS/content.opf", contentOpf(manifest, items, spine, modified));
 
