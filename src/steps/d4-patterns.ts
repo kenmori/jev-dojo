@@ -174,12 +174,12 @@ async function main() {
 
   console.log(
     t(
-      "\n▼ 3. composite scoring（優先度の高い順 上位8件）\n",
-      "\n▼ 3. composite scoring (top 8 by priority)\n",
+      "\n▼ 3. composite scoring（優先度の高い順 上位10件）\n",
+      "\n▼ 3. composite scoring (top 10 by priority)\n",
     ),
   );
   const gold = new Map(exampleLabels.items.map((l) => [l.id, l]));
-  for (const { p, priority: s } of rank(predictions).slice(0, 8)) {
+  for (const { p, priority: s } of rank(predictions).slice(0, 10)) {
     console.log(
       t(
         `${p.id} 優先度 ${s.toFixed(2)}  緊急度 ${p.urgency.toFixed(2)} 苦情 ${p.complaint.toFixed(2)}（作者ラベル: 緊急度 ${gold.get(p.id)?.urgency}）`,
