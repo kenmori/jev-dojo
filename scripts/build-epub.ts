@@ -151,6 +151,8 @@ h2 { font-size: 1.25em; margin: 1.6em 0 0.6em; border-bottom: 1px solid #999; }
 h3 { font-size: 1.1em; margin: 1.2em 0 0.4em; }
 /* 番号付きの問題の中の選択肢（(a)(b)…）には、箇条書きの記号を付けない */
 ol ul { list-style: none; padding-left: 0.5em; margin: 0.3em 0; }
+/* 表の中の長いコードは、狭い画面では途中で折り返す */
+td code { word-break: break-all; }
 pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.8em; line-height: 1.4; background: #f4f4f4; padding: 0.6em; }
 code { font-family: monospace; }
 table { border-collapse: collapse; margin: 0.8em 0; font-size: 0.9em; }
@@ -337,6 +339,8 @@ async function main() {
           fontFamily: '"Noto Sans JP", sans-serif',
           // シーケンス図の参加者（あなたのプログラム・Jev など）は上にだけ出す
           sequence: { mirrorActors: false },
+          // 箱の中の日本語が語の途中で折り返されないよう、折り返す幅を広げる
+          flowchart: { wrappingWidth: 320 },
         });
         await document.fonts.ready;
         if (document.querySelector(".mermaid")) await m.run();

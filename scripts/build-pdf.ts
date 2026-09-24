@@ -262,6 +262,8 @@ async function main() {
         fontFamily: '"Noto Sans JP", sans-serif',
         // シーケンス図の参加者（あなたのプログラム・Jev など）は上にだけ出す
         sequence: { mirrorActors: false },
+        // 箱の中の日本語が語の途中で折り返されないよう、折り返す幅を広げる
+        flowchart: { wrappingWidth: 320 },
       });
       await document.fonts.ready;
       await m.run();
