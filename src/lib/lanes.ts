@@ -53,3 +53,24 @@ export function route(p: Prediction, th: LaneThresholds = DEFAULT_THRESHOLDS): R
     reason: t("決め手に欠ける", "no clear winner"),
   };
 }
+
+/** 1位と2位の確率。確率が1つしかなければ 2位は 0 */
+export function topTwo(probabilities: Record<string, number>): { top: number; second: number } {
+  const [top = 0, second = 0] = Object.values(probabilities).sort((a, b) => b - a);
+  return { top, second };
+}
+
+export interface MarginThresholds {
+  /** 1位の確率がこれ以上 */
+  top: number;
+  /** 1位と2位の差がこれ以上 */
+  margin: number;
+}
+
+/** confidence とは別の決め方: 1位が十分高く、しかも2位を十分引き離しているか */
+export const DEFAULT_MARGIN: MarginThresholds = { top: 0.8, margin: 0.2 };
+
+export function isClearWinner(p: Prediction, th: MarginThresholds = DEFAULT_MARGIN): boolean {
+  const { top, second } = topTwo(p.departmentProbabilities);
+  return top >= th.top && top - second >= th.margin;
+}

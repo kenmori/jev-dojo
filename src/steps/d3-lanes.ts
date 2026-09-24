@@ -13,11 +13,13 @@ import type { Dojo } from "../lib/client.js";
 import { sumUsage } from "../lib/cost.js";
 import { boardDojo, pct, predictAll } from "../lib/evaluate.js";
 import { LANG, t } from "../lib/i18n.js";
-import { DEFAULT_THRESHOLDS, route } from "../lib/lanes.js";
+import { DEFAULT_MARGIN, DEFAULT_THRESHOLDS, isClearWinner, route } from "../lib/lanes.js";
 import { footer, q, runMain, title } from "../lib/print.js";
 
 export {
+  DEFAULT_MARGIN,
   DEFAULT_THRESHOLDS,
+  isClearWinner,
   type Lane,
   type LaneThresholds,
   type Routing,
@@ -79,6 +81,25 @@ async function main() {
     t(
       `救護にも念のため知らせる: ${notify.map((r) => r.p.id).join(", ") || "なし"}`,
       `Also notify first aid, just in case: ${notify.map((r) => r.p.id).join(", ") || "none"}`,
+    ),
+  );
+
+  // 別の決め方: 1位の確率と、2位との差で決める。confidence の auto と比べる
+  const m = DEFAULT_MARGIN;
+  const clear = rows.filter((r) => isClearWinner(r.p));
+  const clearAcc = clear.length ? clear.filter((r) => r.correct).length / clear.length : Number.NaN;
+  const autoIds = new Set(rows.filter((r) => r.routing.lane === "auto").map((r) => r.p.id));
+  const diff = rows.filter((r) => isClearWinner(r.p) !== autoIds.has(r.p.id)).map((r) => r.p.id);
+  console.log(
+    t(
+      `\n▼ 別の決め方: 1位 ≥ ${m.top} かつ 1位と2位の差 ≥ ${m.margin} なら自動`,
+      `\n▼ Another rule: automatic if top ≥ ${m.top} and top − second ≥ ${m.margin}`,
+    ),
+  );
+  console.log(
+    t(
+      `  自動: ${clear.length} 件（作者ラベルとの一致 ${pct(clearAcc)}）／ confidence の auto と違う投稿: ${diff.join(", ") || "なし"}`,
+      `  automatic: ${clear.length} posts (agreement ${pct(clearAcc)}) / posts that differ from the confidence auto lane: ${diff.join(", ") || "none"}`,
     ),
   );
   footer(dojo, usage);

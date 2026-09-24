@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { Prediction } from "../../src/lib/evaluate.js";
+import { topTwo } from "../../src/lib/lanes.js";
 import { buildStates } from "../../src/steps/d1-state.js";
-import { DEFAULT_THRESHOLDS, route } from "../../src/steps/d3-lanes.js";
+import { DEFAULT_THRESHOLDS, isClearWinner, route } from "../../src/steps/d3-lanes.js";
 import { handlers, priority, rank } from "../../src/steps/d4-patterns.js";
 import {
   type Classified,
@@ -23,6 +24,27 @@ const pred = (over: Partial<Prediction> = {}): Prediction => ({
   urgencyConfidence: 0.8,
   usage: { input_tokens: 1, output_tokens: 0 },
   ...over,
+});
+
+describe("三段 1位と2位の差", () => {
+  it("topTwo は 1位と2位の確率を返す", () => {
+    expect(topTwo({ a: 0.2, b: 0.7, c: 0.1 })).toEqual({ top: 0.7, second: 0.2 });
+    expect(topTwo({ a: 1 })).toEqual({ top: 1, second: 0 });
+  });
+
+  it("1位が高く、2位を引き離しているときだけ自動にする", () => {
+    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.91, kotsu: 0.06 } }))).toBe(
+      true,
+    );
+    // 1位は同じ本部でも、2位と接戦
+    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.46, kotsu: 0.44 } }))).toBe(
+      false,
+    );
+    // 1位が 0.8 に届かない
+    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.75, kotsu: 0.05 } }))).toBe(
+      false,
+    );
+  });
 });
 
 describe("初段 buildStates", () => {
