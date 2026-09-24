@@ -335,6 +335,8 @@ async function main() {
           startOnLoad: false,
           theme: "neutral",
           fontFamily: '"Noto Sans JP", sans-serif',
+          // シーケンス図の参加者（あなたのプログラム・Jev など）は上にだけ出す
+          sequence: { mirrorActors: false },
         });
         await document.fonts.ready;
         if (document.querySelector(".mermaid")) await m.run();
