@@ -28,7 +28,7 @@ export JEV_MODE=replay
 
 ### API キーなしで動かしてみる
 
-コード: [`src/steps/k10-hello.ts`](../src/steps/k10-hello.ts)
+コード: [`src/steps/k10-hello.ts`](../../src/steps/k10-hello.ts)
 
 ```bash
 npm run k10
@@ -36,7 +36,7 @@ npm run k10
 
 ### 全部のサンプルをまとめて見る
 
-コード: [`src/demo.ts`](../src/demo.ts)
+コード: [`src/demo.ts`](../../src/demo.ts)
 
 ```bash
 npm run demo
@@ -44,7 +44,7 @@ npm run demo
 
 ### 環境を診断する
 
-コード: [`src/doctor.ts`](../src/doctor.ts)
+コード: [`src/doctor.ts`](../../src/doctor.ts)
 
 ```bash
 npm run doctor
@@ -52,13 +52,13 @@ npm run doctor
 
 ### キーを .env ファイルに書く
 
-コード: [`.env.example`](../.env.example)
+コード: [`.env.example`](../../.env.example)
 
 ```bash
 cp .env.example .env
 ```
 
-コード: [`src/doctor.ts`](../src/doctor.ts)
+コード: [`src/doctor.ts`](../../src/doctor.ts)
 
 ```bash
 npm run doctor
@@ -66,7 +66,7 @@ npm run doctor
 
 ### 本物の Jev に質問する
 
-コード: [`src/steps/k10-hello.ts`](../src/steps/k10-hello.ts)
+コード: [`src/steps/k10-hello.ts`](../../src/steps/k10-hello.ts)
 
 ```bash
 npm run k10
@@ -74,7 +74,7 @@ npm run k10
 
 ### キーを入れたまま再生モードで動かす
 
-コード: [`src/steps/k10-hello.ts`](../src/steps/k10-hello.ts)
+コード: [`src/steps/k10-hello.ts`](../../src/steps/k10-hello.ts)
 
 ```bash
 JEV_MODE=replay npm run k10
@@ -104,7 +104,7 @@ curl https://api.typesafe.ai/v1/systemone \
 
 ### 同じことを TypeScript で書く
 
-コード: [`src/steps/k08-raw.ts`](../src/steps/k08-raw.ts)
+コード: [`src/steps/k08-raw.ts`](../../src/steps/k08-raw.ts)
 
 ```bash
 npm run k08
@@ -114,7 +114,7 @@ npm run k08
 
 ### 実行する前に、予想してみる
 
-コード: [`src/steps/k07-noul.ts`](../src/steps/k07-noul.ts)
+コード: [`src/steps/k07-noul.ts`](../../src/steps/k07-noul.ts)
 
 ```bash
 npm run k07
@@ -124,7 +124,7 @@ npm run k07
 
 ### 実行して、確率の分かれ方を見る
 
-コード: [`src/steps/k06-choice.ts`](../src/steps/k06-choice.ts)
+コード: [`src/steps/k06-choice.ts`](../../src/steps/k06-choice.ts)
 
 ```bash
 npm run k06
@@ -134,7 +134,7 @@ npm run k06
 
 ### 実行する前に、予想してみる
 
-コード: [`src/steps/k05-score.ts`](../src/steps/k05-score.ts)
+コード: [`src/steps/k05-score.ts`](../../src/steps/k05-score.ts)
 
 ```bash
 npm run k05
@@ -144,7 +144,7 @@ npm run k05
 
 ### まとめると、何が得なのか
 
-コード: [`src/steps/k04-batch.ts`](../src/steps/k04-batch.ts)
+コード: [`src/steps/k04-batch.ts`](../../src/steps/k04-batch.ts)
 
 ```bash
 npm run k04
@@ -152,7 +152,7 @@ npm run k04
 
 ### 3 つの答えをつなげる
 
-参考にするサンプル: [`src/steps/k04-batch.ts`](../src/steps/k04-batch.ts)
+参考にするサンプル: [`src/steps/k04-batch.ts`](../../src/steps/k04-batch.ts)
 
 ```bash
 npx tsx src/steps/my-triage.ts
@@ -162,7 +162,7 @@ npx tsx src/steps/my-triage.ts
 
 ### 同じ投稿を、3 通りの材料で聞く
 
-コード: [`src/steps/d1-state.ts`](../src/steps/d1-state.ts)
+コード: [`src/steps/d1-state.ts`](../../src/steps/d1-state.ts)
 
 ```bash
 npm run d1
@@ -172,7 +172,7 @@ npm run d1
 
 ### 同じ投稿に、3 通りの書き方で聞く
 
-コード: [`src/steps/d2-instructions.ts`](../src/steps/d2-instructions.ts)
+コード: [`src/steps/d2-instructions.ts`](../../src/steps/d2-instructions.ts)
 
 ```bash
 npm run d2
@@ -180,7 +180,7 @@ npm run d2
 
 ### 仕分けボットの本番用の質問
 
-コード: [`scripts/show.ts`](../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)
 
 ```bash
 npm run show -- p06 p14 p51
@@ -190,7 +190,7 @@ npm run show -- p06 p14 p51
 
 ### 60 件を振り分けてみる
 
-コード: [`src/steps/d3-lanes.ts`](../src/steps/d3-lanes.ts)、[`src/lib/lanes.ts`](../src/lib/lanes.ts)
+コード: [`src/steps/d3-lanes.ts`](../../src/steps/d3-lanes.ts)、[`src/lib/lanes.ts`](../../src/lib/lanes.ts)
 
 ```bash
 npm run d3
@@ -198,7 +198,7 @@ npm run d3
 
 ### 迷った 8 件を見る
 
-コード: [`scripts/show.ts`](../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)
 
 ```bash
 npm run show -- p22 p42 p49
@@ -208,7 +208,7 @@ npm run show -- p22 p42 p49
 
 ### 実行して、振り分けを見る
 
-コード: [`src/steps/d4-patterns.ts`](../src/steps/d4-patterns.ts)
+コード: [`src/steps/d4-patterns.ts`](../../src/steps/d4-patterns.ts)
 
 ```bash
 npm run d4
@@ -216,7 +216,7 @@ npm run d4
 
 ### 安全の条件は、足し算に混ぜない
 
-参考にするサンプル: [`src/steps/d4-patterns.ts`](../src/steps/d4-patterns.ts)
+参考にするサンプル: [`src/steps/d4-patterns.ts`](../../src/steps/d4-patterns.ts)
 
 ```bash
 JEV_MODE=replay npx tsx src/steps/my-sort.ts
@@ -226,7 +226,7 @@ JEV_MODE=replay npx tsx src/steps/my-sort.ts
 
 ### 実行する
 
-コード: [`src/steps/d5-boundary.ts`](../src/steps/d5-boundary.ts)
+コード: [`src/steps/d5-boundary.ts`](../../src/steps/d5-boundary.ts)
 
 ```bash
 npm run d5
@@ -236,7 +236,7 @@ npm run d5
 
 ### 教材の 60 件
 
-コード: [`src/steps/d6-dataset.ts`](../src/steps/d6-dataset.ts)
+コード: [`src/steps/d6-dataset.ts`](../../src/steps/d6-dataset.ts)
 
 ```bash
 npm run d6
@@ -244,7 +244,7 @@ npm run d6
 
 ### ラベルは Jev の答えを見る前に付ける
 
-コード: [`scripts/label.ts`](../scripts/label.ts)
+コード: [`scripts/label.ts`](../../scripts/label.ts)
 
 ```bash
 npm run label
@@ -254,7 +254,7 @@ npm run label
 
 ### 測る
 
-コード: [`src/steps/d7-calibration.ts`](../src/steps/d7-calibration.ts)、[`src/lib/metrics.ts`](../src/lib/metrics.ts)
+コード: [`src/steps/d7-calibration.ts`](../../src/steps/d7-calibration.ts)、[`src/lib/metrics.ts`](../../src/lib/metrics.ts)
 
 ```bash
 npm run d7
@@ -262,7 +262,7 @@ npm run d7
 
 ### 直して、測り直した結果
 
-コード: [`scripts/lab-complaint.ts`](../scripts/lab-complaint.ts)
+コード: [`scripts/lab-complaint.ts`](../../scripts/lab-complaint.ts)
 
 ```bash
 npm run lab:complaint
@@ -272,7 +272,7 @@ npm run lab:complaint
 
 ### 同じ 60 件を、日本語と英語で判定する
 
-コード: [`src/steps/d8-ja-en.ts`](../src/steps/d8-ja-en.ts)
+コード: [`src/steps/d8-ja-en.ts`](../../src/steps/d8-ja-en.ts)
 
 ```bash
 npm run d8
@@ -280,7 +280,7 @@ npm run d8
 
 ### 日英で答えが分かれた 2 件
 
-コード: [`scripts/show.ts`](../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)
 
 ```bash
 npm run show -- p53 p06 --lang en
@@ -290,7 +290,7 @@ npm run show -- p53 p06 --lang en
 
 ### 流す量と予算を、送る側で守る
 
-コード: [`src/steps/d9-production.ts`](../src/steps/d9-production.ts)、[`src/lib/production.ts`](../src/lib/production.ts)
+コード: [`src/steps/d9-production.ts`](../../src/steps/d9-production.ts)、[`src/lib/production.ts`](../../src/lib/production.ts)
 
 ```bash
 npm run d9
@@ -298,7 +298,7 @@ npm run d9
 
 ### 判定を操作しようとする投稿
 
-コード: [`src/steps/d10-limits.ts`](../src/steps/d10-limits.ts)
+コード: [`src/steps/d10-limits.ts`](../../src/steps/d10-limits.ts)
 
 ```bash
 npm run d10
@@ -308,7 +308,7 @@ npm run d10
 
 ### 調べ方
 
-コード: [`src/steps/okugi-mechanism.ts`](../src/steps/okugi-mechanism.ts)
+コード: [`src/steps/okugi-mechanism.ts`](../../src/steps/okugi-mechanism.ts)
 
 ```bash
 npm run okugi
@@ -319,13 +319,13 @@ npm run okugi -- --live-only   # 見本を除いて、実APIの記録だけを�
 
 ### 試験の受け方
 
-コード: [`exam/tasks`](../exam/tasks)
+コード: [`exam/tasks`](../../exam/tasks)
 
 ```bash
 npm run exam
 ```
 
-テスト: [`exam/tests`](../exam/tests)
+テスト: [`exam/tests`](../../exam/tests)
 
 ```bash
 npx vitest run --project exam
