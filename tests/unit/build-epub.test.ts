@@ -7,6 +7,7 @@ import {
   defaultManifest,
   fillFacts,
   groupByPart,
+  highlightCode,
   insertKeyVisual,
   navXhtml,
   prepareMarkdown,
@@ -128,6 +129,23 @@ describe("目次", () => {
     expect(page).toContain('<p class="toc-part">第1部</p>');
     expect(page).toContain('<a href="ch03.xhtml">第2章</a>');
     expect(page).not.toContain("sec-1");
+  });
+});
+
+describe("highlightCode", () => {
+  it("ts のコードに色の印を付け、エスケープした記号は崩さない", () => {
+    const out = highlightCode(
+      '<pre><code class="language-ts">const a = "x &lt; y"; // メモ\n</code></pre>',
+    );
+    expect(out).toContain('<code class="hljs language-ts">');
+    expect(out).toContain('<span class="hljs-keyword">const</span>');
+    expect(out).toContain('<span class="hljs-string">&quot;x &lt; y&quot;</span>');
+    expect(out).toContain('<span class="hljs-comment">// メモ</span>');
+  });
+
+  it("text など知らない言語は、そのまま残す", () => {
+    const html = '<pre><code class="language-text">a &lt; b</code></pre>';
+    expect(highlightCode(html)).toBe(html);
   });
 });
 

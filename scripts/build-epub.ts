@@ -14,6 +14,10 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join, normalize, relative, resolve } from "node:path";
+import hljs from "highlight.js/lib/core";
+import bash from "highlight.js/lib/languages/bash";
+import json from "highlight.js/lib/languages/json";
+import typescript from "highlight.js/lib/languages/typescript";
 import JSZip from "jszip";
 import { marked } from "marked";
 import facts from "../data/facts.json" with { type: "json" };
@@ -179,6 +183,39 @@ export function applyFootnotes(markdown: string): string {
   return `${withRefs.trimEnd()}\n\n<section class="footnotes" epub:type="endnotes">\n<p class="footnotes-title">注</p>\n${notes}\n</section>\n`;
 }
 
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("json", json);
+const HIGHLIGHT_ALIASES: Record<string, string> = {
+  ts: "typescript",
+  typescript: "typescript",
+  js: "typescript",
+  bash: "bash",
+  sh: "bash",
+  json: "json",
+};
+
+const unescapeHtml = (s: string) =>
+  s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+
+/** コードのブロックに、エディタのような色の印（hljs-* の span）を付ける。text など知らない言語はそのまま */
+export function highlightCode(html: string): string {
+  return html.replace(
+    /<pre><code class="language-([\w-]+)">([\s\S]*?)<\/code><\/pre>/g,
+    (whole, lang: string, code: string) => {
+      const language = HIGHLIGHT_ALIASES[lang];
+      if (!language) return whole;
+      const colored = hljs.highlight(unescapeHtml(code), { language }).value;
+      return `<pre><code class="hljs language-${lang}">${colored}</code></pre>`;
+    },
+  );
+}
+
 export function prepareMarkdown(
   markdown: string,
   path: string,
@@ -227,6 +264,14 @@ ol ul { list-style: none; padding-left: 0.5em; margin: 0.3em 0; }
 td code { word-break: break-all; }
 pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.8em; line-height: 1.4; background: #f4f4f4; padding: 0.6em; }
 code { font-family: monospace; }
+/* コードの色分け。白黒の端末でも区別できるよう、暗めの色に太字・斜体を組み合わせる */
+.hljs-keyword, .hljs-meta .hljs-keyword { color: #1B3A7A; font-weight: bold; }
+.hljs-built_in, .hljs-type { color: #1B3A7A; }
+.hljs-string, .hljs-regexp { color: #7A4F00; }
+.hljs-number, .hljs-literal { color: #1F6F5C; }
+.hljs-comment { color: #5F6675; font-style: italic; }
+.hljs-title, .hljs-title.function_, .hljs-attr, .hljs-property { color: #34599E; }
+.hljs-variable, .hljs-params { color: #1B2436; }
 table { border-collapse: collapse; margin: 0.8em 0; font-size: 0.9em; }
 th, td { border: 1px solid #999; padding: 0.2em 0.4em; vertical-align: top; }
 th { background: #EDF0F5; font-weight: bold; }
@@ -449,9 +494,11 @@ async function main() {
         c.path,
         byPath,
       );
-      let html = (marked.parse(prepared.markdown, { async: false }) as string).replace(
-        /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-        (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+      let html = highlightCode(
+        (marked.parse(prepared.markdown, { async: false }) as string).replace(
+          /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+          (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+        ),
       );
       // SVG の画像は、中身をその場に埋め込んでからブラウザで PNG にする
       html = html.replace(
