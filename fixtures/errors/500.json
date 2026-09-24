@@ -1,0 +1,4 @@
+{
+  "meta": { "source": "synthetic", "recordedAt": null, "note": "サーバ側の一時的な失敗の見本。本文の形は実APIと異なる可能性がある" },
+  "response": { "status": 500, "headers": {}, "body": { "error": { "message": "Internal server error" } } }
+}

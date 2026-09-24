@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!node_modules",
+      "!coverage",
+      "!fixtures",
+      "!docs/_generated",
+      "!package-lock.json",
+      "!app/node_modules",
+      "!app/dist",
+      "!app/.wrangler",
+      "!app/src/routeTree.gen.ts",
+      "!app/worker-configuration.d.ts",
+      "!app/package-lock.json",
+      "!logs"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

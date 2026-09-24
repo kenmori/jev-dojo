@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "副業で月30万円！詳しくはプロフィールのリンクから。",
+      "questions": {
+        "intent": {
+          "type": "choice",
+          "instructions": "この投稿の書き手は、運営に何をしてほしいのですか？",
+          "criteria": {
+            "answer": "質問に答えてほしい",
+            "fix": "困りごとを直してほしい、改善してほしい",
+            "lostItem": "なくした物を探してほしい、または拾った物を届けたい",
+            "thanks": "お礼や感想を伝えたい。対応は不要",
+            "none": "運営への依頼ではない（宣伝など）"
+          }
+        },
+        "lostItemFound": {
+          "type": "choice",
+          "instructions": "この投稿が落とし物についての投稿だとしたら、書き手は物をなくした人ですか、拾った人ですか？",
+          "criteria": {
+            "lost": "なくした人",
+            "found": "拾った人、見かけた人",
+            "notApplicable": "落とし物の投稿ではない"
+          }
+        },
+        "fixNeedsStaffNow": {
+          "type": "noul",
+          "instructions": "この投稿が困りごとの報告だとしたら、スタッフが現地に行く必要がありますか？",
+          "criteria": {
+            "true": "その場で片付け・誘導・修理などが必要",
+            "false": "説明や、次回以降の改善で足りる"
+          }
+        },
+        "answerFromFaq": {
+          "type": "score",
+          "instructions": "この投稿が質問だとしたら、よくある質問（FAQ）で答えられる程度の内容ですか？",
+          "criteria": [
+            "FAQ では答えられない。個別の確認が必要",
+            "FAQ で一部は答えられる",
+            "FAQ でそのまま答えられる"
+          ]
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "intent": {
+          "type": "choice",
+          "choice": "none",
+          "confidence": 0.82,
+          "probabilities": {
+            "answer": 0.03,
+            "fix": 0.01,
+            "lostItem": 0,
+            "thanks": 0.02,
+            "none": 0.94
+          }
+        },
+        "lostItemFound": {
+          "type": "choice",
+          "choice": "notApplicable",
+          "confidence": 0.9,
+          "probabilities": {
+            "lost": 0.01,
+            "found": 0.01,
+            "notApplicable": 0.98
+          }
+        },
+        "fixNeedsStaffNow": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "answerFromFaq": {
+          "type": "score",
+          "score": 0.7,
+          "confidence": 0.06,
+          "legend": {
+            "0": "FAQ では答えられない。個別の確認が必要",
+            "1": "FAQ で一部は答えられる",
+            "2": "FAQ でそのまま答えられる"
+          },
+          "probabilities": {
+            "0": 0.5,
+            "1": 0.3,
+            "2": 0.2
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 369,
+        "output_tokens": 0
+      }
+    }
+  }
+}

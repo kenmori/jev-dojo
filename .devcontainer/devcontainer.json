@@ -1,0 +1,16 @@
+{
+  "name": "jev-dojo",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "postCreateCommand": "npm ci && npm run demo",
+  "customizations": {
+    "vscode": {
+      "extensions": ["biomejs.biome", "vitest.explorer", "bierner.markdown-mermaid"]
+    }
+  },
+  "secrets": {
+    "TYPESAFE_API_KEY": {
+      "description": "TypeSafe AI の API キー（なくても npm run demo で進められます）",
+      "documentationUrl": "https://docs.typesafe.ai/introduction/quickstart"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "The man at the cotton candy stall was really kind. Thank you.",
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "この投稿は、運営に対する苦情や不満ですか？",
+          "criteria": {
+            "true": "困っていること・不満・改善の要望が書かれている。遠回しな言い方や皮肉も含む",
+            "false": "質問・お礼・報告・宣伝など、不満ではない"
+          }
+        },
+        "department": {
+          "type": "choice",
+          "instructions": "この投稿は、どの担当が対応するべきですか？",
+          "criteria": {
+            "honbu": "運営本部。全体の予定、ボランティア、ごみ、トイレ、お礼や意見など",
+            "yatai": "屋台・出店。出店の有無、料金、食べ物",
+            "kotsu": "交通・駐車場。車、自転車、道路、バス",
+            "otoshimono": "落とし物。なくした物、拾った物、逃げたペット",
+            "kyugo": "救護・安全。けが、体調不良、迷子、危険な状況",
+            "sonota": "どれにも当てはまらない。お祭りと関係のない宣伝など"
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "instructions": "この投稿に、運営はどのくらい急いで対応するべきですか？",
+          "criteria": [
+            "急がない。後日の対応や、手の空いたときの返信でよい",
+            "今日中に対応したい。いま困っている人がいる、または放っておくと悪化する",
+            "今すぐ対応が必要。人の安全や体調にかかわる"
+          ]
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.16
+        },
+        "department": {
+          "type": "choice",
+          "choice": "yatai",
+          "confidence": 0.78,
+          "probabilities": {
+            "honbu": 0.01,
+            "yatai": 0.92,
+            "kotsu": 0.01,
+            "otoshimono": 0.04,
+            "kyugo": 0.01,
+            "sonota": 0.01
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.31,
+          "confidence": 0.4,
+          "legend": {
+            "0": "急がない。後日の対応や、手の空いたときの返信でよい",
+            "1": "今日中に対応したい。いま困っている人がいる、または放っておくと悪化する",
+            "2": "今すぐ対応が必要。人の安全や体調にかかわる"
+          },
+          "probabilities": {
+            "0": 0.79,
+            "1": 0.11,
+            "2": 0.1
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 370,
+        "output_tokens": 0
+      }
+    }
+  }
+}

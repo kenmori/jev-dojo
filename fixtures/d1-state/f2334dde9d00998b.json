@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": {
+        "board": {
+          "name": "地域のお祭り掲示板",
+          "purpose": "住民が運営に質問・要望・報告を書き込む場所"
+        },
+        "post": {
+          "text": "花火の音で赤ちゃんが起きてしまいました。もう少し早い時間に終わるとうれしいのですが……。",
+          "author": "はるか"
+        }
+      },
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "`post.text` は、運営に対する苦情や不満ですか？",
+          "criteria": {
+            "true": "困っていること・不満・改善の要望が書かれている。遠回しな言い方も含む",
+            "false": "質問・お礼・報告など、不満ではない"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.69
+        }
+      },
+      "usage": {
+        "input_tokens": 256,
+        "output_tokens": 0
+      }
+    }
+  }
+}

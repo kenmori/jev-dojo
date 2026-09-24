@@ -1,0 +1,31 @@
+{
+  "name": "jev-dojo-board",
+  "private": true,
+  "type": "module",
+  "description": "応用A: お祭り掲示板の仕分けアプリ（TanStack Start + Cloudflare Workers）",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "postinstall": "wrangler types"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "^1.170.39",
+    "@tanstack/react-start": "^1.168.58",
+    "@typesafe-ai/sdk": "0.6.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.29.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "^5.9.0",
+    "vite": "^8.0.14",
+    "wrangler": "^4.74.0"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "jev-dojo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Jev（TypeSafe AI の System One モデル）を級・段で学ぶハンズオン教材",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "demo": "JEV_MODE=replay tsx src/demo.ts",
+    "doctor": "tsx src/doctor.ts",
+    "k10": "tsx src/steps/k10-hello.ts",
+    "k08": "tsx src/steps/k08-raw.ts",
+    "k07": "tsx src/steps/k07-noul.ts",
+    "k06": "tsx src/steps/k06-choice.ts",
+    "k05": "tsx src/steps/k05-score.ts",
+    "k04": "tsx src/steps/k04-batch.ts",
+    "d1": "tsx src/steps/d1-state.ts",
+    "d2": "tsx src/steps/d2-instructions.ts",
+    "d3": "tsx src/steps/d3-lanes.ts",
+    "d4": "tsx src/steps/d4-patterns.ts",
+    "d5": "tsx src/steps/d5-boundary.ts",
+    "d6": "tsx src/steps/d6-dataset.ts",
+    "d7": "tsx src/steps/d7-calibration.ts",
+    "d8": "tsx src/steps/d8-ja-en.ts",
+    "d9": "tsx src/steps/d9-production.ts",
+    "d10": "tsx src/steps/d10-limits.ts",
+    "ob": "tsx src/steps/ob-two-layer.ts",
+    "okugi": "tsx src/steps/okugi-mechanism.ts",
+    "exam": "tsx scripts/exam.ts",
+    "label": "tsx scripts/label.ts",
+    "record": "tsx scripts/record.ts",
+    "facts": "tsx scripts/render-facts.ts",
+    "facts:verify": "tsx scripts/verify-facts.ts",
+    "docmap": "tsx scripts/sync-doc-map.ts",
+    "lint": "biome check . && tsx scripts/lint-docs.ts",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project unit --project contract",
+    "test:eval": "vitest run --project eval",
+    "check": "npm run typecheck && npm run lint && tsx scripts/render-facts.ts --check && tsx scripts/render-reports.ts --check && npm test && EXAM_SOLUTIONS=1 vitest run --project exam",
+    "reports": "tsx scripts/render-reports.ts",
+    "pdf": "tsx scripts/build-pdf.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "@typesafe-ai/sdk": "0.6.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "^22.0.0",
+    "marked": "^18.0.14",
+    "mermaid": "^12.0.0",
+    "playwright-core": "^1.63.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.1"
+  }
+}

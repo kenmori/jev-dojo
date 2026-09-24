@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "スマホを落としました。黒いケースです。連絡は［電話番号］まで。",
+      "questions": {
+        "direction": {
+          "type": "choice",
+          "instructions": "この投稿の書き手は、物をなくした人ですか、拾った人ですか？",
+          "criteria": {
+            "lost": "なくした、落とした、探している",
+            "found": "拾った、見つけた、預かっている",
+            "neither": "落とし物の話ではない"
+          }
+        },
+        "item": {
+          "type": "choice",
+          "instructions": "この投稿で話題になっている物は何ですか？",
+          "criteria": {
+            "bottle": "水筒、ペットボトル",
+            "phone": "スマートフォン、携帯電話",
+            "key": "鍵",
+            "wallet": "財布",
+            "other": "上のどれでもない物"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "direction": {
+          "type": "choice",
+          "choice": "lost",
+          "confidence": 0.7,
+          "probabilities": {
+            "lost": 0.92,
+            "found": 0.04,
+            "neither": 0.04
+          }
+        },
+        "item": {
+          "type": "choice",
+          "choice": "phone",
+          "confidence": 0.76,
+          "probabilities": {
+            "bottle": 0.02,
+            "phone": 0.92,
+            "key": 0.02,
+            "wallet": 0.02,
+            "other": 0.02
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 200,
+        "output_tokens": 0
+      }
+    }
+  }
+}

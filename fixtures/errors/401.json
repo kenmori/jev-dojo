@@ -1,0 +1,4 @@
+{
+  "meta": { "source": "synthetic", "recordedAt": null, "note": "APIキーが間違っているときの見本。本文の形は実APIと異なる可能性がある" },
+  "response": { "status": 401, "headers": {}, "body": { "error": { "message": "Invalid API key" } } }
+}

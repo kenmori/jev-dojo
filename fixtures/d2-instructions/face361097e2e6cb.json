@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "たこ焼きの屋台、30分並んだのに目の前で売り切れ。最高のお祭りですね。",
+      "questions": {
+        "bare": {
+          "type": "noul",
+          "instructions": "苦情？"
+        },
+        "withCriteria": {
+          "type": "noul",
+          "instructions": "この投稿は、運営に対する苦情や不満ですか？",
+          "criteria": {
+            "true": "困っていること・不満・改善の要望が書かれている",
+            "false": "質問・お礼・報告など、不満ではない"
+          }
+        },
+        "structured": {
+          "type": "noul",
+          "instructions": {
+            "task": "この投稿が、運営に対する苦情や不満かどうかを判断する",
+            "definition": "書き手が困っている、不満がある、または改善を求めている",
+            "include": [
+              "遠回しな要望（〜だとうれしいのですが）",
+              "皮肉（さすが運営ですね）",
+              "丁寧な言葉づかいの要請"
+            ],
+            "exclude": [
+              "純粋な質問",
+              "お礼や感想",
+              "落とし物などの報告"
+            ]
+          },
+          "criteria": {
+            "true": "苦情や不満、改善の要望",
+            "false": "それ以外"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "bare": {
+          "type": "noul",
+          "noul": 0.52
+        },
+        "withCriteria": {
+          "type": "noul",
+          "noul": 0.63
+        },
+        "structured": {
+          "type": "noul",
+          "noul": 0.81
+        }
+      },
+      "usage": {
+        "input_tokens": 266,
+        "output_tokens": 0
+      }
+    }
+  }
+}

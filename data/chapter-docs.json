@@ -1,0 +1,123 @@
+{
+  "baseUrl": "https://docs.typesafe.ai",
+  "chapters": [
+    {
+      "chapter": "10級",
+      "file": "docs/kyu/10-what-is-jev.md",
+      "paths": ["/introduction", "/concepts/system-one"]
+    },
+    {
+      "chapter": "9級",
+      "file": "docs/kyu/09-setup.md",
+      "paths": ["/introduction/quickstart", "/sdk/javascript"]
+    },
+    {
+      "chapter": "8級",
+      "file": "docs/kyu/08-first-call.md",
+      "paths": ["/introduction/quickstart", "/api"]
+    },
+    {
+      "chapter": "7級",
+      "file": "docs/kyu/07-noul.md",
+      "paths": ["/primitives", "/primitives/noul"]
+    },
+    {
+      "chapter": "6級",
+      "file": "docs/kyu/06-choice.md",
+      "paths": ["/primitives", "/primitives/choice"]
+    },
+    {
+      "chapter": "5級",
+      "file": "docs/kyu/05-score.md",
+      "paths": ["/primitives", "/primitives/score"]
+    },
+    {
+      "chapter": "4級",
+      "file": "docs/kyu/04-batch.md",
+      "paths": ["/patterns/fan-out", "/cookbooks/parallel_questions"]
+    },
+    {
+      "chapter": "初段",
+      "file": "docs/dan/01-state.md",
+      "paths": ["/concepts/state"]
+    },
+    {
+      "chapter": "二段",
+      "file": "docs/dan/02-instructions.md",
+      "paths": ["/primitives/advanced"]
+    },
+    {
+      "chapter": "三段",
+      "file": "docs/dan/03-confidence.md",
+      "paths": ["/confidence", "/patterns/confidence-routing"]
+    },
+    {
+      "chapter": "四段",
+      "file": "docs/dan/04-patterns.md",
+      "paths": ["/patterns", "/patterns/composite-scoring", "/patterns/intent-routing"]
+    },
+    {
+      "chapter": "五段",
+      "file": "docs/dan/05-boundary.md",
+      "paths": ["/concepts/how-to-build-with-system-one"]
+    },
+    {
+      "chapter": "六段",
+      "file": "docs/kodan/06-dataset.md",
+      "paths": ["/introduction/machine-learning-primer"]
+    },
+    {
+      "chapter": "七段",
+      "file": "docs/kodan/07-calibration.md",
+      "paths": [
+        "/introduction/machine-learning-primer",
+        "/cookbooks/classification_using_confidence"
+      ]
+    },
+    {
+      "chapter": "八段",
+      "file": "docs/kodan/08-japanese-lab.md",
+      "paths": ["/models", "/model-jaggedness/jev-1.13"]
+    },
+    {
+      "chapter": "九段",
+      "file": "docs/kodan/09-production.md",
+      "paths": ["/models", "/api", "/sdk/javascript"]
+    },
+    {
+      "chapter": "十段",
+      "file": "docs/kodan/10-limits.md",
+      "paths": ["/model-jaggedness/jev-1.13", "/legal"]
+    },
+    {
+      "chapter": "奥義",
+      "file": "docs/kaiden/01-mechanism.md",
+      "paths": ["/concepts/system-one", "/confidence", "/models"]
+    },
+    {
+      "chapter": "皆伝",
+      "file": "docs/kaiden/02-exam.md",
+      "paths": ["/concepts/how-to-build-with-system-one"]
+    },
+    {
+      "chapter": "応用A",
+      "file": "docs/advanced/a-tanstack-cloudflare.md",
+      "paths": ["/sdk/javascript"]
+    },
+    {
+      "chapter": "応用B",
+      "file": "docs/advanced/b-two-layer.md",
+      "paths": ["/concepts/how-to-build-with-system-one", "/cookbooks/citation_check"]
+    },
+    {
+      "chapter": "応用C",
+      "file": "docs/advanced/c-frameworks.md",
+      "paths": ["/sdk/javascript", "/api"]
+    },
+    {
+      "chapter": "応用D",
+      "file": "docs/advanced/d-agent-skill.md",
+      "paths": ["/agent-skill"]
+    }
+  ]
+}

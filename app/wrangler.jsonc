@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jev-dojo-board",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry"
+  // TYPESAFE_API_KEY は vars に書かず、`npx wrangler secret put TYPESAFE_API_KEY` で登録する。
+  // 未登録のときは、記録済みの見本データで動くデモモードになる。
+}

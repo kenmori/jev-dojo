@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "昨日の夜、神社の裏の道に車がたくさん止まっていて、家から車が出せませんでした。なんとかしてください。",
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "この投稿は、運営に対する苦情や不満ですか？",
+          "criteria": {
+            "true": "困っていること・不満・改善の要望が書かれている",
+            "false": "質問・お礼・報告など、不満ではない"
+          }
+        },
+        "department": {
+          "type": "choice",
+          "instructions": "この投稿は、どの担当が対応するべきですか？",
+          "criteria": {
+            "honbu": "運営本部。全体の予定、ボランティア、ごみ、お礼や意見など",
+            "yatai": "屋台・出店。出店の有無、料金、食べ物",
+            "kotsu": "交通・駐車場。車、道路、バス",
+            "otoshimono": "落とし物。なくした物、拾った物",
+            "kyugo": "救護・安全。けが、体調不良、危険な状況"
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "instructions": "この投稿に、運営はどのくらい急いで対応するべきですか？",
+          "criteria": [
+            "急がない。お祭りが終わってからの対応でよい",
+            "今日中に対応したい",
+            "今すぐ対応が必要。人の安全や体調にかかわる"
+          ]
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.94
+        },
+        "department": {
+          "type": "choice",
+          "choice": "kotsu",
+          "confidence": 0.68,
+          "probabilities": {
+            "honbu": 0.09,
+            "yatai": 0.01,
+            "kotsu": 0.87,
+            "otoshimono": 0.01,
+            "kyugo": 0.02
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1,
+          "confidence": 0.18,
+          "legend": {
+            "0": "急がない。お祭りが終わってからの対応でよい",
+            "1": "今日中に対応したい",
+            "2": "今すぐ対応が必要。人の安全や体調にかかわる"
+          },
+          "probabilities": {
+            "0": 0.18,
+            "1": 0.64,
+            "2": 0.18
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 314,
+        "output_tokens": 0
+      }
+    }
+  }
+}

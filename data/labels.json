@@ -1,0 +1,427 @@
+{
+  "labeler": "example",
+  "note": "作者（jev-dojo）が付けた例。正解ではなく、ラベル付けガイド（docs/kodan/06-dataset.md）に沿った一つの判断。自分のラベルは npm run label で data/labels.mine.json に作る",
+  "guide": "docs/kodan/06-dataset.md",
+  "items": [
+    {
+      "id": "p01",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p02",
+      "isComplaint": true,
+      "department": "kotsu",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p03",
+      "isComplaint": false,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p04",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p05",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p06",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p07",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p08",
+      "isComplaint": true,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": ["婉曲"]
+    },
+    {
+      "id": "p09",
+      "isComplaint": false,
+      "department": "kotsu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p10",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p11",
+      "isComplaint": true,
+      "department": "honbu",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p12",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p13",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": ["敬語"]
+    },
+    {
+      "id": "p14",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": ["皮肉"]
+    },
+    {
+      "id": "p15",
+      "isComplaint": true,
+      "department": "kotsu",
+      "urgency": 1,
+      "tags": ["主語省略"]
+    },
+    {
+      "id": "p16",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p17",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p18",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p19",
+      "isComplaint": false,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p20",
+      "isComplaint": true,
+      "department": "honbu",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p21",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p22",
+      "isComplaint": false,
+      "department": "kotsu",
+      "urgency": 1,
+      "tags": ["敬語"]
+    },
+    {
+      "id": "p23",
+      "isComplaint": true,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p24",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p25",
+      "isComplaint": false,
+      "department": "sonota",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p26",
+      "isComplaint": true,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": ["婉曲"]
+    },
+    {
+      "id": "p27",
+      "isComplaint": false,
+      "department": "kotsu",
+      "urgency": 0,
+      "tags": ["主語省略"]
+    },
+    {
+      "id": "p28",
+      "isComplaint": false,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p29",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p30",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p31",
+      "isComplaint": true,
+      "department": "kotsu",
+      "urgency": 0,
+      "tags": ["婉曲"]
+    },
+    {
+      "id": "p32",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p33",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": ["皮肉", "主語省略"]
+    },
+    {
+      "id": "p34",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p35",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p36",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": ["主語省略"]
+    },
+    {
+      "id": "p37",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p38",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p39",
+      "isComplaint": true,
+      "department": "kyugo",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p40",
+      "isComplaint": false,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p41",
+      "isComplaint": true,
+      "department": "kotsu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p42",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p43",
+      "isComplaint": true,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": ["皮肉"]
+    },
+    {
+      "id": "p44",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p45",
+      "isComplaint": true,
+      "department": "kyugo",
+      "urgency": 2,
+      "tags": []
+    },
+    {
+      "id": "p46",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p47",
+      "isComplaint": false,
+      "department": "kotsu",
+      "urgency": 1,
+      "tags": ["主語省略"]
+    },
+    {
+      "id": "p48",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": ["敬語"]
+    },
+    {
+      "id": "p49",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p50",
+      "isComplaint": false,
+      "department": "kyugo",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p51",
+      "isComplaint": true,
+      "department": "kotsu",
+      "urgency": 0,
+      "tags": ["敬語", "婉曲"]
+    },
+    {
+      "id": "p52",
+      "isComplaint": false,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p53",
+      "isComplaint": true,
+      "department": "kyugo",
+      "urgency": 1,
+      "tags": ["主語省略"]
+    },
+    {
+      "id": "p54",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p55",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p56",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p57",
+      "isComplaint": true,
+      "department": "yatai",
+      "urgency": 0,
+      "tags": ["婉曲"]
+    },
+    {
+      "id": "p58",
+      "isComplaint": false,
+      "department": "otoshimono",
+      "urgency": 1,
+      "tags": []
+    },
+    {
+      "id": "p59",
+      "isComplaint": false,
+      "department": "sonota",
+      "urgency": 0,
+      "tags": []
+    },
+    {
+      "id": "p60",
+      "isComplaint": false,
+      "department": "honbu",
+      "urgency": 0,
+      "tags": []
+    }
+  ]
+}

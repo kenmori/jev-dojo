@@ -1,0 +1,110 @@
+# 週次の鮮度チェック。公式ドキュメント・モデル・SDK・リンクの変化を検出して Issue にする（plan.md §7.3）
+name: freshness
+
+on:
+  schedule:
+    - cron: "0 1 * * 1" # 毎週月曜 10:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  docs:
+    name: 公式ドキュメント（llms.txt）の差分
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run docmap -- --diff-out "$RUNNER_TEMP/docdiff.md"
+      - run: npm run facts
+      - name: 差分があれば Issue を立てる
+        run: |
+          if [ -s "$RUNNER_TEMP/docdiff.md" ]; then
+            gh issue create \
+              --title "freshness: 公式ドキュメントが更新されました（$(date -u +%F)）" \
+              --body-file "$RUNNER_TEMP/docdiff.md"
+          fi
+      - name: スナップショットを PR にする
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/doc-map
+          commit-message: "chore: 公式ドキュメント対応表を更新"
+          title: "chore: 公式ドキュメント対応表を更新"
+          body: "`npm run docmap` の結果です。差分の内容は同時に立てた Issue を参照してください。"
+          add-paths: |
+            data/doc-map.json
+            docs/_generated/
+            README.md
+
+  model:
+    name: モデルと facts.json の照合
+    runs-on: ubuntu-latest
+    env:
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: 照合
+        id: verify
+        if: env.TYPESAFE_API_KEY != ''
+        continue-on-error: true
+        run: npm run facts:verify
+      - name: 固定モデルが無くなっていたら Issue
+        if: steps.verify.outcome == 'failure'
+        run: |
+          gh issue create \
+            --title "freshness: 固定モデルが /v1/models にありません" \
+            --body "data/facts.json の model.pinned を確認してください。ログ: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          exit 1
+      - name: 新バージョンが出ていたら Issue
+        if: steps.verify.outputs.latest_changed == 'true'
+        run: |
+          title="freshness: jev-latest が ${{ steps.verify.outputs.latest }} になりました"
+          if [ -z "$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+            gh issue create --title "$title" --body "新しいバージョンが出ています。八段の評価を再実行し、fixture の録り直し（npm run record）と data/facts.json の更新を検討してください。"
+          fi
+
+  sdk:
+    name: SDK の新バージョン
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: npm の最新版と比較
+        run: |
+          pinned=$(node -p "require('./data/facts.json').sdk.jsVersion")
+          latest=$(npm view @typesafe-ai/sdk version)
+          echo "pinned=$pinned latest=$latest"
+          if [ "$pinned" != "$latest" ]; then
+            title="freshness: @typesafe-ai/sdk $latest が出ました"
+            if [ -z "$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+              gh issue create --title "$title" --body "教材は $pinned で検証しています。package.json と data/facts.json を更新し、npm run check と npm run record を実行してください。"
+            fi
+          fi
+
+  links:
+    name: 外部リンクの死活チェック
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        id: lychee
+        with:
+          args: --no-progress --exclude-path node_modules README.md plan.md "docs/**/*.md"
+          fail: false
+      - name: リンク切れがあれば Issue
+        if: steps.lychee.outputs.exit_code != '0'
+        run: gh issue create --title "freshness: リンク切れがあります（$(date -u +%F)）" --body-file ./lychee/out.md

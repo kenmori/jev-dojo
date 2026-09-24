@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/messages",
+    "body": {
+      "model": "claude-opus-5",
+      "max_tokens": 1024,
+      "output_config": {
+        "effort": "low"
+      },
+      "fallbacks": "default",
+      "system": "あなたは地域のお祭りの運営スタッフとして、掲示板の投稿への返信の下書きを書きます。\n日本語で、2〜3文、やわらかく丁寧に書いてください。\n日時・金額・対応の結果など、投稿にない事実は書かないでください。できるかどうかわからない約束もしないでください。\n下書きの本文だけを出力してください。",
+      "messages": [
+        {
+          "role": "user",
+          "content": "投稿:\n今年も楽しかったです！運営のみなさん、ありがとうございました。\n\n担当: 運営本部\n返信の目的: 投稿へのお礼を伝える"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "id": "msg_synthetic_p12",
+      "type": "message",
+      "role": "assistant",
+      "model": "claude-opus-5",
+      "content": [
+        {
+          "type": "text",
+          "text": "温かいお言葉をありがとうございます。運営一同、とても励みになります。"
+        }
+      ],
+      "stop_reason": "end_turn",
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 249,
+        "output_tokens": 41
+      }
+    }
+  }
+}

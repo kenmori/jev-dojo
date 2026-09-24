@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": {
+        "post": "昨日の夜、神社の裏の道に車がたくさん止まっていて、家から車が出せませんでした。なんとかしてください。",
+        "draft": "ご不便をおかけして申し訳ありません。いただいた内容は交通・駐車場係に伝えました。"
+      },
+      "questions": {
+        "noPromise": {
+          "type": "noul",
+          "instructions": "`draft` は、`post` に書かれていない事実や、できるかどうかわからない約束を含んでいませんか？",
+          "criteria": {
+            "true": "含んでいない。受付・お礼・お詫び・担当への連絡の範囲にとどまっている",
+            "false": "日時・結果・対応内容などを、根拠なく約束したり断定したりしている"
+          }
+        },
+        "fitsPost": {
+          "type": "noul",
+          "instructions": "`draft` は、`post` への返信として内容がかみ合っていますか？"
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "noPromise": {
+          "type": "noul",
+          "noul": 0.94
+        },
+        "fitsPost": {
+          "type": "noul",
+          "noul": 0.91
+        }
+      },
+      "usage": {
+        "input_tokens": 273,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+:root {
+  --fg: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #ffffff;
+  --accent: #2563eb;
+  font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+header p {
+  color: var(--muted);
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 24px;
+}
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .judge {
+    order: -1;
+  }
+  .samples ul {
+    max-height: 40vh;
+  }
+}
+.samples ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 70vh;
+  overflow: auto;
+}
+.samples button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 4px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.samples button:hover {
+  background: #f9fafb;
+}
+.id {
+  color: var(--muted);
+  font-size: 12px;
+  margin-right: 4px;
+}
+form {
+  display: grid;
+  gap: 8px;
+}
+textarea {
+  font: inherit;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+form button {
+  justify-self: start;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+form button:disabled {
+  opacity: 0.6;
+}
+.error {
+  color: #b91c1c;
+}
+.result {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+.mode {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.mode-demo {
+  background: #fef3c7;
+}
+.mode-live {
+  background: #dcfce7;
+}
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+}
+dt {
+  color: var(--muted);
+}
+dd {
+  margin: 0;
+}
+dd small {
+  color: var(--muted);
+  margin-left: 6px;
+}
+.lane {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.lane-auto {
+  background: #dbeafe;
+}
+.lane-confirm {
+  background: #fef3c7;
+}
+.lane-human {
+  background: #fee2e2;
+}
+.bars {
+  list-style: none;
+  padding: 0;
+}
+.bars li {
+  display: grid;
+  grid-template-columns: 7em 1fr 3em;
+  gap: 8px;
+  align-items: center;
+}
+meter {
+  width: 100%;
+}
+.urgent {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}

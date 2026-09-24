@@ -1,0 +1,2 @@
+# ローカル開発用。cp .dev.vars.example .dev.vars してキーを入れる（.dev.vars はコミットしない）
+TYPESAFE_API_KEY=

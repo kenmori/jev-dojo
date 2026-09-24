@@ -1,0 +1,46 @@
+jev-dojo のライセンス
+
+Copyright (c) 2026 kenmori
+
+このリポジトリは、部分ごとに異なる条件で提供します。
+
+1. ソースコード（docs/ 以外のすべて。src/, scripts/, tests/, exam/, app/, data/, fixtures/ など）
+   MIT License（下記全文）
+
+2. 教材本文（docs/ 以下の Markdown と図）
+   Creative Commons 表示 - 非営利 - 改変禁止 4.0 国際（CC BY-NC-ND 4.0）
+   https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja
+   - 個人の学習、社内勉強会など、非営利の目的で読む・共有することは自由です（出典の表示が必要）
+   - 本文を販売すること、有料の教材・書籍・講座に組み込むこと、改変したものを配布することはできません
+
+3. PDF 版などの有償頒布物
+   著作権者（kenmori）が販売する PDF 版・電子書籍版などは、購入者向けの利用条件に従います。
+   購入した PDF の再配布・転売はできません。
+   上記 2. の CC BY-NC-ND 4.0 は著作権者自身の販売を制限しません。
+
+「TypeSafe」「Jev」は、それぞれの権利者の名称・商標である可能性があります。
+本教材は TypeSafe AI の公式教材ではなく、TypeSafe AI とは関係がありません。
+
+------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 kenmori
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
