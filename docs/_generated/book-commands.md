@@ -1,7 +1,7 @@
 <!-- このファイルは書籍の原稿から自動で作っています。直接編集しないでください -->
 # 『ハンズオン Jev 入門』のコマンド一覧
 
-書籍『ハンズオン Jev 入門』の「▶ やってみよう」などのコマンドを、章ごとに並べたページです（35 か所）。
+書籍『ハンズオン Jev 入門』の「▶ やってみよう」などのコマンドを、章ごとに並べたページです（コマンド 35 か所、自分で作るファイル 2 個）。
 電子書籍のアプリによっては、本からコピーすると引用符（“ ”）や書名が付け足されます。コマンドは、このページからコピーしてください。
 GitHub では、コマンドの枠の右上にあるボタンでコピーできます。
 
@@ -154,6 +154,32 @@ npm run k04
 
 参考にするサンプル: [`src/steps/k04-batch.ts`](../../src/steps/k04-batch.ts)
 
+① `src/steps/my-triage.ts` を新しく作り、次のコードを貼り付けて保存する
+
+```ts
+import { createDojo } from "../lib/client.js";
+import { getPost } from "../lib/posts.js";
+import { toLevel, urgency } from "./k05-score.js";
+import { department } from "./k06-choice.js";
+import { decide, isComplaint } from "./k07-noul.js";
+
+const dojo = createDojo("k04-batch");
+const post = getPost("p02");
+const { answers } = await dojo.client.systemOne({
+  state: post.text,
+  questions: { isComplaint, department, urgency },
+});
+
+console.log({
+  complaint: decide(answers.isComplaint.noul),
+  department: answers.department.choice,
+  departmentConfidence: answers.department.confidence,
+  urgency: toLevel(answers.urgency.score),
+});
+```
+
+② 実行する
+
 ```bash
 npx tsx src/steps/my-triage.ts
 ```
@@ -217,6 +243,24 @@ npm run d4
 ### 安全の条件は、足し算に混ぜない
 
 参考にするサンプル: [`src/steps/d4-patterns.ts`](../../src/steps/d4-patterns.ts)
+
+① `src/steps/my-sort.ts` を新しく作り、次のコードを貼り付けて保存する
+
+```ts
+import { boardDojo, type Prediction, predictAll } from "../lib/evaluate.js";
+import { rank } from "./d4-patterns.js";
+
+function sortForStaff(predictions: Prediction[]) {
+  const urgentSafety = predictions.filter((p) => p.department === "kyugo" && p.urgency >= 1.5);
+  const rest = predictions.filter((p) => !urgentSafety.includes(p));
+  return [...urgentSafety, ...rank(rest).map((r) => r.p)];
+}
+
+const predictions = await predictAll(boardDojo("ja"), "ja");
+console.log(sortForStaff(predictions).slice(0, 12).map((p) => p.id).join(" "));
+```
+
+② 実行する
 
 ```bash
 JEV_MODE=replay npx tsx src/steps/my-sort.ts
