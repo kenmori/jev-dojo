@@ -45,7 +45,7 @@ flowchart LR
 
 > 一次情報: https://docs.typesafe.ai/concepts/system-one
 
-## Playground で1回叩いてみる
+## まず公式のデモで触り、次にこのリポジトリで同じことをする
 
 🔴 揮発
 

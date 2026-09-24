@@ -29,7 +29,7 @@ Jev の答えは、いつも決まった形で返ってきます。0〜1 の数�
 
 > 一次情報: https://docs.typesafe.ai/concepts/how-to-build-with-system-one
 
-## プロンプトインジェクション
+## 投稿の中の「こう判定して」には従わせない
 
 🟡 半恒久
 

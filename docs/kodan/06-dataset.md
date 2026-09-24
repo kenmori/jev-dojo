@@ -37,7 +37,7 @@ npm run d6      # データの内訳と、作者の例との一致度を表示
 
 > 一次情報: https://docs.typesafe.ai/introduction/machine-learning-primer
 
-## ラベル付けガイド
+## 迷う投稿のために、ラベルの基準を文章にしておく
 
 🟡 半恒久
 

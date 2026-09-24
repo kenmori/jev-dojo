@@ -47,7 +47,7 @@ npm run k04
 
 > 一次情報: https://docs.typesafe.ai/cookbooks/parallel_questions
 
-## 速さとお金を測ってみる
+## まとめると速く安くなる「はず」を、実測で確かめる
 
 🟡 半恒久
 

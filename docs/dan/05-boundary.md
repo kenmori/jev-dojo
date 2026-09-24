@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [How to build with System One](https://docs.typesafe.ai/concepts/how-to-build-with-system-one)
 - この章でできるようになること: 業務の判断を見て、コードに残す部分と Jev に渡す部分を分けられる
 
-## 線の引き方
+## ルールで書き切れるならコード、書き切れないなら Jev
 
 🟢 恒久
 
@@ -33,7 +33,7 @@
 
 > 一次情報: https://docs.typesafe.ai/concepts/how-to-build-with-system-one
 
-## 落とし物の照合を作る
+## 落とし物は、判定を Jev、照合をコードが受け持つ
 
 🟡 半恒久
 

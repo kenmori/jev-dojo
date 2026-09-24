@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [How to build with System One](https://docs.typesafe.ai/concepts/how-to-build-with-system-one)
 - この章でできるようになること: 学んだことを、自分の手でコードにして証明する
 
-## 試験のやり方
+## 10問の関数を書けば、テストが採点する
 
 🟢 恒久
 
@@ -51,7 +51,7 @@ npm run exam   # 採点
 
 > 一次情報: https://docs.typesafe.ai/concepts/how-to-build-with-system-one
 
-## 皆伝のあとに
+## 本当の皆伝は、自分の業務のデータでやり直せたとき
 
 🟢 恒久
 

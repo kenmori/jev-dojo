@@ -46,7 +46,7 @@ npm run reports     # レポートを作り直す
 
 > 一次情報: https://docs.typesafe.ai/models
 
-## 悪い数字が出たときに
+## 悪い数字が出たら、まず質問の設計を疑う
 
 🟢 恒久
 

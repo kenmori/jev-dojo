@@ -6,3 +6,4 @@ dist/
 .DS_Store
 data/labels.mine.json
 logs/
+__pycache__/

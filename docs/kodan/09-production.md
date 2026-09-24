@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Models](https://docs.typesafe.ai/models) / [API](https://docs.typesafe.ai/api) / [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript)
 - この章でできるようになること: レート制限・リトライ・バージョン固定・コスト監視・ログを、本番を想定して設計できる
 
-## バージョンを固定する
+## しきい値は測ったモデル専用なので、バージョンを固定する
 
 🟢 恒久
 
@@ -34,7 +34,7 @@
 
 > 一次情報: https://docs.typesafe.ai/models
 
-## 流量・リトライ・予算・ログ
+## リトライは SDK に任せ、流量・予算・ログはコードで持つ
 
 🟡 半恒久
 

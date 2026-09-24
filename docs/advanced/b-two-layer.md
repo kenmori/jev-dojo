@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [How to build with System One](https://docs.typesafe.ai/concepts/how-to-build-with-system-one) / [Citation check](https://docs.typesafe.ai/cookbooks/citation_check)
 - この章でできるようになること: 判断は Jev、文章は LLM、方針はコード、という分担で機能を組める
 
-## 役割を分ける
+## 判断は Jev、文章は LLM、方針はコードが持つ
 
 🟢 恒久
 
@@ -48,7 +48,7 @@ npm run ob
 
 > 一次情報: https://docs.typesafe.ai/concepts/how-to-build-with-system-one
 
-## Claude の呼び出し
+## Claude は公式 SDK で呼び、断られたら人に回す
 
 🔴 揮発
 

@@ -65,10 +65,11 @@ export function rewrite(markdown: string, file: string, known: Set<string>): str
         if (bang) {
           const abs = join(ROOT, target);
           if (!existsSync(abs)) return whole;
-          const data = readFileSync(abs).toString("base64");
-          return `<img alt="${text}" src="data:image/svg+xml;base64,${data}">`;
+          // <img> で読み込むと SVG の中の文字にページのフォントが効かないので、SVG をそのまま埋め込む
+          const svg = readFileSync(abs, "utf8").replace(/<\?xml[^>]*>\s*/, "");
+          return `<div class="figure" role="img" aria-label="${text}">${svg.trim()}</div>`;
         }
-        if (known.has(target)) return `[${text}](#${hash ? `${idFor(target)}` : idFor(target)})`;
+        if (known.has(target)) return `[${text}](#${idFor(target)})`;
         return `[${text}](${REPO_URL}/${target}${hash ? `#${hash}` : ""})`;
       },
     );
@@ -83,17 +84,27 @@ function syntheticFixtures(): boolean {
   return false;
 }
 
+/**
+ * 日本語フォントは同梱の Noto Sans JP（OFL）を使う。
+ * OS のフォントに任せると、環境によっては中国語用のフォントで組まれ、漢字の字形が日本語と変わってしまう。
+ */
+const FONT_CSS = ["400.css", "700.css"].map(
+  (f) => `file://${join(ROOT, "node_modules", "@fontsource", "noto-sans-jp", f)}`,
+);
+
 const CSS = `
 @page { size: A4; margin: 18mm 16mm 20mm; }
 :root { --fg: #111827; --muted: #6b7280; --line: #d1d5db; --accent: #2563eb; }
-body { font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Yu Gothic", "WenQuanYi Zen Hei", sans-serif; color: var(--fg); font-size: 10.5pt; line-height: 1.75; }
+body { font-family: "Noto Sans JP", sans-serif; color: var(--fg); font-size: 10.5pt; line-height: 1.75; }
 h1 { font-size: 20pt; border-bottom: 3px solid var(--accent); padding-bottom: 4px; margin-top: 0; }
 h2 { font-size: 14pt; margin-top: 1.6em; border-left: 5px solid var(--accent); padding-left: 8px; break-after: avoid; }
 h3 { font-size: 11.5pt; margin-top: 1.2em; break-after: avoid; }
 section.chapter { break-before: page; }
 .part { color: var(--muted); font-size: 9pt; letter-spacing: 0.1em; }
 pre { background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 4px; padding: 8px 10px; font-size: 8.5pt; line-height: 1.5; white-space: pre-wrap; word-break: break-all; break-inside: avoid; }
-code { font-family: "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.9em; }
+code { font-family: "SFMono-Regular", Menlo, Consolas, "DejaVu Sans Mono", "Noto Sans JP", monospace; font-size: 0.9em; }
+svg text { font-family: "Noto Sans JP", sans-serif !important; }
+.figure svg { max-width: 100%; height: auto; }
 :not(pre) > code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
 table { border-collapse: collapse; width: 100%; font-size: 9pt; margin: 0.8em 0; break-inside: avoid; }
 th, td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; }
@@ -139,7 +150,9 @@ export function buildHtml(): string {
   }).join("\n");
 
   return `<!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><title>jev-dojo</title><style>${CSS}</style></head>
+<html lang="ja"><head><meta charset="utf-8"><title>jev-dojo</title>
+${FONT_CSS.map((href) => `<link rel="stylesheet" href="${href}">`).join("\n")}
+<style>${CSS}</style></head>
 <body>
 <div class="cover">
   <h1>jev-dojo</h1>
@@ -199,8 +212,21 @@ async function main() {
       const m = (
         window as unknown as { mermaid: { initialize(o: object): void; run(): Promise<void> } }
       ).mermaid;
-      m.initialize({ startOnLoad: false, theme: "neutral" });
+      m.initialize({
+        startOnLoad: false,
+        theme: "neutral",
+        fontFamily: '"Noto Sans JP", sans-serif',
+      });
+      await document.fonts.ready;
       await m.run();
+    });
+    // フォントは文字の範囲ごとに分かれて読み込まれる。印刷の前に、ページで使う全文字の分を読み込ませる
+    await page.evaluate(async () => {
+      const text = document.body.textContent ?? "";
+      await Promise.all(
+        ["400", "700"].map((w) => document.fonts.load(`${w} 16px "Noto Sans JP"`, text)),
+      );
+      await document.fonts.ready;
     });
     await page.pdf({
       path: join(out, "jev-dojo.pdf"),

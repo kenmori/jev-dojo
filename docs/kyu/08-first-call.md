@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Quick start](https://docs.typesafe.ai/introduction/quickstart) / [API](https://docs.typesafe.ai/api)
 - この章でできるようになること: curl で POST し、返ってきた JSON を読める
 
-## 手紙を出して、返事を読む
+## 送るのも返ってくるのも、JSON が1つだけ
 
 🟡 半恒久
 

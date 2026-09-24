@@ -33,6 +33,7 @@ describe("build-pdf", () => {
 
   it("図は埋め込む", () => {
     const md = rewrite("![図](charts/lab-accuracy.svg)", "docs/_generated/lab-ja-en.md", known);
-    expect(md).toContain("data:image/svg+xml;base64,");
+    expect(md).toContain('<div class="figure"');
+    expect(md).toContain("<svg");
   });
 });

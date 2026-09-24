@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Patterns](https://docs.typesafe.ai/patterns) / [Fan-out](https://docs.typesafe.ai/patterns/fan-out) / [Composite scoring](https://docs.typesafe.ai/patterns/composite-scoring) / [Intent routing](https://docs.typesafe.ai/patterns/intent-routing)
 - この章でできるようになること: fan-out、confidence-gated routing、composite scoring、intent routing を使い分けられる
 
-## intent routing と fan-out
+## 目的で振り分け、要りそうな質問は先に聞いておく
 
 🟢 恒久
 
@@ -50,7 +50,7 @@ npm run d4
 
 > 一次情報: https://docs.typesafe.ai/patterns/fan-out
 
-## composite scoring と confidence-gated routing
+## 点数は重みで組み合わせ、安全の条件は別に持つ
 
 🟢 恒久
 

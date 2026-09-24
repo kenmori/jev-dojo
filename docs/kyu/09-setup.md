@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Quick start](https://docs.typesafe.ai/introduction/quickstart) / [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript)
 - この章でできるようになること: `git clone` → `npm install` → `npm run check` が通る
 
-## キーなしで動かす
+## APIキーがなくても、記録済みの答えで全章が動く
 
 🔴 揮発
 
@@ -25,7 +25,7 @@ npm run demo     # 全章のサンプルを再生。APIキー不要・費用ゼ�
 npm run check    # 型チェック・lint・テスト。全部緑になれば準備完了
 ```
 
-ローカルに Node.js を入れたくない場合は、GitHub の「Code → Codespaces」から開けば、同じ環境がブラウザ上で立ち上がります（[.devcontainer](../../.devcontainer/devcontainer.json)）。
+Node.js を手元に入れたくない場合は、GitHub の「Code → Codespaces」から開きます。同じ環境がブラウザ上で立ち上がります（[.devcontainer](../../.devcontainer/devcontainer.json)）。
 
 <details><summary>もっと深く（プロ向け）</summary>
 
@@ -48,7 +48,7 @@ fixture のファイル名はリクエスト内容のハッシュなので、質
 
 > 一次情報: https://docs.typesafe.ai/sdk/javascript
 
-## APIキーを入れる
+## 本物の API は、キーを .env に入れてから
 
 🔴 揮発
 

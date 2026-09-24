@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript) / [API](https://docs.typesafe.ai/api)
 - この章でできるようになること: フレームワーク経由で Jev を使うか、公式 SDK を直接使うかを、根拠を持って選べる
 
-## 選び方
+## 迷ったら、公式 SDK を直接使うのがいちばん単純
 
 🟢 恒久
 
@@ -35,7 +35,7 @@
 
 > 一次情報: https://docs.typesafe.ai/api
 
-## 2026-09-24 時点の状況
+## 2026-09-24 時点では、公式 SDK のほかに3つの統合がある
 
 🔴 揮発
 

@@ -4,7 +4,7 @@
 - 先に読む公式ページ: [Primitives](https://docs.typesafe.ai/primitives) / [Score](https://docs.typesafe.ai/primitives/score)
 - この章でできるようになること: 緊急度を3段階で評価できる。score が小数になる理由を説明できる
 
-## 段階をつける
+## Score は、順番のある段階で点をつける
 
 🟢 恒久
 

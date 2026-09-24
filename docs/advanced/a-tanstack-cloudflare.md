@@ -49,7 +49,7 @@ export const judgePost = createServerFn({ method: "POST" })
 
 > 一次情報: https://docs.typesafe.ai/sdk/javascript
 
-## 動かす・デプロイする
+## キーがなければデモモード、あれば自由な文章を判定できる
 
 🔴 揮発
 
