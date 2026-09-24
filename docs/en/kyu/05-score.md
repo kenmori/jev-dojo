@@ -6,14 +6,10 @@
 
 ## Score rates things on ordered levels
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 We ask "How urgent is it?" and have Jev rate it on three levels: 0, 1 and 2.
 The difference from Choice is that **the levels have an order**. 1 is more urgent than 0, and 2 is more urgent than 1.
-
-### Properly
 
 ```ts
 import { score } from "@typesafe-ai/sdk";
@@ -43,14 +39,10 @@ npm run k05
 
 ## score is an expected value, so it can be a decimal
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 If it is "18% likely to be 0 points, 64% for 1 point, 18% for 2 points," the average is 1.00 points.
 score is this **average (expected value)**. That is why it can be a decimal like 1.4.
-
-### Properly
 
 Expected value = Σ (points × probability of those points)
 

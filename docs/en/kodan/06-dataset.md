@@ -6,15 +6,11 @@
 
 ## The right answer is something you decide
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 There is no universal right answer to "Is this post a complaint?"
 Whether you call "The fireworks woke my baby. It would be nice if they ended a little earlier" a complaint depends on how the organizers want to run things.
 Before you measure how accurate Jev is, first decide **your own right answers** and write them down.
-
-### Properly
 
 The data is the 60 posts in [data/posts.ja.json](../../../data/posts.ja.json). An English translation of the same posts is in [data/posts.en.json](../../../data/posts.en.json); the 8th Dan uses both.
 
@@ -39,13 +35,9 @@ Your labels are saved to `data/labels.mine.json`, and the 7th and 8th Dan use th
 
 ## Write down the labeling rules for the posts you hesitate on
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 For the posts that are hard to call, write the rules down in words. Without rules, even the same person will judge differently from one day to the next.
-
-### Properly
 
 **Complaint (isComplaint)**
 

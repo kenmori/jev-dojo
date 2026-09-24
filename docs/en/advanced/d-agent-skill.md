@@ -6,13 +6,9 @@
 
 ## The official skill installs with one command
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 There is an official add-on that teaches coding agents such as Claude Code "how to use Jev." It is called a skill.
-
-### Properly
 
 These are the steps from the README of the official repository (typesafe-ai/skills).
 
@@ -38,13 +34,9 @@ In Claude Code you can call it explicitly with `/typesafe:typesafe-ai`.
 
 ## Review the agent's code from this course's point of view
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Have an agent write the message-board sorting, then check it using what you learned in this course. The goal is not just to get code written, but to **spot the problems**.
-
-### Properly
 
 An example request to the agent:
 

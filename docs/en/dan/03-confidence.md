@@ -6,14 +6,10 @@
 
 ## Confidence tells you "was it an easy pick?"
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 As you saw in Kyu 6, probability is "how likely each option is", and confidence is "was it an easy pick?".
 Posts that were an easy pick go to the machine; posts where it hesitated go to a person. That is the idea behind the three lanes.
-
-### Properly
 
 | Answer type | How to see hesitation |
 |---|---|
@@ -36,15 +32,11 @@ Points the official skill warns about:
 
 ## Easy picks run automatically; uncertain posts go to a person
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 - **auto** … Confident. Sent automatically to the right team
 - **confirm** … There is a candidate, but some doubt. Someone on that team checks it once before accepting
 - **human** … No clear winner. Someone at the main office reads it and decides
-
-### Properly
 
 ```mermaid
 flowchart LR

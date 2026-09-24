@@ -6,14 +6,10 @@
 
 ## When in doubt, using the official SDK directly is the simplest
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 If you already use an AI framework, its "Jev part" keeps your code in the same style.
 If not, using the official SDK directly is the simplest. Either way, what you send (state and questions) is the same.
-
-### Properly
 
 | What to check | Why |
 |---|---|
@@ -37,13 +33,9 @@ This course uses the official SDK directly because it meets every condition abov
 
 ## As of 2026-09-24, there are three integrations besides the official SDK
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 These are the integration packages that could be confirmed on npm on that date. They can change within weeks, so always check the latest before using one.
-
-### Properly
 
 | Package | Provider | Version checked | How you call it |
 |---|---|---|---|

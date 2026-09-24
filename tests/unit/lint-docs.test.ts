@@ -15,22 +15,23 @@ const facts: Facts = {
 
 describe("lintSections", () => {
   it("ラベルと一次情報がそろっていれば OK", () => {
-    const text = "## A\n\n🟢 恒久\n\n本文\n\n> 一次情報: https://docs.typesafe.ai/x\n";
+    const text =
+      "## A\n\n<!-- freshness: evergreen -->\n\n本文\n\n> 一次情報: https://docs.typesafe.ai/x\n";
     expect(lintSections("a.md", text)).toEqual([]);
   });
 
   it("一次情報がない h2 はエラー", () => {
-    const errors = lintSections("a.md", "## A\n\n🟢 恒久\n本文\n");
+    const errors = lintSections("a.md", "## A\n\n<!-- freshness: evergreen -->\n本文\n");
     expect(errors.map((e) => e.message).join()).toMatch(/一次情報/);
   });
 
   it("ラベルがない h2 はエラー", () => {
     const errors = lintSections("a.md", "## A\n\n> 一次情報: x\n");
-    expect(errors.map((e) => e.message).join()).toMatch(/ラベル/);
+    expect(errors.map((e) => e.message).join()).toMatch(/目印/);
   });
 
   it("コードブロックの中の ## は見出しとして扱わない", () => {
-    const text = "## A\n🟢 恒久\n```\n## not heading\n```\n> 一次情報: x\n";
+    const text = "## A\n<!-- freshness: volatile -->\n```\n## not heading\n```\n> 一次情報: x\n";
     expect(lintSections("a.md", text)).toEqual([]);
   });
 });

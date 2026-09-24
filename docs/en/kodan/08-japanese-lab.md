@@ -6,14 +6,10 @@
 
 ## Follow the official instructions to the letter
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 The official docs say: "English is its strongest language. It can handle Japanese and other languages, but not necessarily as well. If you use it in a language other than English, test it on your own text."
 This chapter is that test, done exactly as instructed.
-
-### Properly
 
 We classify the 60 posts twice, in Japanese and in an English translation with the same content, and compare:
 
@@ -48,14 +44,10 @@ npm run reports     # rebuild the reports
 
 ## If the numbers look bad, suspect the question design first
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Even if the Japanese numbers are bad, do not jump to "Jev is weak at Japanese".
 Most of the time, the cause is in how the question is written.
-
-### Properly
 
 1. Line up the posts where the answers differ, and check whether they cluster in certain tags (敬語 (honorific), 主語省略 (omitted subject), 婉曲 (indirect), 皮肉 (sarcasm))
 2. If they do, add that wording to the criteria's `include` (2nd Dan)

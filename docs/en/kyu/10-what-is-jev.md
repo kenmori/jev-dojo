@@ -6,15 +6,11 @@
 
 ## Jev is an AI that does not write text
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 AIs like ChatGPT answer your question **in sentences**.
 Jev does not write sentences. It answers "yes or no", "which of A, B or C", or "how many points", **with probabilities**.
 Think of a student filling in a multiple-choice answer sheet, not a student writing an essay.
-
-### Properly
 
 Jev is a **System One model** from TypeSafe AI.
 It takes "the material for the judgment" (state) and "the questions" (questions) as input, and returns only answers in a fixed shape (a schema).
@@ -47,13 +43,9 @@ flowchart LR
 
 ## Try the official demo first, then do the same thing in this repository
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 First, try it in your browser without installing anything.
-
-### Properly
 
 In the official interactive demo (Jev Lab), type in some text and a question, and watch the answer come back.
 This course does not build its own demo, because the official one is the most up to date and the most accurate.

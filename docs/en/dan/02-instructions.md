@@ -6,14 +6,10 @@
 
 ## How you ask changes the answer
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Asking just "Complaint?" is different from first explaining "It counts as a complaint if it describes a problem or asks for improvement. Indirect wording and sarcasm count too." Of course the answers differ.
 People also judge inconsistently when nobody tells them the criteria.
-
-### Properly
 
 [src/steps/d2-instructions.ts](../../../src/steps/d2-instructions.ts) asks about the same posts in three different wordings.
 
@@ -54,13 +50,9 @@ npm run d2
 
 ## Provide a "none of the above" option
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Without an "other" option, even an unrelated ad gets forced onto some team.
-
-### Properly
 
 The team question in Kyu 6 had no way out. The second half of the 2nd Dan compares the same ad post (p25) with two questions: "without sonota" and "with sonota" (sonota means "none of the above").
 

@@ -17,14 +17,10 @@ Being a "Jev master" does not mean knowing the internals. It means **being able 
 
 ## Questions are answered at the same time, without seeing each other's answers
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 Give Jev one post and ask three questions, and the three questions are answered at the same time, separately.
 Answers always come back in a fixed shape (with probabilities). Not a single character of text is generated.
-
-### Properly
 
 ```mermaid
 sequenceDiagram
@@ -57,15 +53,11 @@ sequenceDiagram
 
 ## score is an expected value; confidence is how concentrated the distribution is
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 - A Choice spreads probability across all the options and picks the one with the most
 - A Score takes the probability of each level and works out the "average level"
 - confidence is how much the probability is gathered in one place
-
-### Properly
 
 **[General]** A classification model usually computes a "score" for each option and turns those into probabilities that add up to 1 (softmax).
 
@@ -102,13 +94,9 @@ This course's functions are in [src/lib/mechanics.ts](../../../src/lib/mechanics
 
 ## Check the mechanism against your own data
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 Do not just believe what is written. Go through every recorded response and check that it really behaves that way.
-
-### Properly
 
 ```bash
 npm run okugi
@@ -135,14 +123,10 @@ It reads every recorded response in `fixtures/` and checks the following (it doe
 
 ## What System One is, and what is not known
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Human thinking has "fast thinking" (System 1), which decides in a flash, and "slow thinking" (System 2), which thinks things through.
 Jev is an AI that specializes in the fast kind of judgment only.
-
-### Properly
 
 - **[Confirmed]** Jev is the first flagship model among TypeSafe's System One models. It understands natural language and, instead of generating text, returns typed answers and probabilities (SKILL.md)
 - **[Confirmed]** System One models are trained to make calibrated judgments. Even so, verify performance in your own domain (SKILL.md)

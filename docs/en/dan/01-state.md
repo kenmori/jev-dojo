@@ -6,14 +6,10 @@
 
 ## More material does not mean a better decision
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 When you ask a teacher "Is this essay a complaint?", you could hand over just the essay, add a note about the message board, or dump every past essay on the desk.
 Too much material actually blurs the judgment. And the more material you send, the more it costs (in tokens).
-
-### Properly
 
 [src/steps/d1-state.ts](../../../src/steps/d1-state.ts) asks "Is this a complaint?" about the same post (p08, an indirect request) three times, changing only how the state is passed.
 
@@ -43,13 +39,9 @@ The output shows the **input token count** next to each probability. The stuffed
 
 ## Point to a place in the state from the question
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 If you give your material names, the question can say exactly where to look, like "Is `post.text` a complaint?"
-
-### Properly
 
 The 1st Dan question points to a place in the state with a path wrapped in backticks.
 

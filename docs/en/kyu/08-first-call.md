@@ -6,14 +6,10 @@
 
 ## You send one JSON object and get one JSON object back
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 Asking Jev something is like mailing a letter in a fixed format and getting a reply in a fixed format.
 The SDK is a tool that writes that letter for you, but first let's write one by hand.
-
-### Properly
 
 All you send is one JSON object.
 

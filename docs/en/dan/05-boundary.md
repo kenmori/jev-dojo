@@ -6,14 +6,10 @@
 
 ## If you can write the rule out in full, use code; if you cannot, use Jev
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Arithmetic, date comparisons, fixed rules and table lookups are faster, cheaper and error-free in code.
 Ask Jev only about things **you cannot decide without understanding what the words mean**, such as "Is this text about losing something or finding something?"
-
-### Properly
 
 | Code does it | Ask Jev |
 |---|---|
@@ -35,13 +31,9 @@ When in doubt, ask yourself: "Can I write this decision out in full as rules?" I
 
 ## For lost items, Jev classifies and code does the matching
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 For six posts that arrived at the lost-and-found desk, Jev decides only "lost or found" and "what item", and code does the matching.
-
-### Properly
 
 The flow in [src/steps/d5-boundary.ts](../../../src/steps/d5-boundary.ts):
 

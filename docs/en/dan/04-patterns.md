@@ -6,14 +6,10 @@
 
 ## Route by purpose, and ask the questions you will likely need up front
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 You send each post down a different path depending on "what does this person want?" (An answer? A fix? Just to say thanks?)
 It is faster to **ask, in the first request**, the questions each path is likely to need.
-
-### Properly
 
 [src/steps/d4-patterns.ts](../../../src/steps/d4-patterns.ts) asks four questions in one request.
 
@@ -52,14 +48,10 @@ npm run d4
 
 ## Combine scores with weights, and keep safety conditions separate
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Turn "urgency", "how much it sounds like a complaint" and "chance it is a first-aid case" into scores, add them up with weights, and you get an order in which to handle posts.
 Changing the weights does not require asking Jev again.
-
-### Properly
 
 ```ts
 export const DEFAULT_WEIGHTS: Weights = { urgency: 0.6, complaint: 0.25, kyugo: 0.15 };

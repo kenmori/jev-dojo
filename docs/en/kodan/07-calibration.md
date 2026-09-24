@@ -6,14 +6,10 @@
 
 ## When it says 80%, is it right 80% of the time?
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Collect the days when the weather forecast said "80% chance of rain". If it really rained on about 8 out of every 10 of those days, you can trust that forecast.
 We call this being well calibrated.
-
-### Properly
 
 | Measure | Meaning | Good value |
 |---|---|---|
@@ -42,14 +38,10 @@ Report: [_generated/calibration.en.md](../../_generated/calibration.en.md)
 
 ## Choose the threshold by measuring
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 In Kyu 7 we provisionally said "automate it if the probability is 0.8 or higher".
 Here we start from a goal, "what we decide automatically should be right at least 95% of the time", and work backwards to the threshold.
-
-### Properly
 
 `npm run d7` prints a table of what happens as you move the threshold t.
 

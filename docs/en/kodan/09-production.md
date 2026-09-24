@@ -6,14 +6,10 @@
 
 ## A threshold belongs to the model you measured, so pin the version
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 `jev-latest` is a name that means "the newest one", so what it points to changes when a new model comes out.
 If you measured and chose a threshold in the 7th Dan, that threshold is **only valid for the model you measured**. That is why you pin the version in production.
-
-### Properly
 
 - Every sample in this course from Kyu 9 on uses a pinned model ([src/lib/client.ts](../../../src/lib/client.ts); for the value, see [facts.en.md](../../_generated/facts.en.md#model))
 - The `model` field of a response holds the model that actually answered. `npm run d9` warns you if the model you asked for and the model in the response differ
@@ -36,14 +32,10 @@ Steps for moving to a new version:
 
 ## Leave retries to the SDK; keep throughput, budget and logs in your code
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 Before you send 60 posts at once, decide "how many at the same time", "how many per minute" and "how much money at most".
 Keep a record for each item so you can trace what happened afterwards.
-
-### Properly
 
 [src/steps/d9-production.ts](../../../src/steps/d9-production.ts) and [src/lib/production.ts](../../../src/lib/production.ts):
 

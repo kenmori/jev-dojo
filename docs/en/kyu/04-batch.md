@@ -6,14 +6,10 @@
 
 ## Write three questions in one letter
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 You don't need to ask "Is it a complaint?", "Which team?" and "How urgent?" in three separate rounds.
 Write all three questions in one letter, and one reply answers them all.
-
-### Properly
 
 Put the questions you built in Kyu 7, Kyu 6 and Kyu 5 into `questions` as they are ([src/steps/k04-batch.ts](../../../src/steps/k04-batch.ts)).
 
@@ -49,14 +45,10 @@ npm run k04
 
 ## Batching "should" be faster and cheaper, so measure it
 
-🟡 Semi-stable
-
-### In one line
+<!-- freshness: semi-stable -->
 
 We actually measure the difference between one batched call and three calls with one question each.
 Measuring is more reliable than guessing.
-
-### Properly
 
 `npm run k04` runs it both ways and shows the input token counts and times side by side.
 

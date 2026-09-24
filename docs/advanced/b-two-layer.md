@@ -6,14 +6,10 @@
 
 ## 判断は Jev、文章は LLM、方針はコードが持つ
 
-🟢 恒久
-
-### ひとことで
+<!-- freshness: evergreen -->
 
 返事の文章を書くのは、文章が得意な LLM（ここでは Claude）に任せます。
 でも「返事をするか」「誰が対応するか」「急ぐか」は、LLM に考えさせません。それは Jev が判断し、コードが決めます。
-
-### ちゃんと言うと
 
 ```mermaid
 flowchart LR
@@ -50,13 +46,9 @@ npm run ob
 
 ## Claude は公式 SDK で呼び、断られたら人に回す
 
-🔴 揮発
-
-### ひとことで
+<!-- freshness: volatile -->
 
 Claude は Anthropic の公式 SDK で呼びます。Jev と同じく、キーがなくても記録済みの見本で動きます。
-
-### ちゃんと言うと
 
 ```ts
 const response = await claude.beta.messages.create({

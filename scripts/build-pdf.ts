@@ -127,6 +127,9 @@ const CSS = `
 :root { --fg: #111827; --muted: #6b7280; --line: #d1d5db; --accent: #2563eb; }
 body { font-family: "Noto Sans JP", sans-serif; color: var(--fg); font-size: 10.5pt; line-height: 1.75; }
 h1 { font-size: 20pt; border-bottom: 3px solid var(--accent); padding-bottom: 4px; margin-top: 0; }
+h2.fresh-evergreen { border-left-color: #16a34a; }
+h2.fresh-semi-stable { border-left-color: #eab308; }
+h2.fresh-volatile { border-left-color: #dc2626; }
 h2 { font-size: 14pt; margin-top: 1.6em; border-left: 5px solid var(--accent); padding-left: 8px; break-after: avoid; }
 h3 { font-size: 11.5pt; margin-top: 1.2em; break-after: avoid; }
 section.chapter { break-before: page; }
@@ -164,10 +167,17 @@ export function buildHtml(): string {
 
   const sections = chapters.map(({ part, file }) => {
     const md = rewrite(readFileSync(join(ROOT, file), "utf8"), file, known);
-    const html = (marked.parse(md, { async: false }) as string).replace(
-      /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-      (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
-    );
+    const html = (marked.parse(md, { async: false }) as string)
+      .replace(
+        /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+        (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+      )
+      // 賞味期限の目印を、見出しの縁の色（緑・黄・赤）にする
+      .replace(
+        /<h2([^>]*)>([\s\S]*?)<\/h2>\s*<!-- freshness: (evergreen|semi-stable|volatile) -->/g,
+        (_m, attrs: string, inner: string, fresh: string) =>
+          `<h2 class="fresh-${fresh}"${attrs}>${inner}</h2>`,
+      );
     return `<section class="chapter" id="${idFor(file)}"><div class="part">${part}</div>${html}</section>`;
   });
 

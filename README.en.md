@@ -58,7 +58,7 @@ The full list of chapters is in [docs/en/00-index.md](docs/en/00-index.md).
 
 ## What makes this course different
 
-- **Layered design** … Every section is written in the same three layers, from "In one line" that a 13-year-old can read to "Going deeper (for pros)"
+- **Layered design** … Every section starts with a plain explanation a 13-year-old can follow, moves on to code and real output, and ends with a collapsed deep dive for professionals
 - **Backed by commands and tests** … Of all 23 chapters, 21 have a command to run and 19 have automated tests (see "How to run each chapter" below). `npm test` passes without an API key
 - **One running example that grows** … You sort posts on "the local festival message board," adding features chapter by chapter
 - **Built not to go stale** … Prices, rate limits and model IDs are collected in [data/facts.json](data/facts.json) and never written directly in the text. A weekly CI job detects changes in the official docs

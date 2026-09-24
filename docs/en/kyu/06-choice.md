@@ -6,14 +6,10 @@
 
 ## Choice picks one, and also returns the probability of every option
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 We ask "Which team should handle this post?" and have Jev pick one of five teams.
 You get back more than the name of the chosen team: Jev also tells you **the probability of each and every team**.
-
-### Properly
 
 ```ts
 import { choice } from "@typesafe-ai/sdk";
@@ -53,16 +49,12 @@ npm run k06
 
 ## Probability and confidence are different things
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 - **probability** … "how likely it is to be each team"
 - **confidence** … "whether it picked without hesitation"
 
 If one team is clearly the favorite, confidence is high. If the votes are split, confidence is low.
-
-### Properly
 
 Here are two sample results (replay) side by side.
 

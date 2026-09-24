@@ -6,14 +6,10 @@
 
 ## Jev judges, the LLM writes, and the code owns the policy
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Writing the reply is left to an LLM that is good at writing (here, Claude).
 But "should we reply?", "who handles it?" and "is it urgent?" are not left to the LLM. Jev judges those, and the code decides.
-
-### Properly
 
 ```mermaid
 flowchart LR
@@ -59,13 +55,9 @@ npm run ob
 
 ## Call Claude with the official SDK, and hand refusals to a person
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 Claude is called with Anthropic's official SDK. Like Jev, it runs on recorded samples even without a key.
-
-### Properly
 
 ```ts
 const response = await claude.beta.messages.create({

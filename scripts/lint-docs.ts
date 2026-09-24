@@ -2,7 +2,7 @@
  * 教材本文の lint（plan.md §7, §9）。
  *
  * 1. h2 ごとに `> 一次情報:` の行があること
- * 2. h2 ごとに賞味期限ラベル（🟢 恒久 / 🟡 半恒久 / 🔴 揮発）があること
+ * 2. h2 ごとに賞味期限の目印（<!-- freshness: ... -->）があること
  * 3. data/facts.json の揮発する値（価格・レート制限・モデルIDなど）を直書きしていないこと
  *
  *   npx tsx scripts/lint-docs.ts
@@ -21,7 +21,8 @@ export interface LintError {
 
 /** 見出しルールを免除するファイル（目次など） */
 const SECTION_RULE_EXEMPT = new Set(["docs/00-index.md", "docs/en/00-index.md"]);
-const LABEL = /🟢 恒久|🟡 半恒久|🔴 揮発|🟢 Evergreen|🟡 Semi-stable|🔴 Volatile/;
+/** 賞味期限の目印。本文には表示されず、PDF では見出しの縁の色になる */
+const LABEL = /^<!-- freshness: (evergreen|semi-stable|volatile) -->$/;
 const PRIMARY = /^>\s*(一次情報|Primary source):/;
 
 /** 本文に直書きしてはいけない値 */
@@ -71,7 +72,7 @@ export function lintSections(file: string, text: string): LintError[] {
       errors.push({
         file,
         line: s.line,
-        message: `「${s.title}」に賞味期限ラベル（🟢/🟡/🔴）がありません`,
+        message: `「${s.title}」に賞味期限の目印（<!-- freshness: evergreen | semi-stable | volatile -->）がありません`,
       });
     }
   }

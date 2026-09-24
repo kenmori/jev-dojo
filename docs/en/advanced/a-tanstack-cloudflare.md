@@ -6,14 +6,10 @@
 
 ## The API key lives only on the server
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 If you put an API key in code that runs in the browser, anyone who opens the page can steal it.
 Jev is always called from the server. The browser only asks the server, "please judge this post."
-
-### Properly
 
 ```mermaid
 flowchart LR
@@ -53,13 +49,9 @@ The web app's screens in `app/` are in Japanese only; the server-side logic is t
 
 ## Without a key it runs in demo mode; with a key it judges any text
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 Without a key, the app runs in "demo mode," which can judge only the sample posts. Add a key and it can judge any text you type.
-
-### Properly
 
 ```bash
 cd app

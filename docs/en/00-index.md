@@ -8,21 +8,16 @@ Chapter code blocks show the plain command (`npm run k07`); they assume you have
 
 ---
 
-Every chapter is written in the same three layers.
+Each section starts with a plain explanation built around an everyday analogy, then moves on to definitions, code and real output.
+The closing "Going deeper (for pros)" block is collapsed and covers design trade-offs, failure cases and primary sources. If this is your first time, it is fine to leave it closed.
 
-- **In one line** … an analogy and a diagram. No jargon. Anyone can read it
-- **Properly** … definitions → code → run it → output. Hands on
-- **Going deeper (for pros)** … inside a collapsed block. Design trade-offs, failure cases, primary sources
+In the PDF edition, the color of the bar to the left of each section heading shows how long its content stays valid.
 
-If this is your first time, it is fine to leave the collapsed blocks closed.
-
-Each section starts with a freshness label.
-
-| Label | Meaning |
+| Bar color | Meaning |
 |---|---|
-| 🟢 Evergreen | Stays true even when the model changes |
-| 🟡 Semi-stable | Review it when something big changes |
-| 🔴 Volatile | Changes often. For numbers, see [_generated/facts.en.md](../_generated/facts.en.md) |
+| Green | Evergreen. Stays true even when the model changes |
+| Yellow | Semi-stable. Review it when something big changes |
+| Red | Volatile. Changes often. For numbers, see [_generated/facts.en.md](../_generated/facts.en.md) |
 
 `npm run demo` plays 17 chapters back to back. Kyu 9, Okugi, Kaiden and Advanced A each run with the command in the tables below. Advanced C and Advanced D are reading only; they have no command to run.
 

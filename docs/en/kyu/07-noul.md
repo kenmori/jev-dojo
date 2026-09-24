@@ -6,14 +6,10 @@
 
 ## You get back the probability of "yes"
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 When you ask "Is this a complaint?", Jev does not answer "yes" or "no". It answers with **the probability of "yes"**.
 0.94 means "almost certainly a complaint"; 0.5 means "could go either way."
-
-### Properly
 
 ```ts
 import { noul } from "@typesafe-ai/sdk";
@@ -50,14 +46,10 @@ npm run k07
 
 ## Your code decides what to do with the probability
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Jev only tells you "complaint-ness: 0.83."
 Deciding "send it to staff if it is 0.8 or higher" is your code's job.
-
-### Properly
 
 ```mermaid
 flowchart LR

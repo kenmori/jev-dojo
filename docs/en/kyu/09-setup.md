@@ -6,14 +6,10 @@
 
 ## The samples run on recorded answers, even without an API key
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 Before you get an API key, let's get everything running on your machine.
 There is a mode (replay) that shows answers recorded earlier, like playing back a video.
-
-### Properly
 
 You need Node.js (for the version, see [.nvmrc](../../../.nvmrc) and `engines` in `package.json`) and Git.
 
@@ -55,13 +51,9 @@ You can replace them with real ones using `npm run record`. You can tell which i
 
 ## Put your key in .env before using the real API
 
-🔴 Volatile
-
-### In one line
+<!-- freshness: volatile -->
 
 Set up the "password" you need to talk to the real Jev.
-
-### Properly
 
 1. Follow the official Quick start to create an account and issue an API key
 2. Create `.env` and paste the key into it

@@ -6,14 +6,10 @@
 
 ## Write 10 functions and the tests grade them
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 There are 10 functions with the body left blank. You fill them in yourself, and automated tests grade them.
 Get them all right and you reach **Kaiden (full mastery)**. You do not need an API key.
-
-### Properly
 
 ```bash
 npm run exam   # grade
@@ -53,14 +49,10 @@ The tasks are in [exam/tasks](../../../exam/tasks). The comment at the top of ea
 
 ## True mastery is redoing it all with your own work data
 
-🟢 Evergreen
-
-### In one line
+<!-- freshness: evergreen -->
 
 Passing the exam only proves something about this message board.
 True Kaiden is **when you can do the same thing again with the data from your own work**.
-
-### Properly
 
 Steps for redoing it with your own subject:
 
