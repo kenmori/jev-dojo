@@ -19,13 +19,13 @@ import { compareLanguages } from "../lib/reports.js";
 export async function run(ja: Dojo, en: Dojo) {
   const labels = labelsForEval();
   const [pja, pen] = [await predictAll(ja, "ja"), await predictAll(en, "en")];
-  return { labels, comparison: compareLanguages(pja, pen, labels.items) };
+  return { labels, pja, pen, comparison: compareLanguages(pja, pen, labels.items) };
 }
 
 async function main() {
   const ja = boardDojo("ja");
   const en = boardDojo("en");
-  const { comparison: c } = await run(ja, en);
+  const { comparison: c, pja, pen } = await run(ja, en);
 
   title(t("八段 日本語ラボ", "8th Dan: Japanese lab"));
   const line = (name: string, a: string, b: string) =>
@@ -87,6 +87,25 @@ async function main() {
     );
   }
   if (c.disagreements.length === 0) console.log(t("  なし", "  none"));
+  const complaintSplits = pja.flatMap((j) => {
+    const e = pen.find((x) => x.id === j.id);
+    return e && j.complaint >= 0.5 !== e.complaint >= 0.5 ? [{ j, e }] : [];
+  });
+  console.log(
+    t(
+      "\n日英で苦情の判定（0.5 で切った場合）が分かれた投稿（くわしくは npm run show -- <ID> と --lang en）",
+      "\nPosts where the complaint call (0.5 cut) differs between Japanese and English (details: npm run show -- <ID>, with --lang en)",
+    ),
+  );
+  for (const { j, e } of complaintSplits) {
+    console.log(
+      t(
+        `  ${j.id} ja=${j.complaint.toFixed(2)} en=${e.complaint.toFixed(2)}`,
+        `  ${j.id} ja=${j.complaint.toFixed(2)} en=${e.complaint.toFixed(2)}`,
+      ),
+    );
+  }
+  if (complaintSplits.length === 0) console.log(t("  なし", "  none"));
   console.log(
     t(
       "\n詳しいレポート: docs/_generated/lab-ja-en.md（npm run reports で更新）",

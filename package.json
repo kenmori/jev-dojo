@@ -29,6 +29,8 @@
     "d10": "tsx src/steps/d10-limits.ts",
     "ob": "tsx src/steps/ob-two-layer.ts",
     "okugi": "tsx src/steps/okugi-mechanism.ts",
+    "show": "tsx scripts/show.ts",
+    "lab:complaint": "tsx scripts/lab-complaint.ts",
     "exam": "tsx scripts/exam.ts",
     "label": "tsx scripts/label.ts",
     "record": "tsx scripts/record.ts",

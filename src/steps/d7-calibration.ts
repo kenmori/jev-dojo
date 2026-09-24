@@ -21,7 +21,7 @@ export async function run(dojo: Dojo) {
 
 async function main() {
   const dojo = boardDojo(LANG);
-  const { labels, summary: s } = await run(dojo);
+  const { labels, predictions, summary: s } = await run(dojo);
 
   title(t("七段 キャリブレーションを測る", "7th Dan: Measure calibration"));
   console.log(
@@ -73,6 +73,25 @@ async function main() {
     ),
   );
 
+  const wrong = predictions.flatMap((p) => {
+    const l = labels.items.find((x) => x.id === p.id);
+    return l && p.complaint >= 0.5 !== l.isComplaint ? [{ p, l }] : [];
+  });
+  console.log(
+    t(
+      "\n  0.5 で切ったときに外した投稿（くわしくは npm run show -- <ID>）",
+      "\n  Posts misjudged at a 0.5 cut (details: npm run show -- <ID>)",
+    ),
+  );
+  for (const { p, l } of wrong) {
+    console.log(
+      t(
+        `    ${p.id} 苦情の確率 ${p.complaint.toFixed(2)} ／ ラベル ${l.isComplaint ? "苦情" : "苦情ではない"}`,
+        `    ${p.id} P(complaint) ${p.complaint.toFixed(2)} / label ${l.isComplaint ? "complaint" : "not a complaint"}`,
+      ),
+    );
+  }
+  if (wrong.length === 0) console.log(t("    なし", "    none"));
   console.log(t("\n▼ 担当部署（Choice）", "\n▼ Team (Choice)"));
   console.log(
     t(

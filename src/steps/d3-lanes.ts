@@ -58,13 +58,20 @@ async function main() {
         `■ ${lane}: ${inLane.length} posts (agreement with the author's labels ${pct(acc)})`,
       ),
     );
-    for (const r of inLane.slice(0, 4)) {
+    // auto は件数が多いので先頭の 4 件だけ。確認・人に回ったものは全部出す（くわしくは npm run show -- <ID>）
+    const shown = lane === "auto" ? inLane.slice(0, 4) : inLane;
+    for (const r of shown) {
       console.log(
         `    ${r.p.id} ${r.p.department.padEnd(10)} conf ${r.p.departmentConfidence.toFixed(2)} ${r.correct ? "○" : "×"} ${q(`${r.text.slice(0, 28)}…`)}`,
       );
     }
-    if (inLane.length > 4)
-      console.log(t(`    …ほか ${inLane.length - 4} 件`, `    ...and ${inLane.length - 4} more`));
+    if (inLane.length > shown.length)
+      console.log(
+        t(
+          `    …ほか ${inLane.length - shown.length} 件`,
+          `    ...and ${inLane.length - shown.length} more`,
+        ),
+      );
     console.log("");
   }
   const notify = rows.filter((r) => r.routing.alsoNotifyKyugo);
