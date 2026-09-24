@@ -39,7 +39,7 @@ Noul の 0.5 は「中くらい苦情」という意味ではありません。�
 - **human** … 決め手なし。本部の人が読んで決める
 
 ```mermaid
-flowchart LR
+flowchart TB
   P["投稿"] --> J{Jev}
   J --> C["担当の Choice<br/>＋ confidence"]
   C --> R{"コード: route()"}

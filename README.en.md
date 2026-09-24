@@ -34,25 +34,14 @@ If you get stuck, `npm run doctor` checks your setup.
 ## Grade map
 
 Kyu are beginner grades that count down from 10 to 4; Dan are expert ranks that count up from 1st to 10th.
+Go from the top row down, and left to right within each row.
 
-```mermaid
-flowchart LR
-  subgraph Beginner["Beginner (Kyu)"]
-    K10["Kyu 10<br/>What is Jev?"] --> K9["Kyu 9<br/>Set up"] --> K8["Kyu 8<br/>Your first call"] --> K7["Kyu 7<br/>Noul"] --> K6["Kyu 6<br/>Choice"] --> K5["Kyu 5<br/>Score"] --> K4["Kyu 4<br/>Ask in one batch"]
-  end
-  subgraph Intermediate["Intermediate (Dan)"]
-    D1["1st Dan state"] --> D2["2nd Dan instructions"] --> D3["3rd Dan confidence"] --> D4["4th Dan patterns"] --> D5["5th Dan code boundary"]
-  end
-  subgraph Advanced["Advanced (high Dan)"]
-    D6["6th Dan dataset"] --> D7["7th Dan calibration"] --> D8["8th Dan Japanese lab"] --> D9["9th Dan production"] --> D10["10th Dan limits and misuse"]
-  end
-  subgraph Mastery["Mastery"]
-    O["Okugi mechanism"] --> E["Final exam"]
-  end
-  K4 --> D1
-  D5 --> D6
-  D10 --> O
-```
+| Stage | Chapters (left to right) | What you can do after it |
+|---|---|---|
+| Beginner (Kyu) | [Kyu 10 What is Jev?](docs/en/kyu/10-what-is-jev.md) → [Kyu 9 Set up](docs/en/kyu/09-setup.md) → [Kyu 8 Your first call](docs/en/kyu/08-first-call.md) → [Kyu 7 Noul](docs/en/kyu/07-noul.md) → [Kyu 6 Choice](docs/en/kyu/06-choice.md) → [Kyu 5 Score](docs/en/kyu/05-score.md) → [Kyu 4 Ask in one batch](docs/en/kyu/04-batch.md) | Ask Jev with the three question shapes |
+| Intermediate (Dan) | [1st Dan state](docs/en/dan/01-state.md) → [2nd Dan instructions](docs/en/dan/02-instructions.md) → [3rd Dan confidence](docs/en/dan/03-confidence.md) → [4th Dan patterns](docs/en/dan/04-patterns.md) → [5th Dan code boundary](docs/en/dan/05-boundary.md) | Write criteria and send unsure answers to a person |
+| Advanced (high Dan) | [6th Dan dataset](docs/en/kodan/06-dataset.md) → [7th Dan calibration](docs/en/kodan/07-calibration.md) → [8th Dan Japanese lab](docs/en/kodan/08-japanese-lab.md) → [9th Dan production](docs/en/kodan/09-production.md) → [10th Dan limits and misuse](docs/en/kodan/10-limits.md) | Measure accuracy and decide if it is ready for production |
+| Mastery | [Okugi mechanism](docs/en/kaiden/01-mechanism.md) → [Final exam](docs/en/kaiden/02-exam.md) | Check how it works from the recordings, then take the exam |
 
 The full list of chapters is in [docs/en/00-index.md](docs/en/00-index.md).
 

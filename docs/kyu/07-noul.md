@@ -52,7 +52,7 @@ Jev は「苦情っぽさ 0.83」と教えてくれるだけです。
 「0.8 以上なら担当に回す」と決めるのは、あなたのコードです。
 
 ```mermaid
-flowchart LR
+flowchart TB
   A["投稿文<br/>（state）"] --> B{Jev}
   C["質問<br/>「これは苦情か」"] --> B
   B --> D["noul（確率）"]

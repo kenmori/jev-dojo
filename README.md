@@ -30,24 +30,14 @@ npm run k10           # 本物のAPIを叩く
 
 ## 級位マップ
 
-```mermaid
-flowchart LR
-  subgraph 入門["入門（級）"]
-    K10["10級<br/>Jevって何？"] --> K9["9級<br/>環境をつくる"] --> K8["8級<br/>最初の1回"] --> K7["7級<br/>Noul"] --> K6["6級<br/>Choice"] --> K5["5級<br/>Score"] --> K4["4級<br/>まとめて聞く"]
-  end
-  subgraph 中級["中級（段）"]
-    D1["初段 state"] --> D2["二段 instructions"] --> D3["三段 confidence"] --> D4["四段 パターン"] --> D5["五段 コードとの境界"]
-  end
-  subgraph 上級["上級（高段）"]
-    D6["六段 評価データ"] --> D7["七段 キャリブレーション"] --> D8["八段 日本語ラボ"] --> D9["九段 本番運用"] --> D10["十段 限界と誤用"]
-  end
-  subgraph 皆伝["皆伝"]
-    O["奥義 仕組み"] --> E["最終試験"]
-  end
-  K4 --> D1
-  D5 --> D6
-  D10 --> O
-```
+上から順に進みます。各段階の中も、左から順です。
+
+| 段階 | 章（左から順に） | できるようになること |
+|---|---|---|
+| 入門（級） | [10級 Jevって何？](docs/kyu/10-what-is-jev.md) → [9級 環境をつくる](docs/kyu/09-setup.md) → [8級 最初の1回](docs/kyu/08-first-call.md) → [7級 Noul](docs/kyu/07-noul.md) → [6級 Choice](docs/kyu/06-choice.md) → [5級 Score](docs/kyu/05-score.md) → [4級 まとめて聞く](docs/kyu/04-batch.md) | 3 つの質問の形で、Jev に聞ける |
+| 中級（段） | [初段 state](docs/dan/01-state.md) → [二段 instructions](docs/dan/02-instructions.md) → [三段 confidence](docs/dan/03-confidence.md) → [四段 パターン](docs/dan/04-patterns.md) → [五段 コードとの境界](docs/dan/05-boundary.md) | 判断の基準を書き、迷った答えを人に回せる |
+| 上級（高段） | [六段 評価データ](docs/kodan/06-dataset.md) → [七段 キャリブレーション](docs/kodan/07-calibration.md) → [八段 日本語ラボ](docs/kodan/08-japanese-lab.md) → [九段 本番運用](docs/kodan/09-production.md) → [十段 限界と誤用](docs/kodan/10-limits.md) | 当たり具合を測り、本番に出せるか判断できる |
+| 皆伝 | [奥義 仕組み](docs/kaiden/01-mechanism.md) → [最終試験](docs/kaiden/02-exam.md) | 記録から仕組みを確かめ、試験で腕試しをする |
 
 全章の一覧は [docs/00-index.md](docs/00-index.md) にあります。
 

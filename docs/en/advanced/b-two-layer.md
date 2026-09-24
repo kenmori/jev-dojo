@@ -12,7 +12,7 @@ Writing the reply is left to an LLM that is good at writing (here, Claude).
 But "should we reply?", "who handles it?" and "is it urgent?" are not left to the LLM. Jev judges those, and the code decides.
 
 ```mermaid
-flowchart LR
+flowchart TB
   P["Post"] --> J1{"Jev<br/>intent, team, urgency, complaint"}
   J1 --> C{"Code: plan()"}
   C -->|"first aid / urgent"| H["A person responds now<br/>(no waiting for a draft)"]

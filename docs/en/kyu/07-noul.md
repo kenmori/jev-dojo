@@ -52,7 +52,7 @@ Jev only tells you "complaint-ness: 0.83."
 Deciding "send it to staff if it is 0.8 or higher" is your code's job.
 
 ```mermaid
-flowchart LR
+flowchart TB
   A["Post text<br/>(state)"] --> B{Jev}
   C["Question<br/>“Is this a complaint?”"] --> B
   B --> D["noul (probability)"]

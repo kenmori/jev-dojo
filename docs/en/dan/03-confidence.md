@@ -39,7 +39,7 @@ Points the official skill warns about:
 - **human** … No clear winner. Someone at the main office reads it and decides
 
 ```mermaid
-flowchart LR
+flowchart TB
   P["Post"] --> J{Jev}
   J --> C["Team Choice<br/>+ confidence"]
   C --> R{"Code: route()"}
