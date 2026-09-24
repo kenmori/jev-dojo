@@ -90,12 +90,24 @@ ${HEADER}
 `;
 }
 
-/** 全サンプルを1周したときのトークン数と、合成データが混ざっているか */
+/** 費用の目安に付ける注記。見本データ（合成）がどのくらい混ざっているかで文面を変える */
+export function syntheticNote(share: number, lang: "ja" | "en"): string {
+  if (share === 0) return "";
+  if (share === 1)
+    return lang === "ja"
+      ? "。※ 見本データ（合成）のトークン数からの推定"
+      : ". Estimated from the token counts of the sample (synthetic) data";
+  return lang === "ja"
+    ? "。※ 一部は見本データ（合成）のトークン数からの推定"
+    : ". Partly estimated from the token counts of the sample (synthetic) data";
+}
+
 /** lang のサンプルのリクエストを1回ずつ送ったときのトークン数。英語モードの fixture は fixtures/en/ にある */
 export function estimateFullRun(lang: "ja" | "en" = "ja"): {
   inputTokens: number;
   costUSD: number;
-  synthetic: boolean;
+  /** 合成データの割合。0 なら全部実測、1 なら全部見本 */
+  syntheticShare: number;
 } {
   const fixtures = readdirSync(FIXTURES_DIR, { recursive: true })
     .map(String)
@@ -120,7 +132,10 @@ export function estimateFullRun(lang: "ja" | "en" = "ja"): {
   return {
     inputTokens: usage.input_tokens,
     costUSD: costUSD(usage),
-    synthetic: fixtures.some((fx) => fx.meta.source === "synthetic"),
+    syntheticShare:
+      fixtures.length === 0
+        ? 0
+        : fixtures.filter((fx) => fx.meta.source === "synthetic").length / fixtures.length,
   };
 }
 
@@ -133,7 +148,7 @@ export function renderReadmeBlock(f: Facts, docMapCheckedAt: string | null): str
     `公式ドキュメント差分チェック: ${docMapCheckedAt ? `✅ ${docMapCheckedAt}` : "未実施"}`,
     "```",
     "",
-    `全サンプルのリクエストを1回ずつ live で送ったときの Jev の費用の目安: 約 ${formatUSD(est.costUSD)}（入力 ${est.inputTokens.toLocaleString("en-US")} トークン、新規クレジット ${f.signup.startingCredit} の ${((est.costUSD / Number(f.signup.startingCredit.replace(/[^\d.]/g, ""))) * 100).toPrecision(2)}%）${est.synthetic ? "。※ 見本データ（合成）のトークン数からの推定" : ""}。応用B の Claude の費用は別にかかります`,
+    `全サンプルのリクエストを1回ずつ live で送ったときの Jev の費用の目安: 約 ${formatUSD(est.costUSD)}（入力 ${est.inputTokens.toLocaleString("en-US")} トークン、新規クレジット ${f.signup.startingCredit} の ${((est.costUSD / Number(f.signup.startingCredit.replace(/[^\d.]/g, ""))) * 100).toPrecision(2)}%）${syntheticNote(est.syntheticShare, "ja")}。応用B の Claude の費用は別にかかります`,
     "<!-- facts:end -->",
   ].join("\n");
 }
@@ -211,7 +226,7 @@ export function renderReadmeBlockEn(f: Facts, docMapCheckedAt: string | null): s
     `Official docs diff check: ${docMapCheckedAt ? `✅ ${docMapCheckedAt}` : "not run yet"}`,
     "```",
     "",
-    `Estimated Jev cost of sending every English sample request once in live mode: about ${formatUSD(est.costUSD)} (${est.inputTokens.toLocaleString("en-US")} input tokens, ${((est.costUSD / credit) * 100).toPrecision(2)}% of the ${f.signup.startingCredit} sign-up credit)${est.synthetic ? ". Estimated from the token counts of the sample (synthetic) data" : ""}. Claude usage in Advanced B is billed separately`,
+    `Estimated Jev cost of sending every English sample request once in live mode: about ${formatUSD(est.costUSD)} (${est.inputTokens.toLocaleString("en-US")} input tokens, ${((est.costUSD / credit) * 100).toPrecision(2)}% of the ${f.signup.startingCredit} sign-up credit)${syntheticNote(est.syntheticShare, "en")}. Claude usage in Advanced B is billed separately`,
     "<!-- facts:end -->",
   ].join("\n");
 }

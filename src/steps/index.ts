@@ -1,6 +1,7 @@
 /**
  * 章ごとのサンプルの一覧。demo と record がこの順番で回す。
  * dirs はその章が使う fixture のディレクトリ（record のとき、ここを消してから録り直す）。
+ * dirs が空の章は、八段が録った共有の fixture（board-ja / board-en）を使うので、record でも再生で表示だけする。
  */
 import { t } from "../lib/i18n.js";
 export interface StepEntry {

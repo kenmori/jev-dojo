@@ -37,8 +37,8 @@ Node.js を手元に入れたくない場合は、GitHub の「Code → Codespac
 仕組みは SDK の `fetch` オプションに、ファイルから応答を返す関数を渡しているだけです。
 fixture のファイル名はリクエスト内容のハッシュなので、質問文を1文字でも変えると「fixture がない」と教えてくれます。
 
-最初に入っている fixture は**手で作った見本（合成データ）**です。実APIの結果ではありません。
-`npm run record` で本物に置き換えられます。どちらなのかは各 fixture の `meta.source` と、実行時の表示でわかります。
+日本語の fixture は、作者が実APIで記録したものです。英語用（`fixtures/en/`）と応用Bの一部は、まだ**手で作った見本（合成データ）**です。
+`npm run record` で、自分の環境の結果に置き換えられます。どちらなのかは各 fixture の `meta.source` と、実行時の表示でわかります。
 
 </details>
 

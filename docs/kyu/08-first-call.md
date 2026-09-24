@@ -37,20 +37,20 @@ curl https://api.typesafe.ai/v1/systemone \
 | `type` | 答えの形。`noul`（はい/いいえ）・`choice`（選ぶ）・`score`（点をつける） |
 | `instructions` | 質問そのもの |
 
-返ってくる JSON は、だいたい次の形です。
+返ってくる JSON は、次の形です（作者が記録したときの値）。
 
 ```json
 {
   "model": "（実際に答えたモデルのバージョン）",
   "answers": {
-    "isQuestion": { "type": "noul", "noul": 0.98 }
+    "isQuestion": { "type": "noul", "noul": 0.91 }
   },
-  "usage": { "input_tokens": 64, "output_tokens": 0 }
+  "usage": { "input_tokens": 300, "output_tokens": 23 }
 }
 ```
 
 - `answers.isQuestion.noul` … 「はい」の確率
-- `usage.input_tokens` … 料金計算のもとになるトークン数
+- `usage.input_tokens` / `usage.output_tokens` … 料金計算のもとになるトークン数。Jev は文章を返しませんが、出力も 0 ではありません
 
 同じことを TypeScript で、SDK を使わずに書いたのが [src/steps/k08-raw.ts](../../src/steps/k08-raw.ts) です。
 
@@ -63,7 +63,7 @@ npm run k08
 - `questions` の名前がそのまま `answers` のキーになります。SDK を使うと、この対応が TypeScript の型として推論されます（7級以降）
 - `model` にエイリアス（`jev-latest` など）を渡した場合、応答の `model` には実際に使われたバージョンが入ります。これを使って「エイリアスが今どこを指しているか」を調べられます（[scripts/verify-facts.ts](../../scripts/verify-facts.ts)）
 - `state` と `instructions` には文字列だけでなく JSON オブジェクトや配列も渡せます（二段で扱います）
-- 上の JSON の数字はこの教材の見本です。実際の値は実行して確かめてください
+- 上の JSON の数字は、作者が1回記録したときの値です。実行するたびに少し変わることがあります。短い投稿でも `input_tokens` が大きいのは、質問の形式などの決まった分が毎回送られているためと考えられます
 
 </details>
 

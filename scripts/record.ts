@@ -47,13 +47,23 @@ for (const { script, file, dirs, needsClaude } of targets) {
     );
     continue;
   }
+  // dirs が空の章は、ほかの章（八段）が録った共有の fixture を使う。
+  // ここで録り直すと共有の fixture が上書きされ、先に表示した章の結果と再生の結果がずれるので、再生で表示だけする
+  const shared = dirs.length === 0;
   // 古い fixture が残らないよう、章ごとに消してから録る
   for (const dir of dirs)
     rmSync(join(FIXTURES_DIR, stepDir(dir)), { recursive: true, force: true });
-  console.log(t(`● ${script} を録音中…`, `● recording ${script}...`));
+  console.log(
+    shared
+      ? t(
+          `● ${script} は共有の記録を再生します（録り直さない）`,
+          `● ${script} replays the shared recordings (not re-recorded)`,
+        )
+      : t(`● ${script} を録音中…`, `● recording ${script}...`),
+  );
   const result = spawnSync("npx", ["tsx", join(ROOT, "src", "steps", file)], {
     stdio: "inherit",
-    env: { ...process.env, JEV_MODE: "record" },
+    env: { ...process.env, JEV_MODE: shared ? "replay" : "record" },
   });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
