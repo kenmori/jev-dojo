@@ -358,7 +358,7 @@ async function main() {
             : src.endsWith(".svg")
               ? `<div class="figure" data-alt="${alt}">${readFileSync(src, "utf8").replace(/<\?xml[^>]*>\s*/, "")}</div>`
               : // PNG・JPEG の挿絵も、ほかの図と同じく画面の幅に合わせて PNG にする
-                `<div class="figure" data-alt="${alt}"><img src="file://${src}" alt="${alt}" style="max-width:720px"></div>`,
+                `<div class="figure" data-alt="${alt}" data-photo="1"><img src="file://${src}" alt="${alt}" style="max-width:720px"></div>`,
       );
       const scratch = join(ROOT, "dist", "epub-work.html");
       mkdirSync(dirname(scratch), { recursive: true });
@@ -391,12 +391,20 @@ async function main() {
       const names: string[] = [];
       for (let k = 0; k < n; k++) {
         figureCount += 1;
-        const name = `fig${String(figureCount).padStart(3, "0")}.png`;
+        // 挿絵（PNG・JPEG）は JPEG にして、本のファイルを小さく保つ。図やグラフは文字が多いので PNG のまま
+        const photo = (await figures.nth(k).getAttribute("data-photo")) === "1";
+        const name = `fig${String(figureCount).padStart(3, "0")}.${photo ? "jpg" : "png"}`;
         zip.file(
           `OEBPS/images/${name}`,
-          await figures.nth(k).screenshot({ omitBackground: false }),
+          await figures
+            .nth(k)
+            .screenshot(photo ? { type: "jpeg", quality: 85 } : { omitBackground: false }),
         );
-        items.push({ id: name.replace(".png", ""), href: `images/${name}`, type: "image/png" });
+        items.push({
+          id: name.replace(/\.\w+$/, ""),
+          href: `images/${name}`,
+          type: photo ? "image/jpeg" : "image/png",
+        });
         names.push(name);
       }
       const body = await page.evaluate((imgNames: string[]) => {
