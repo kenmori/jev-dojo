@@ -7,3 +7,4 @@ dist/
 data/labels.mine.json
 logs/
 __pycache__/
+book/

@@ -1,0 +1,14 @@
+{
+  "title": "（書名）",
+  "subtitle": "（副題）",
+  "author": "kenmori",
+  "language": "ja",
+  "description": "（Amazon の商品説明と同じ内容でよい）",
+  "cover": "cover.jpg",
+  "output": "jev-dojo-book.epub",
+  "chapters": [
+    { "src": "chapters/00-preface.md" },
+    { "src": "repo:docs/kyu/10-what-is-jev.md" },
+    { "src": "chapters/90-measured-results.md" }
+  ]
+}

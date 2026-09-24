@@ -221,7 +221,7 @@ ${sections.join("\n")}
 </body></html>`;
 }
 
-async function launch(): Promise<Browser> {
+export async function launch(): Promise<Browser> {
   const path = process.env.PDF_BROWSER;
   if (path) return chromium.launch({ executablePath: path });
   try {
