@@ -110,6 +110,38 @@ export function fillFacts(markdown: string, source: unknown = facts): string {
   });
 }
 
+/**
+ * 脚注。原稿の `[^key]` を「※1」の注番号にし、`[^key]: 説明` の行を章の終わりの「注」にまとめる。
+ * EPUB 3 の noteref / footnote なので、Kindle では番号をタップすると説明がポップアップで出る。
+ * 番号は章ごとに、本文に出てくる順に振る。
+ */
+export function applyFootnotes(markdown: string): string {
+  const defs = new Map<string, string>();
+  const body = markdown.replace(
+    /^\[\^([\w-]+)\]:[ \t]*(.+)$\n?/gm,
+    (_m, key: string, text: string) => {
+      defs.set(key, text.trim());
+      return "";
+    },
+  );
+  const order: string[] = [];
+  let refs = 0;
+  const withRefs = body.replace(/\[\^([\w-]+)\]/g, (_m, key: string) => {
+    if (!defs.has(key)) throw new Error(`脚注の説明がありません: [^${key}]`);
+    let n = order.indexOf(key) + 1;
+    if (n === 0) n = order.push(key);
+    return `<a class="noteref" epub:type="noteref" href="#fn-${n}" id="fnref-${++refs}">※${n}</a>`;
+  });
+  if (order.length === 0) return withRefs;
+  const notes = order
+    .map(
+      (key, i) =>
+        `<aside class="footnote" epub:type="footnote" id="fn-${i + 1}"><p>※${i + 1}　${marked.parseInline(defs.get(key) ?? "", { async: false }) as string}</p></aside>`,
+    )
+    .join("\n");
+  return `${withRefs.trimEnd()}\n\n<section class="footnotes" epub:type="footnotes">\n<p class="footnotes-title">注</p>\n${notes}\n</section>\n`;
+}
+
 export function prepareMarkdown(
   markdown: string,
   path: string,
@@ -117,7 +149,7 @@ export function prepareMarkdown(
 ): { markdown: string; images: string[] } {
   const images: string[] = [];
   const dir = dirname(path);
-  const md = fillFacts(markdown)
+  const md = applyFootnotes(fillFacts(markdown))
     .replace(/^<!-- freshness: [\w-]+ -->\n?/gm, "")
     .replace(
       /<details><summary>(.*?)<\/summary>/g,
@@ -162,6 +194,10 @@ blockquote { margin: 0.8em 0; padding-left: 0.8em; border-left: 3px solid #999; 
 .deeper-title { font-weight: bold; }
 img { max-width: 100%; }
 .figure { text-align: center; margin: 1em 0; }
+a.noteref { font-size: 0.75em; vertical-align: super; text-decoration: none; }
+.footnotes { margin-top: 2em; border-top: 1px solid #999; font-size: 0.85em; }
+.footnotes-title { font-weight: bold; }
+aside.footnote p { margin: 0.4em 0; }
 `;
 
 const esc = (s: string) =>
@@ -317,9 +353,12 @@ async function main() {
       html = html.replace(
         /<img class="figure-src" data-src="([^"]+)" alt="([^"]*)"\s*\/?>/g,
         (_m, src: string, alt: string) =>
-          src.endsWith(".svg") && existsSync(src)
-            ? `<div class="figure" data-alt="${alt}">${readFileSync(src, "utf8").replace(/<\?xml[^>]*>\s*/, "")}</div>`
-            : `<span>${alt}</span>`,
+          !existsSync(src)
+            ? `<span>${alt}</span>`
+            : src.endsWith(".svg")
+              ? `<div class="figure" data-alt="${alt}">${readFileSync(src, "utf8").replace(/<\?xml[^>]*>\s*/, "")}</div>`
+              : // PNG・JPEG の挿絵も、ほかの図と同じく画面の幅に合わせて PNG にする
+                `<div class="figure" data-alt="${alt}"><img src="file://${src}" alt="${alt}" style="max-width:720px"></div>`,
       );
       const scratch = join(ROOT, "dist", "epub-work.html");
       mkdirSync(dirname(scratch), { recursive: true });

@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  applyFootnotes,
   contentOpf,
   defaultManifest,
   fillFacts,
@@ -96,5 +97,25 @@ describe("fillFacts", () => {
   it("ない値やオブジェクトはエラーにする", () => {
     expect(() => fillFacts("{{facts.nope}}", {})).toThrow();
     expect(() => fillFacts("{{facts.model}}", { model: { a: 1 } })).toThrow();
+  });
+});
+
+describe("applyFootnotes", () => {
+  it("[^key] を出てくる順に ※1, ※2 にし、章の終わりに注をまとめる", () => {
+    const md = "Jev[^a] と API[^b]。もう一度 Jev[^a]。\n\n[^b]: 窓口\n[^a]: モデル\n";
+    const out = applyFootnotes(md);
+    expect(out).toContain('href="#fn-1" id="fnref-1">※1</a>');
+    expect(out).toContain('href="#fn-2" id="fnref-2">※2</a>');
+    expect(out).toContain('href="#fn-1" id="fnref-3">※1</a>');
+    expect(out).toContain(
+      '<aside class="footnote" epub:type="footnote" id="fn-1"><p>※1　モデル</p></aside>',
+    );
+    expect(out).not.toContain("[^b]:");
+  });
+  it("説明のない注はエラーにする", () => {
+    expect(() => applyFootnotes("Jev[^x]")).toThrow();
+  });
+  it("注がなければ何も足さない", () => {
+    expect(applyFootnotes("本文だけ")).toBe("本文だけ");
   });
 });
