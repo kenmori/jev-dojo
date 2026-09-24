@@ -204,6 +204,7 @@ code { font-family: monospace; }
 table { border-collapse: collapse; margin: 0.8em 0; font-size: 0.9em; }
 th, td { border: 1px solid #999; padding: 0.2em 0.4em; vertical-align: top; }
 blockquote { margin: 0.8em 0; padding-left: 0.8em; border-left: 3px solid #999; }
+.caution { margin: 1em 0; padding: 0.2em 0.9em; border: 2px solid #000; }
 .deeper { border: 1px solid #bbb; padding: 0 0.8em; margin: 1em 0; }
 .deeper-title { font-weight: bold; }
 img { max-width: 100%; }

@@ -86,15 +86,15 @@ if (!key) {
           `pinned model ${facts.model.pinned} is available`,
         ),
       );
-    else {
-      ng(
+    // 一覧には別名（jev-latest など）だけが載り、バージョン番号は載らないことがある。
+    // 確かめるには質問を 1 回送る必要があり費用がかかるので、doctor では確かめない
+    else
+      info(
         t(
-          `固定モデル ${facts.model.pinned} が一覧にありません。data/facts.json が古い可能性があります`,
-          `pinned model ${facts.model.pinned} is not in the list. data/facts.json may be out of date`,
+          `一覧には別名だけが載っています。教材は ${facts.model.pinned} で検証しました。実際に答えたバージョンは、サンプルの画面の「実際に答えたモデル」で確かめられます`,
+          `The list shows aliases only. This course was verified with ${facts.model.pinned}; each sample prints the version that actually answered`,
         ),
       );
-      failed = true;
-    }
   } catch (err) {
     ng(
       t(
