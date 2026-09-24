@@ -1,6 +1,7 @@
 import type { Usage } from "@typesafe-ai/sdk";
 import { costUSD, formatUSD, type Pricing } from "./cost.js";
 import { facts } from "./facts.js";
+import { t } from "./i18n.js";
 
 /**
  * 本番運用の部品（九段）。
@@ -10,7 +11,9 @@ import { facts } from "./facts.js";
 /** 同時に走るリクエストの数を制限する */
 export function createLimiter(concurrency: number) {
   if (!Number.isInteger(concurrency) || concurrency < 1) {
-    throw new Error("concurrency は 1 以上の整数です");
+    throw new Error(
+      t("concurrency は 1 以上の整数です", "concurrency must be an integer of 1 or more"),
+    );
   }
   let active = 0;
   const queue: (() => void)[] = [];
@@ -76,7 +79,12 @@ export class BudgetExceededError extends Error {
     readonly spentUSD: number,
     readonly limitUSD: number,
   ) {
-    super(`予算を超えました: ${formatUSD(spentUSD)} / 上限 ${formatUSD(limitUSD)}`);
+    super(
+      t(
+        `予算を超えました: ${formatUSD(spentUSD)} / 上限 ${formatUSD(limitUSD)}`,
+        `Budget exceeded: ${formatUSD(spentUSD)} / limit ${formatUSD(limitUSD)}`,
+      ),
+    );
   }
 }
 

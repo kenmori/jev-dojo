@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "The trash bins are overflowing and litter is scattered on the street.",
+      "questions": {
+        "urgency": {
+          "type": "score",
+          "instructions": "How urgently should the organizers respond to this post?",
+          "criteria": [
+            "Not urgent. It can wait until after the festival",
+            "Should be handled today",
+            "Needs action right now. Someone's safety or health is involved"
+          ]
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgency": {
+          "type": "score",
+          "score": 0.85,
+          "confidence": 0.31,
+          "legend": {
+            "0": "Not urgent. It can wait until after the festival",
+            "1": "Should be handled today",
+            "2": "Needs action right now. Someone's safety or health is involved"
+          },
+          "probabilities": {
+            "0": 0.22,
+            "1": 0.71,
+            "2": 0.07
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 217,
+        "output_tokens": 0
+      }
+    }
+  }
+}

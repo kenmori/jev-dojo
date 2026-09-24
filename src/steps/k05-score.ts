@@ -4,19 +4,33 @@
  *
  *   npm run k05
  */
+
 import { score } from "@typesafe-ai/sdk";
 import { createDojo, type Dojo } from "../lib/client.js";
 import { sumUsage } from "../lib/cost.js";
+import { t } from "../lib/i18n.js";
 import { getPost } from "../lib/posts.js";
-import { footer, printProbabilities, runMain, title } from "../lib/print.js";
+import { footer, printProbabilities, q, runMain, title } from "../lib/print.js";
 
 export const STEP = "k05-score";
 
-export const urgency = score("この投稿に、運営はどのくらい急いで対応するべきですか？", [
-  "急がない。お祭りが終わってからの対応でよい",
-  "今日中に対応したい",
-  "今すぐ対応が必要。人の安全や体調にかかわる",
-]);
+export const urgency = score(
+  t(
+    "この投稿に、運営はどのくらい急いで対応するべきですか？",
+    "How urgently should the organizers respond to this post?",
+  ),
+  [
+    t(
+      "急がない。お祭りが終わってからの対応でよい",
+      "Not urgent. It can wait until after the festival",
+    ),
+    t("今日中に対応したい", "Should be handled today"),
+    t(
+      "今すぐ対応が必要。人の安全や体調にかかわる",
+      "Needs action right now. Someone's safety or health is involved",
+    ),
+  ],
+);
 
 /** 期待値を一番近い段階に丸める。丸め方もコードの仕事 */
 export function toLevel(expected: number): 0 | 1 | 2 {
@@ -44,12 +58,15 @@ async function main() {
   const dojo = createDojo(STEP);
   const rows = await run(dojo);
 
-  title("5級 Score（点をつける）");
+  title(t("5級 Score（点をつける）", "Kyu 5: Score (rate it)"));
   for (const { post, answer } of rows) {
     const level = toLevel(answer.score);
-    console.log(`${post.id} 「${post.text}」`);
+    console.log(`${post.id} ${q(post.text)}`);
     console.log(
-      `    期待値 ${answer.score.toFixed(2)} → 段階 ${level}「${answer.legend[level]}」（confidence ${answer.confidence.toFixed(2)}）`,
+      t(
+        `    期待値 ${answer.score.toFixed(2)} → 段階 ${level}「${answer.legend[level]}」（confidence ${answer.confidence.toFixed(2)}）`,
+        `    expected ${answer.score.toFixed(2)} → level ${level} "${answer.legend[level]}" (confidence ${answer.confidence.toFixed(2)})`,
+      ),
     );
     printProbabilities(answer.probabilities, "      ");
     console.log("");

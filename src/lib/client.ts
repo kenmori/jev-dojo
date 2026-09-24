@@ -8,6 +8,7 @@ import {
   type Mode,
   resolveMode,
 } from "./fixtures.js";
+import { t } from "./i18n.js";
 
 /**
  * TypeSafeClient の薄いラッパ。
@@ -51,7 +52,10 @@ export function createDojo(step: string, options: DojoOptions = {}): Dojo {
   const apiKey = mode === "replay" ? REPLAY_KEY : process.env.TYPESAFE_API_KEY?.trim();
   if (!apiKey) {
     throw new Error(
-      "TYPESAFE_API_KEY が設定されていません。.env にキーを入れるか、`npm run demo` でキーなしの再生を試してください。",
+      t(
+        "TYPESAFE_API_KEY が設定されていません。.env にキーを入れるか、`npm run demo` でキーなしの再生を試してください。",
+        "TYPESAFE_API_KEY is not set. Put your key in .env, or try the keyless replay with `npm run demo`.",
+      ),
     );
   }
 

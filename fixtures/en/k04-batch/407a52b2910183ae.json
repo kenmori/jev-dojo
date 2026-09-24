@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "Last night so many cars were parked on the road behind the shrine that I couldn't get my car out of my house. Please do something about it.",
+      "questions": {
+        "department": {
+          "type": "choice",
+          "instructions": "Which team should handle this post?",
+          "criteria": {
+            "honbu": "Main office. Overall schedule, volunteers, trash, thanks and general feedback",
+            "yatai": "Food stalls. Which stalls are open, prices, food",
+            "kotsu": "Traffic and parking. Cars, roads, buses",
+            "otoshimono": "Lost and found. Things lost or found",
+            "kyugo": "First aid and safety. Injuries, feeling unwell, danger"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "kotsu",
+          "confidence": 0.68,
+          "probabilities": {
+            "honbu": 0.09,
+            "yatai": 0.01,
+            "kotsu": 0.87,
+            "otoshimono": 0.01,
+            "kyugo": 0.02
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 378,
+        "output_tokens": 0
+      }
+    }
+  }
+}

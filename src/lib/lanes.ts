@@ -1,4 +1,5 @@
 import type { Prediction } from "./evaluate.js";
+import { t } from "./i18n.js";
 
 /**
  * 3レーンの振り分け（三段）。Node の API を使わない純粋関数なので、
@@ -26,19 +27,29 @@ export interface Routing {
 }
 
 /** レーン分けはコードの仕事。Jev の答えは材料にすぎない */
-export function route(p: Prediction, t: LaneThresholds = DEFAULT_THRESHOLDS): Routing {
+export function route(p: Prediction, th: LaneThresholds = DEFAULT_THRESHOLDS): Routing {
   const kyugo = p.departmentProbabilities.kyugo ?? 0;
-  const alsoNotifyKyugo = p.department !== "kyugo" && kyugo >= t.safetyFloor;
-  if (p.departmentConfidence >= t.auto) {
-    return { lane: "auto", department: p.department, alsoNotifyKyugo, reason: "confidence が高い" };
+  const alsoNotifyKyugo = p.department !== "kyugo" && kyugo >= th.safetyFloor;
+  if (p.departmentConfidence >= th.auto) {
+    return {
+      lane: "auto",
+      department: p.department,
+      alsoNotifyKyugo,
+      reason: t("confidence が高い", "high confidence"),
+    };
   }
-  if (p.departmentConfidence >= t.confirm) {
+  if (p.departmentConfidence >= th.confirm) {
     return {
       lane: "confirm",
       department: p.department,
       alsoNotifyKyugo,
-      reason: "候補はあるが迷いがある",
+      reason: t("候補はあるが迷いがある", "has a candidate but is unsure"),
     };
   }
-  return { lane: "human", department: p.department, alsoNotifyKyugo, reason: "決め手に欠ける" };
+  return {
+    lane: "human",
+    department: p.department,
+    alsoNotifyKyugo,
+    reason: t("決め手に欠ける", "no clear winner"),
+  };
 }

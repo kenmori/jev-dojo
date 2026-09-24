@@ -1,5 +1,6 @@
 import type { Usage } from "@typesafe-ai/sdk";
 import { facts } from "./facts.js";
+import { t } from "./i18n.js";
 
 export interface Pricing {
   inputPerMtok: number;
@@ -32,5 +33,5 @@ export function sumUsage(...usages: Usage[]): Usage {
 }
 
 export function describeCost(usage: Usage, pricing: Pricing = facts.pricing): string {
-  return `入力 ${usage.input_tokens} tok / 出力 ${usage.output_tokens} tok → ${formatUSD(costUSD(usage, pricing))}`;
+  return `${t("入力", "input")} ${usage.input_tokens} tok / ${t("出力", "output")} ${usage.output_tokens} tok → ${formatUSD(costUSD(usage, pricing))}`;
 }

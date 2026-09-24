@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 /**
  * 実行結果から SVG の図を作る（plan.md §5.2）。
  * 図に数値を焼き込むのではなく、数値が変われば図も作り直す。外部ライブラリは使わない。
@@ -132,8 +134,8 @@ export function reliabilityDiagram(
   parts.push(
     `<rect x="${x(0)}" y="${y(1)}" width="${size}" height="${size}" fill="none" stroke="#9ca3af"/>`,
     `<line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="#9ca3af" stroke-dasharray="4 4"/>`,
-    `<text x="${x(0.5)}" y="${y(0) + 36}" text-anchor="middle" ${FONT} font-size="12" fill="#374151">予測した確率</text>`,
-    `<text x="16" y="${y(0.5)}" ${FONT} font-size="12" fill="#374151" transform="rotate(-90 16 ${y(0.5)})" text-anchor="middle">実際の割合</text>`,
+    `<text x="${x(0.5)}" y="${y(0) + 36}" text-anchor="middle" ${FONT} font-size="12" fill="#374151">${t("予測した確率", "Predicted probability")}</text>`,
+    `<text x="16" y="${y(0.5)}" ${FONT} font-size="12" fill="#374151" transform="rotate(-90 16 ${y(0.5)})" text-anchor="middle">${t("実際の割合", "Observed share")}</text>`,
   );
   series.forEach((s, j) => {
     const color = COLORS[j % COLORS.length];

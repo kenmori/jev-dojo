@@ -7,12 +7,14 @@
  *
  *   npm run d3
  */
+
 import { exampleLabels, postsFor } from "../lib/board.js";
 import type { Dojo } from "../lib/client.js";
 import { sumUsage } from "../lib/cost.js";
 import { boardDojo, pct, predictAll } from "../lib/evaluate.js";
+import { LANG, t } from "../lib/i18n.js";
 import { DEFAULT_THRESHOLDS, route } from "../lib/lanes.js";
-import { footer, runMain, title } from "../lib/print.js";
+import { footer, q, runMain, title } from "../lib/print.js";
 
 export {
   DEFAULT_THRESHOLDS,
@@ -23,9 +25,9 @@ export {
 } from "../lib/lanes.js";
 
 export async function run(dojo: Dojo) {
-  const predictions = await predictAll(dojo, "ja");
+  const predictions = await predictAll(dojo, LANG);
   const gold = new Map(exampleLabels.items.map((l) => [l.id, l.department]));
-  const text = new Map(postsFor("ja").map((p) => [p.id, p.text]));
+  const text = new Map(postsFor(LANG).map((p) => [p.id, p.text]));
   const rows = predictions.map((p) => ({
     p,
     routing: route(p),
@@ -36,26 +38,42 @@ export async function run(dojo: Dojo) {
 }
 
 async function main() {
-  const dojo = boardDojo("ja");
+  const dojo = boardDojo(LANG);
   const { rows, usage } = await run(dojo);
 
-  title("三段 confidence");
-  const t = DEFAULT_THRESHOLDS;
-  console.log(`しきい値: auto ≥ ${t.auto} ／ confirm ≥ ${t.confirm} ／ それ未満は human\n`);
+  title(t("三段 confidence", "3rd Dan: Confidence"));
+  const th = DEFAULT_THRESHOLDS;
+  console.log(
+    t(
+      `しきい値: auto ≥ ${th.auto} ／ confirm ≥ ${th.confirm} ／ それ未満は human\n`,
+      `Thresholds: auto ≥ ${th.auto} / confirm ≥ ${th.confirm} / below that, human\n`,
+    ),
+  );
   for (const lane of ["auto", "confirm", "human"] as const) {
     const inLane = rows.filter((r) => r.routing.lane === lane);
     const acc = inLane.length ? inLane.filter((r) => r.correct).length / inLane.length : Number.NaN;
-    console.log(`■ ${lane}: ${inLane.length} 件（作者ラベルとの一致 ${pct(acc)}）`);
+    console.log(
+      t(
+        `■ ${lane}: ${inLane.length} 件（作者ラベルとの一致 ${pct(acc)}）`,
+        `■ ${lane}: ${inLane.length} posts (agreement with the author's labels ${pct(acc)})`,
+      ),
+    );
     for (const r of inLane.slice(0, 4)) {
       console.log(
-        `    ${r.p.id} ${r.p.department.padEnd(10)} conf ${r.p.departmentConfidence.toFixed(2)} ${r.correct ? "○" : "×"} 「${r.text.slice(0, 28)}…」`,
+        `    ${r.p.id} ${r.p.department.padEnd(10)} conf ${r.p.departmentConfidence.toFixed(2)} ${r.correct ? "○" : "×"} ${q(`${r.text.slice(0, 28)}…`)}`,
       );
     }
-    if (inLane.length > 4) console.log(`    …ほか ${inLane.length - 4} 件`);
+    if (inLane.length > 4)
+      console.log(t(`    …ほか ${inLane.length - 4} 件`, `    ...and ${inLane.length - 4} more`));
     console.log("");
   }
   const notify = rows.filter((r) => r.routing.alsoNotifyKyugo);
-  console.log(`救護にも念のため知らせる: ${notify.map((r) => r.p.id).join(", ") || "なし"}`);
+  console.log(
+    t(
+      `救護にも念のため知らせる: ${notify.map((r) => r.p.id).join(", ") || "なし"}`,
+      `Also notify first aid, just in case: ${notify.map((r) => r.p.id).join(", ") || "none"}`,
+    ),
+  );
   footer(dojo, usage);
 }
 

@@ -1,11 +1,9 @@
 import { readdirSync } from "node:fs";
 import { basename, join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { FIXTURES_DIR, readFixture, requestKey } from "../../src/lib/fixtures.js";
+import { FIXTURES_DIR, listFixtureDirs, readFixture, requestKey } from "../../src/lib/fixtures.js";
 
-const stepDirs = readdirSync(FIXTURES_DIR, { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name !== "errors")
-  .map((d) => d.name);
+const stepDirs = listFixtureDirs().filter((d) => d !== "errors");
 
 describe("fixtures/", () => {
   for (const dir of stepDirs) {

@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "It was fun again this year! Thank you to everyone who ran it.",
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "Is this post a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement",
+            "false": "A question, thanks, a report, or anything else that is not a complaint"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.02
+        }
+      },
+      "usage": {
+        "input_tokens": 216,
+        "output_tokens": 0
+      }
+    }
+  }
+}

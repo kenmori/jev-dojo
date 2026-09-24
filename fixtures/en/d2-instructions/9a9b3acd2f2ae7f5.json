@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "I waited 30 minutes in line for takoyaki and it sold out right in front of me. What a fantastic festival.",
+      "questions": {
+        "bare": {
+          "type": "noul",
+          "instructions": "Complaint?"
+        },
+        "withCriteria": {
+          "type": "noul",
+          "instructions": "Is this post a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement",
+            "false": "A question, thanks, a report, or anything else that is not a complaint"
+          }
+        },
+        "structured": {
+          "type": "noul",
+          "instructions": {
+            "task": "Decide whether this post is a complaint about the organizers",
+            "definition": "The writer is having a problem, is dissatisfied, or is asking for improvement",
+            "include": [
+              "Indirect requests (\"it would be nice if...\")",
+              "Sarcasm (\"great job, organizers\")",
+              "Requests phrased very politely"
+            ],
+            "exclude": [
+              "Plain questions",
+              "Thanks or impressions",
+              "Reports such as lost items"
+            ]
+          },
+          "criteria": {
+            "true": "A complaint, dissatisfaction, or a request for improvement",
+            "false": "Anything else"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "bare": {
+          "type": "noul",
+          "noul": 0.52
+        },
+        "withCriteria": {
+          "type": "noul",
+          "noul": 0.63
+        },
+        "structured": {
+          "type": "noul",
+          "noul": 0.81
+        }
+      },
+      "usage": {
+        "input_tokens": 526,
+        "output_tokens": 0
+      }
+    }
+  }
+}

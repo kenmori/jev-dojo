@@ -1,6 +1,7 @@
 /**
  * 評価指標（六段・七段・八段）。どれも純粋関数なので APIキーなしでテストできる。
  */
+import { t } from "./i18n.js";
 
 export function accuracy<T>(predicted: T[], gold: T[]): number {
   assertSameLength(predicted, gold);
@@ -157,5 +158,11 @@ export function median(xs: number[]): number {
 }
 
 function assertSameLength(a: unknown[], b: unknown[]): void {
-  if (a.length !== b.length) throw new Error(`長さが違います: ${a.length} と ${b.length}`);
+  if (a.length !== b.length)
+    throw new Error(
+      t(
+        `長さが違います: ${a.length} と ${b.length}`,
+        `Lengths differ: ${a.length} and ${b.length}`,
+      ),
+    );
 }

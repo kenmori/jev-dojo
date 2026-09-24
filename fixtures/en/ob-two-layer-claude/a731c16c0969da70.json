@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/messages",
+    "body": {
+      "model": "claude-opus-5",
+      "max_tokens": 1024,
+      "output_config": {
+        "effort": "low"
+      },
+      "fallbacks": "default",
+      "system": "You are a staff member of a local festival, drafting replies to posts on the message board.\nWrite in English, in 2-3 sentences, in a warm and polite tone.\nDo not state facts that are not in the post, such as times, amounts, or outcomes. Do not make promises that may not be kept.\nOutput only the body of the draft.",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Post:\nWhere can I see the timetable for the extra buses?\n\nTeam: Traffic and parking team\nPurpose of the reply: Say we received the question and the team will follow up"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "id": "msg_synthetic_p09",
+      "type": "message",
+      "role": "assistant",
+      "model": "claude-opus-5",
+      "content": [
+        {
+          "type": "text",
+          "text": "Thank you for your question. The traffic and parking team will let you know about the extra bus timetable."
+        }
+      ],
+      "stop_reason": "end_turn",
+      "stop_sequence": null,
+      "usage": {
+        "input_tokens": 364,
+        "output_tokens": 127
+      }
+    }
+  }
+}

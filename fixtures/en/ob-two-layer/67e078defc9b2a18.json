@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": {
+        "post": "It was fun again this year! Thank you to everyone who ran it.",
+        "draft": "Thank you so much for your kind words. They mean a lot to everyone on the organizing team."
+      },
+      "questions": {
+        "noPromise": {
+          "type": "noul",
+          "instructions": "Is `draft` free of facts not in `post` and of promises that may not be kept?",
+          "criteria": {
+            "true": "Yes. It stays within acknowledging, thanking, apologizing, and passing it to the team",
+            "false": "No. It promises or asserts times, outcomes, or actions without basis"
+          }
+        },
+        "fitsPost": {
+          "type": "noul",
+          "instructions": "Does `draft` fit as a reply to `post`?"
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "noPromise": {
+          "type": "noul",
+          "noul": 0.94
+        },
+        "fitsPost": {
+          "type": "noul",
+          "noul": 0.91
+        }
+      },
+      "usage": {
+        "input_tokens": 396,
+        "output_tokens": 0
+      }
+    }
+  }
+}

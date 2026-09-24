@@ -1,14 +1,15 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { CHAPTERS, rewrite } from "../../scripts/build-pdf.js";
+import { CHAPTERS, chaptersFor, rewrite } from "../../scripts/build-pdf.js";
 import { ROOT } from "../../src/lib/fixtures.js";
 
 const known = new Set(CHAPTERS.map((c) => c.file));
 
 describe("build-pdf", () => {
-  it("PDF に入れる章のファイルがすべて存在する", () => {
+  it("PDF に入れる章のファイルがすべて存在する（日本語版・英語版）", () => {
     for (const c of CHAPTERS) expect(existsSync(join(ROOT, c.file)), c.file).toBe(true);
+    for (const c of chaptersFor("en")) expect(existsSync(join(ROOT, c.file)), c.file).toBe(true);
   });
 
   it("章へのリンクは PDF 内のリンクに、コードへのリンクは GitHub の URL にする", () => {

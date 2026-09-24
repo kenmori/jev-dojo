@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -18,6 +18,8 @@ export type AnyFetch = (input: string | URL | Request, init?: RequestInit) => Pr
  */
 export type Mode = "replay" | "live" | "record";
 
+import { LANG, t } from "./i18n.js";
+
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const FIXTURES_DIR = join(ROOT, "fixtures");
 
@@ -25,7 +27,12 @@ export function resolveMode(env: NodeJS.ProcessEnv = process.env): Mode {
   const explicit = env.JEV_MODE?.trim();
   if (explicit === "replay" || explicit === "live" || explicit === "record") return explicit;
   if (explicit)
-    throw new Error(`JEV_MODE は replay / live / record のいずれかです（今: ${explicit}）`);
+    throw new Error(
+      t(
+        `JEV_MODE は replay / live / record のいずれかです（今: ${explicit}）`,
+        `JEV_MODE must be replay / live / record (got: ${explicit})`,
+      ),
+    );
   return env.TYPESAFE_API_KEY?.trim() ? "live" : "replay";
 }
 
@@ -74,8 +81,16 @@ export function requestKey(req: FixtureRequest): string {
   return hash.slice(0, 16);
 }
 
+/**
+ * 章の fixture の置き場所。英語モード（JEV_LANG=en）では質問文が変わるので fixtures/en/ 以下に分ける。
+ * こうしておくと、片方の言語だけを録り直しても、もう片方の fixture は消えない。
+ */
+export function stepDir(step: string): string {
+  return LANG === "en" ? join("en", step) : step;
+}
+
 export function fixtureFile(step: string, req: FixtureRequest): string {
-  return join(FIXTURES_DIR, step, `${requestKey(req)}.json`);
+  return join(FIXTURES_DIR, stepDir(step), `${requestKey(req)}.json`);
 }
 
 function toRequest(input: string | URL | Request, init?: RequestInit): FixtureRequest {
@@ -107,8 +122,14 @@ export function createReplayFetch(step: string, onReplay?: (meta: FixtureMeta) =
     if (!existsSync(file)) {
       throw new Error(
         [
-          `fixture がありません: ${relative(ROOT, file)}`,
-          "質問や state を書き換えた場合は、APIキーを設定して `npm run record` で録り直してください。",
+          t(
+            `fixture がありません: ${relative(ROOT, file)}`,
+            `Fixture not found: ${relative(ROOT, file)}`,
+          ),
+          t(
+            "質問や state を書き換えた場合は、APIキーを設定して `npm run record` で録り直してください。",
+            "If you changed a question or the state, set your API key and re-record with `npm run record`.",
+          ),
         ].join("\n"),
       );
     }
@@ -163,4 +184,13 @@ export function fetchFromResponses(...responses: FixtureResponse[]): AnyFetch & 
   };
   f.calls = 0;
   return f;
+}
+
+/** fixture が入っているディレクトリの一覧（FIXTURES_DIR からの相対パス。例: "k10-hello", "en/k10-hello"） */
+export function listFixtureDirs(): string[] {
+  return readdirSync(FIXTURES_DIR, { recursive: true, withFileTypes: true })
+    .filter((d) => d.isFile() && d.name.endsWith(".json"))
+    .map((d) => relative(FIXTURES_DIR, d.parentPath))
+    .filter((dir, i, all) => all.indexOf(dir) === i)
+    .sort();
 }

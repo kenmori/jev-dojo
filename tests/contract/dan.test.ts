@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { exampleLabels } from "../../src/lib/board.js";
 import { createDojo } from "../../src/lib/client.js";
 import { boardDojo, predictAll, summarize } from "../../src/lib/evaluate.js";
+import { LANG } from "../../src/lib/i18n.js";
 import { compareLanguages } from "../../src/lib/reports.js";
 import * as d1 from "../../src/steps/d1-state.js";
 import * as d2 from "../../src/steps/d2-instructions.js";
@@ -38,7 +39,7 @@ describe("二段", () => {
 
 describe("三段", () => {
   it("全件がどれかのレーンに入る", async () => {
-    const { rows } = await d3.run(boardDojo("ja", { mode: "replay" }));
+    const { rows } = await d3.run(boardDojo(LANG, { mode: "replay" }));
     expect(rows).toHaveLength(60);
     for (const r of rows) expect(["auto", "confirm", "human"]).toContain(r.routing.lane);
   });
@@ -48,7 +49,7 @@ describe("四段", () => {
   it("intent ごとに処理が決まり、優先度で並べられる", async () => {
     const { intents, predictions } = await d4.run(
       replay(d4.STEP),
-      boardDojo("ja", { mode: "replay" }),
+      boardDojo(LANG, { mode: "replay" }),
     );
     expect(intents).toHaveLength(d4.INTENT_POSTS.length);
     for (const r of intents) expect(r.action.length).toBeGreaterThan(0);
@@ -80,20 +81,20 @@ describe("七段・八段", () => {
 
 describe("九段", () => {
   it("全件を処理し、1件1行のログを残す。予算を超えたら止まる", async () => {
-    const r = await d9.run(boardDojo("ja", { mode: "replay" }), {
+    const r = await d9.run(boardDojo(LANG, { mode: "replay" }), {
       ...d9.DEFAULT_OPTIONS,
       perMinute: 10_000,
     });
     expect(r.results.every((x) => x.ok)).toBe(true);
     expect(r.logs).toHaveLength(60);
-    expect(JSON.stringify(r.logs)).not.toContain("花火");
+    expect(JSON.stringify(r.logs)).not.toMatch(/花火|fireworks/);
     await expect(
-      d9.run(boardDojo("ja", { mode: "replay" }), {
+      d9.run(boardDojo(LANG, { mode: "replay" }), {
         concurrency: 1,
         perMinute: 10_000,
         budgetUSD: 0,
       }),
-    ).rejects.toThrow("予算");
+    ).rejects.toThrow(/予算|Budget/);
   });
 });
 

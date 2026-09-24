@@ -73,10 +73,16 @@ flowchart LR
 [src/steps/k07-noul.ts](../../src/steps/k07-noul.ts) の `decide` 関数がこの分岐です。
 
 ```ts
+export const ACTIONS = {
+  escalate: t("苦情として担当へ回す", "Send to staff as a complaint"),
+  review: t("人が読んで判断する", "A person reads it and decides"),
+  none: t("苦情ではない", "Not a complaint"),
+} as const;
+
 export function decide(probability: number, threshold = AUTO_THRESHOLD): Action {
-  if (probability >= threshold) return "苦情として担当へ回す";
-  if (probability >= 1 - threshold) return "人が読んで判断する";
-  return "苦情ではない";
+  if (probability >= threshold) return ACTIONS.escalate;
+  if (probability >= 1 - threshold) return ACTIONS.review;
+  return ACTIONS.none;
 }
 ```
 

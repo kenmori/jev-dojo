@@ -3,6 +3,7 @@ import { pathToFileURL } from "node:url";
 import type { Usage } from "@typesafe-ai/sdk";
 import type { Dojo } from "./client.js";
 import { describeCost } from "./cost.js";
+import { t } from "./i18n.js";
 
 export function title(text: string): void {
   console.log(`\n=== ${text} ===\n`);
@@ -25,16 +26,24 @@ export function printProbabilities(probabilities: Record<string, number>, indent
 /** 実行モードと費用を表示する。全サンプル共通のフッター */
 export function footer(dojo: Dojo, usage: Usage, ...others: Dojo[]): void {
   console.log("");
-  console.log(`モード: ${dojo.mode} ｜ モデル: ${dojo.model}`);
-  console.log(`今回の実行: ${describeCost(usage)}`);
+  console.log(
+    t(`モード: ${dojo.mode} ｜ モデル: ${dojo.model}`, `Mode: ${dojo.mode} | Model: ${dojo.model}`),
+  );
+  console.log(`${t("今回の実行", "This run")}: ${describeCost(usage)}`);
   if (dojo.mode === "replay") {
     const synthetic = [dojo, ...others].some((d) =>
       d.replayed.some((m) => m.source === "synthetic"),
     );
     console.log(
       synthetic
-        ? "※ 記録済みの見本データ（合成）を再生しました。実APIの結果ではありません。費用は実際にはかかっていません。"
-        : "※ 記録済みの実APIレスポンスを再生しました。費用は実際にはかかっていません。",
+        ? t(
+            "※ 記録済みの見本データ（合成）を再生しました。実APIの結果ではありません。費用は実際にはかかっていません。",
+            "Note: replayed hand-made sample data (synthetic). These are NOT real API results. No cost was incurred.",
+          )
+        : t(
+            "※ 記録済みの実APIレスポンスを再生しました。費用は実際にはかかっていません。",
+            "Note: replayed recorded real API responses. No cost was incurred.",
+          ),
     );
   }
 }
@@ -52,4 +61,9 @@ export function runMain(importMetaUrl: string, main: () => Promise<void>): void 
     console.error(err instanceof Error ? err.message : err);
     process.exitCode = 1;
   });
+}
+
+/** 投稿などの引用。日本語は「」、英語は "" で囲む */
+export function q(text: string): string {
+  return t(`「${text}」`, `"${text}"`);
 }

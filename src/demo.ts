@@ -4,12 +4,19 @@
  *
  *   npm run demo
  */
+
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { ROOT } from "./lib/fixtures.js";
+import { t } from "./lib/i18n.js";
 import { STEPS } from "./steps/index.js";
 
-console.log("jev-dojo demo — 記録済みのレスポンスを再生します（APIキー不要・費用ゼロ）");
+console.log(
+  t(
+    "jev-dojo demo — 記録済みのレスポンスを再生します（APIキー不要・費用ゼロ）",
+    "jev-dojo demo — replaying recorded responses (no API key needed, zero cost)",
+  ),
+);
 
 for (const { file } of STEPS) {
   const result = spawnSync("npx", ["tsx", join(ROOT, "src", "steps", file)], {
@@ -20,5 +27,8 @@ for (const { file } of STEPS) {
 }
 
 console.log(
-  "\n次の一歩: cp .env.example .env でキーを入れて、npm run k10 で本物のAPIを叩いてみよう。",
+  t(
+    "\n次の一歩: cp .env.example .env でキーを入れて、npm run k10 で本物のAPIを叩いてみよう。",
+    "\nNext step: cp .env.example .env, add your key, then call the real API with npm run k10.",
+  ),
 );

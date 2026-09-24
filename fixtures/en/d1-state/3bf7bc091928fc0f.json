@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": {
+        "post": {
+          "text": "The fireworks woke my baby up. It would be nice if they could end a little earlier..."
+        },
+        "history": [
+          "みどり: Will the Bon dance go ahead even if it rains?",
+          "たけし: Last night so many cars were parked on the road behind the shrine that I couldn't get my car out of my house. Please do something about it.",
+          "ゆい: Will the yakisoba stall be there again this year? It was delicious last year, so I'm looking forward to it!",
+          "けんじ: I lost a blue children's water bottle. I think it was near the main tent.",
+          "さくら: An elderly man has collapsed next to the tower stage! Please call the first-aid staff!",
+          "まさる: The goldfish scooping seems more expensive than last year. I'd like an explanation of why.",
+          "あおい: What time do volunteers need to gather?",
+          "こうた: Where can I see the timetable for the extra buses?",
+          "ひろみ: I found a wallet on the ground, so I dropped it off at the main tent.",
+          "りょう: The trash bins are overflowing and litter is scattered on the street.",
+          "なつみ: It was fun again this year! Thank you to everyone who ran it.",
+          "しんじ: Excuse me, but could you kindly tell me where the smoking area is in the venue?",
+          "えり: I waited 30 minutes in line for takoyaki and it sold out right in front of me. What a fantastic festival.",
+          "だいき: The rotary in front of the station is jammed with pick-up cars and nothing is moving.",
+          "みか: My daughter is lost. She's a 5-year-old girl in a red yukata. If you see her, please contact the main tent!",
+          "ゆうすけ: My child who ate shaved ice says they feel a bit sick. Is there somewhere to rest?",
+          "あや: I dropped my phone. It has a black case with a cat sticker on the back.",
+          "のぶお: Can we apply to run a stall through this board again next year?",
+          "かおり: There are far too few toilets. It's really hard for people with kids.",
+          "たくや: The fireworks were amazing! I'll definitely come again next year.",
+          "まゆみ: Sorry for the trouble, but I would be grateful if you could guide me to a route passable by wheelchair.",
+          "けいた: One of the lantern decorations is about to fall and might hit people walking underneath.",
+          "ちひろ: I found a key with a bear keychain. Where should I take it?",
+          "ひでき: Earn 300,000 yen a month with a side job! Details at the link in my profile.",
+          "あきこ: As a neighbor, it would help if the music stage volume could be turned down a little.",
+          "そうた: Where's the bicycle parking?",
+          "れいこ: The man at the cotton candy stall was really kind. Thank you.",
+          "じゅん: I cut my foot and the bleeding won't stop. Do you at least have a bandage?",
+          "ともこ: I'd like to volunteer. Is it still possible to join?",
+          "まこと: I wrote the same thing last year, but once again there was no parking attendant this year.",
+          "ななみ: I just saw a pink hat in front of the main tent. I think someone lost it.",
+          "いさむ: Prices at every stall are tourist-trap prices. And this is supposed to be a local festival.",
+          "ゆか: Our cat got out. It's an orange tabby with a blue collar.",
+          "こうじ: Please tell me when the portable shrine will pass by.",
+          "みさき: Someone on a bench looks like they have heatstroke and is completely limp.",
+          "しょうへい: The trash sorting is confusing. Where should I throw away PET bottles?",
+          "えみ: I'm worried about tomorrow's weather. When will you decide if it's cancelled?",
+          "たつや: A drunk person is shouting on the street and the kids are scared.",
+          "さちこ: Are there any stalls that accept credit cards?",
+          "かずき: I wish the road closure had been announced earlier. I missed my bus.",
+          "りな: Is there anywhere that will help me put on a yukata?",
+          "ひろし: Classic organizers — every sign was pointing the wrong way.",
+          "あいこ: I lost my glasses. Black frames, no case.",
+          "ゆうた: There's an exposed cable behind the stage and someone tripped over it.",
+          "まり: Are there rules about taking photos? Can I post them on social media?",
+          "けん: Is there still space in the temporary parking lot?",
+          "ふみ: I look forward to it every year. Thank you in advance for this year too.",
+          "よしお: Exhaust from a stall's generator is blowing toward the seating area and it's smoky.",
+          "あすか: The lost boy found his mom. Thank you so much!",
+          "てつや: We apologize for troubling you when you are busy, but we kindly ask that you inform visitors to refrain from parking on the streets around the venue.",
+          "みずき: Isn't there a mask stall this year?",
+          "かつや: The shrine steps are dark and you can't see your feet.",
+          "ゆきこ: Someone left an umbrella behind. It's a clear plastic umbrella.",
+          "しゅん: Is it okay to come with a stroller? I'd like to know how crowded it is.",
+          "るみ: The grilled corn was undercooked. My child already ate it — will they be okay?",
+          "おさむ: Honestly, there were fewer stalls this year and it felt a little lonely.",
+          "ありさ: I lost my bicycle key. I can't get home and I'm stuck.",
+          "だいすけ: We're holding a used book fair in the neighborhood next month. Please come if you like!",
+          "はな: Can I join the Bon dance circle? Is it okay if I don't know the steps?"
+        ]
+      },
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "Is `post.text` a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement. Includes indirect wording",
+            "false": "A question, thanks, a report, or anything else that is not a complaint"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.49
+        }
+      },
+      "usage": {
+        "input_tokens": 5909,
+        "output_tokens": 0
+      }
+    }
+  }
+}

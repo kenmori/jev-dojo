@@ -5,10 +5,12 @@
  *
  *   npm run k04
  */
+
 import { createDojo, type Dojo } from "../lib/client.js";
 import { describeCost, sumUsage } from "../lib/cost.js";
+import { t } from "../lib/i18n.js";
 import { getPost } from "../lib/posts.js";
-import { footer, runMain, title } from "../lib/print.js";
+import { footer, q, runMain, title } from "../lib/print.js";
 import { urgency } from "./k05-score.js";
 import { department } from "./k06-choice.js";
 import { isComplaint } from "./k07-noul.js";
@@ -48,17 +50,26 @@ async function main() {
   const r = await run(dojo);
   const { isComplaint: q1, department: q2, urgency: q3 } = r.batched.answers;
 
-  title("4級 まとめて聞く");
-  console.log(`投稿: 「${r.post.text}」\n`);
-  console.log(`苦情の確率  ${q1.noul.toFixed(2)}`);
-  console.log(`担当        ${q2.choice}（confidence ${q2.confidence.toFixed(2)}）`);
-  console.log(`緊急度      ${q3.score.toFixed(2)}`);
-  console.log("\n▼ くらべる");
-  console.log(`まとめて1回 : ${describeCost(r.batched.usage)} ｜ ${r.batchedMs.toFixed(0)} ms`);
-  console.log(`1問ずつ3回  : ${describeCost(r.separateUsage)} ｜ ${r.separateMs.toFixed(0)} ms`);
+  title(t("4級 まとめて聞く", "Kyu 4: Ask in one batch"));
+  console.log(`${t("投稿", "Post")}: ${q(r.post.text)}\n`);
+  console.log(`${t("苦情の確率  ", "P(complaint) ")}${q1.noul.toFixed(2)}`);
+  console.log(
+    `${t("担当        ", "Team         ")}${q2.choice} (confidence ${q2.confidence.toFixed(2)})`,
+  );
+  console.log(`${t("緊急度      ", "Urgency      ")}${q3.score.toFixed(2)}`);
+  console.log(t("\n▼ くらべる", "\n▼ Compare"));
+  console.log(
+    `${t("まとめて1回 : ", "1 batched call : ")}${describeCost(r.batched.usage)} | ${r.batchedMs.toFixed(0)} ms`,
+  );
+  console.log(
+    `${t("1問ずつ3回  : ", "3 separate calls: ")}${describeCost(r.separateUsage)} | ${r.separateMs.toFixed(0)} ms`,
+  );
   if (dojo.mode === "replay") {
     console.log(
-      "（replay では通信しないので、時間の比較には意味がありません。live で試してください）",
+      t(
+        "（replay では通信しないので、時間の比較には意味がありません。live で試してください）",
+        "(Replay makes no network calls, so the timing comparison is meaningless. Try it live.)",
+      ),
     );
   }
   footer(dojo, sumUsage(r.batched.usage, r.separateUsage));

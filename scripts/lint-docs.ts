@@ -7,7 +7,7 @@
  *
  *   npx tsx scripts/lint-docs.ts
  */
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import { type Facts, facts } from "../src/lib/facts.js";
 import { ROOT } from "../src/lib/fixtures.js";
@@ -20,9 +20,9 @@ export interface LintError {
 }
 
 /** 見出しルールを免除するファイル（目次など） */
-const SECTION_RULE_EXEMPT = new Set(["docs/00-index.md"]);
-const LABEL = /🟢 恒久|🟡 半恒久|🔴 揮発/;
-const PRIMARY = /^>\s*一次情報:/;
+const SECTION_RULE_EXEMPT = new Set(["docs/00-index.md", "docs/en/00-index.md"]);
+const LABEL = /🟢 恒久|🟡 半恒久|🔴 揮発|🟢 Evergreen|🟡 Semi-stable|🔴 Volatile/;
+const PRIMARY = /^>\s*(一次情報|Primary source):/;
 
 /** 本文に直書きしてはいけない値 */
 export function volatileValues(f: Facts): string[] {
@@ -125,10 +125,14 @@ export function lintAll(): LintError[] {
     if (!SECTION_RULE_EXEMPT.has(file)) errors.push(...lintSections(file, text));
     errors.push(...lintVolatile(file, text));
   }
-  const readme = readFileSync(join(ROOT, "README.md"), "utf8");
-  // 行番号を保つため、ブロックは同じ行数の空行に置き換える
-  const masked = readme.replace(README_BLOCK, (m) => "\n".repeat(m.split("\n").length - 1));
-  errors.push(...lintVolatile("README.md", masked));
+  for (const name of ["README.md", "README.en.md"]) {
+    const path = join(ROOT, name);
+    if (!existsSync(path)) continue;
+    const readme = readFileSync(path, "utf8");
+    // 行番号を保つため、ブロックは同じ行数の空行に置き換える
+    const masked = readme.replace(README_BLOCK, (m) => "\n".repeat(m.split("\n").length - 1));
+    errors.push(...lintVolatile(name, masked));
+  }
   return errors;
 }
 

@@ -5,7 +5,9 @@
  *
  *   npm run k08
  */
+
 import { createDojo, type Dojo } from "../lib/client.js";
+import { t } from "../lib/i18n.js";
 import { getPost } from "../lib/posts.js";
 import { footer, runMain, title } from "../lib/print.js";
 
@@ -18,7 +20,10 @@ export function buildBody(model: string, text: string) {
     questions: {
       isQuestion: {
         type: "noul",
-        instructions: "この投稿は、運営への質問ですか？",
+        instructions: t(
+          "この投稿は、運営への質問ですか？",
+          "Is this post a question for the organizers?",
+        ),
       },
     },
   };
@@ -43,10 +48,10 @@ async function main() {
   const dojo = createDojo(STEP);
   const { status, body, json } = await run(dojo);
 
-  title("8級 最初の1回");
-  console.log("▼ 送ったもの（リクエストボディ）");
+  title(t("8級 最初の1回", "Kyu 8: Your first call"));
+  console.log(t("▼ 送ったもの（リクエストボディ）", "▼ What we sent (request body)"));
   console.log(JSON.stringify(body, null, 2));
-  console.log(`\n▼ 返ってきたもの（HTTP ${status}）`);
+  console.log(t(`\n▼ 返ってきたもの（HTTP ${status}）`, `\n▼ What came back (HTTP ${status})`));
   console.log(JSON.stringify(json, null, 2));
   footer(dojo, json.usage);
 }

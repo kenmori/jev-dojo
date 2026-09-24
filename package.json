@@ -38,10 +38,10 @@
     "lint": "biome check . && tsx scripts/lint-docs.ts",
     "lint:fix": "biome check --write .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --project unit --project contract",
+    "test": "vitest run --project unit --project contract --project contract-en",
     "test:eval": "vitest run --project eval",
-    "check": "npm run typecheck && npm run lint && tsx scripts/render-facts.ts --check && tsx scripts/render-reports.ts --check && npm test && EXAM_SOLUTIONS=1 vitest run --project exam",
-    "reports": "tsx scripts/render-reports.ts",
+    "check": "npm run typecheck && npm run lint && tsx scripts/render-facts.ts --check && tsx scripts/render-reports.ts --check && JEV_LANG=en tsx scripts/render-reports.ts --check && npm test && EXAM_SOLUTIONS=1 vitest run --project exam",
+    "reports": "tsx scripts/render-reports.ts && JEV_LANG=en tsx scripts/render-reports.ts",
     "pdf": "tsx scripts/build-pdf.ts"
   },
   "dependencies": {

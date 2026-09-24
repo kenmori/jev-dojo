@@ -9,6 +9,7 @@
  *
  *   npm run d9
  */
+
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { boardQuestions, postsFor } from "../lib/board.js";
@@ -17,6 +18,7 @@ import { costUSD, formatUSD } from "../lib/cost.js";
 import { boardDojo } from "../lib/evaluate.js";
 import { facts } from "../lib/facts.js";
 import { ROOT } from "../lib/fixtures.js";
+import { LANG, t } from "../lib/i18n.js";
 import { median } from "../lib/metrics.js";
 import { footer, runMain, title } from "../lib/print.js";
 import {
@@ -48,7 +50,7 @@ export async function run(dojo: Dojo, options: ProductionOptions = DEFAULT_OPTIO
   const modelsSeen = new Set<string>();
 
   const results = await mapWithLimits(
-    postsFor("ja"),
+    postsFor(LANG),
     async (post) => {
       budget.check();
       const started = performance.now();
@@ -95,27 +97,50 @@ export async function run(dojo: Dojo, options: ProductionOptions = DEFAULT_OPTIO
 
 async function main() {
   // SDK のリトライ・タイムアウトは設定で持つ。既定値でも 429 と 5xx はバックオフ付きで再試行される
-  const dojo = boardDojo("ja");
+  const dojo = boardDojo(LANG);
   const { results, logs, spentUSD, modelsSeen } = await run(dojo);
 
   const dir = join(ROOT, "logs");
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, `${STEP}.jsonl`), `${logs.map(logLine).join("\n")}\n`);
 
-  title("九段 本番運用");
+  title(t("九段 本番運用", "9th Dan: Running in production"));
   const o = DEFAULT_OPTIONS;
   console.log(
-    `同時実行 ${o.concurrency} ／ 1分あたり上限 ${o.perMinute} ／ 予算 ${formatUSD(o.budgetUSD)}\n`,
+    t(
+      `同時実行 ${o.concurrency} ／ 1分あたり上限 ${o.perMinute} ／ 予算 ${formatUSD(o.budgetUSD)}\n`,
+      `concurrency ${o.concurrency} / per-minute cap ${o.perMinute} / budget ${formatUSD(o.budgetUSD)}\n`,
+    ),
   );
   const ok = results.filter((r) => r.ok).length;
-  console.log(`成功 ${ok} ／ 失敗 ${results.length - ok}`);
-  console.log(`使った金額 ${formatUSD(spentUSD)}`);
-  console.log(`レイテンシ中央値 ${median(logs.map((l) => l.latencyMs))} ms`);
-  console.log(`指定したモデル ${dojo.model} ／ 応答のモデル ${modelsSeen.join(", ")}`);
+  console.log(
+    t(
+      `成功 ${ok} ／ 失敗 ${results.length - ok}`,
+      `succeeded ${ok} / failed ${results.length - ok}`,
+    ),
+  );
+  console.log(t(`使った金額 ${formatUSD(spentUSD)}`, `spent ${formatUSD(spentUSD)}`));
+  console.log(
+    t(
+      `レイテンシ中央値 ${median(logs.map((l) => l.latencyMs))} ms`,
+      `median latency ${median(logs.map((l) => l.latencyMs))} ms`,
+    ),
+  );
+  console.log(
+    t(
+      `指定したモデル ${dojo.model} ／ 応答のモデル ${modelsSeen.join(", ")}`,
+      `requested model ${dojo.model} / model in responses ${modelsSeen.join(", ")}`,
+    ),
+  );
   if (modelsSeen.some((m) => m !== dojo.model)) {
-    console.log("⚠️ 指定と違うモデルが答えています。エイリアスを使っていないか確認してください");
+    console.log(
+      t(
+        "⚠️ 指定と違うモデルが答えています。エイリアスを使っていないか確認してください",
+        "⚠️ A different model answered. Check that you are not using an alias",
+      ),
+    );
   }
-  console.log(`\nログ: logs/${STEP}.jsonl（先頭1行）`);
+  console.log(t(`\nログ: logs/${STEP}.jsonl（先頭1行）`, `\nLog: logs/${STEP}.jsonl (first line)`));
   console.log(`  ${logLine(logs[0] as RequestLog)}`);
   footer(dojo, {
     input_tokens: logs.reduce((a, l) => a + l.inputTokens, 0),

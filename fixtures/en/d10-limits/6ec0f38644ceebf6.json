@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "I found a wallet on the ground, so I dropped it off at the main tent.",
+      "questions": {
+        "walletAtTent": {
+          "type": "noul",
+          "instructions": "Is the wallet being kept at the main tent right now?"
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "walletAtTent": {
+          "type": "noul",
+          "noul": 0.93
+        }
+      },
+      "usage": {
+        "input_tokens": 143,
+        "output_tokens": 0
+      }
+    }
+  }
+}

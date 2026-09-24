@@ -2,6 +2,7 @@
  * 奥義（仕組み）で使う計算。Jev の答えの「形」について、記録した応答から確かめられることを関数にする。
  * どれも純粋関数なので、APIキーなしでテストできる。
  */
+import { t } from "./i18n.js";
 
 /** シャノンエントロピー（自然対数）。分布が平らなほど大きい */
 export function entropy(probabilities: number[]): number {
@@ -54,35 +55,49 @@ export function checkAnswer(answer: AnyAnswer): Invariant[] {
   const out: Invariant[] = [];
   const inRange = (x: number) => x >= 0 && x <= 1;
   if (answer.type === "noul") {
-    out.push({ name: "noul は 0〜1", ok: inRange(answer.noul), detail: String(answer.noul) });
+    out.push({
+      name: t("noul は 0〜1", "noul is between 0 and 1"),
+      ok: inRange(answer.noul),
+      detail: String(answer.noul),
+    });
     return out;
   }
   const ps = Object.values(answer.probabilities);
   const sum = ps.reduce((a, b) => a + b, 0);
-  out.push({ name: "確率はすべて 0〜1", ok: ps.every(inRange), detail: ps.join(", ") });
   out.push({
-    name: "確率の合計はほぼ 1",
+    name: t("確率はすべて 0〜1", "all probabilities are between 0 and 1"),
+    ok: ps.every(inRange),
+    detail: ps.join(", "),
+  });
+  out.push({
+    name: t("確率の合計はほぼ 1", "probabilities sum to about 1"),
     ok: Math.abs(sum - 1) <= SUM_TOLERANCE,
     detail: sum.toFixed(3),
   });
   out.push({
-    name: "confidence は 0〜1",
+    name: t("confidence は 0〜1", "confidence is between 0 and 1"),
     ok: inRange(answer.confidence),
     detail: String(answer.confidence),
   });
   if (answer.type === "choice") {
     const max = Math.max(...ps);
     out.push({
-      name: "choice は確率が最大のラベル",
+      name: t("choice は確率が最大のラベル", "choice is the most probable label"),
       ok: answer.probabilities[answer.choice] === max,
-      detail: `${answer.choice}=${answer.probabilities[answer.choice]} / 最大 ${max}`,
+      detail: t(
+        `${answer.choice}=${answer.probabilities[answer.choice]} / 最大 ${max}`,
+        `${answer.choice}=${answer.probabilities[answer.choice]} / max ${max}`,
+      ),
     });
   } else {
     const ev = expectedScore(answer.probabilities);
     out.push({
-      name: "score は確率の期待値",
+      name: t("score は確率の期待値", "score is the expected value of the probabilities"),
       ok: Math.abs(answer.score - ev) <= SUM_TOLERANCE * (ps.length - 1),
-      detail: `score=${answer.score} / 期待値 ${ev.toFixed(3)}`,
+      detail: t(
+        `score=${answer.score} / 期待値 ${ev.toFixed(3)}`,
+        `score=${answer.score} / expected ${ev.toFixed(3)}`,
+      ),
     });
   }
   return out;

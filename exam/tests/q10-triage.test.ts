@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { boardQuestions } from "../../src/lib/board.js";
+import { boardQuestions, boardStep } from "../../src/lib/board.js";
 import { createDojo } from "../../src/lib/client.js";
+import { LANG } from "../../src/lib/i18n.js";
 import { getPost } from "../../src/lib/posts.js";
 import { load } from "./load.js";
 
 const { triage } = await load<typeof import("../tasks/q10-triage.js")>("q10-triage");
-const dojo = () => createDojo("board-ja", { mode: "replay" });
+const dojo = () => createDojo(boardStep(LANG), { mode: "replay" });
 
 describe("第10問 総合", () => {
   for (const id of ["p02", "p05", "p09", "p16", "p25", "p45"]) {

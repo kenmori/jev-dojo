@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": {
+        "post": {
+          "text": "The fireworks woke my baby up. It would be nice if they could end a little earlier..."
+        }
+      },
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "Is `post.text` a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement. Includes indirect wording",
+            "false": "A question, thanks, a report, or anything else that is not a complaint"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.58
+        }
+      },
+      "usage": {
+        "input_tokens": 275,
+        "output_tokens": 0
+      }
+    }
+  }
+}

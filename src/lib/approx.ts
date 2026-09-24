@@ -2,6 +2,7 @@
  * 確率は完全一致で比べない（plan.md §8）。
  * モデルが少し変わるだけで 0.91 が 0.93 になるのは普通のこと。
  */
+import { t } from "./i18n.js";
 export const DEFAULT_TOLERANCE = 0.05;
 
 export function isClose(actual: number, expected: number, tolerance = DEFAULT_TOLERANCE): boolean {
@@ -21,6 +22,6 @@ export function argmax(probabilities: Record<string, number>): string {
     (best, cur) => (best === undefined || cur[1] > best[1] ? cur : best),
     undefined,
   );
-  if (!top) throw new Error("probabilities が空です");
+  if (!top) throw new Error(t("probabilities が空です", "probabilities is empty"));
   return top[0];
 }

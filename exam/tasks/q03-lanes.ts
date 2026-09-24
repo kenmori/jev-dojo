@@ -5,6 +5,14 @@
  * - confidence >= auto なら "auto"、>= confirm なら "confirm"、それ未満は "human"
  * - ただし、救護（kyugo）の確率が safetyFloor 以上なら、1位でなくても notifyKyugo を true にする
  *   （department が kyugo のときは false）
+ *
+ * ----
+ * Q3 (3rd Dan) Route into three lanes.
+ *
+ * Requirements:
+ * - "auto" if confidence >= auto, "confirm" if >= confirm, otherwise "human"
+ * - if the probability of kyugo (first aid) is >= safetyFloor, set notifyKyugo to true
+ *   even when it is not the top choice (false when department is already kyugo)
  */
 import type { Answer, Lane } from "./types.js";
 
@@ -15,5 +23,5 @@ export interface Thresholds {
 }
 
 export function laneFor(_a: Answer, _t: Thresholds): { lane: Lane; notifyKyugo: boolean } {
-  throw new Error("未実装: 第3問");
+  throw new Error("未実装 / not implemented: 第3問 / Q3");
 }

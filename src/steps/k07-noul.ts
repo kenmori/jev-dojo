@@ -5,29 +5,46 @@
  *
  *   npm run k07
  */
+
 import { noul } from "@typesafe-ai/sdk";
 import { createDojo, type Dojo } from "../lib/client.js";
 import { sumUsage } from "../lib/cost.js";
+import { t } from "../lib/i18n.js";
 import { getPost } from "../lib/posts.js";
 import { bar, footer, runMain, title } from "../lib/print.js";
 
 export const STEP = "k07-noul";
 
-export const isComplaint = noul("この投稿は、運営に対する苦情や不満ですか？", {
-  true: "困っていること・不満・改善の要望が書かれている",
-  false: "質問・お礼・報告など、不満ではない",
-});
+export const isComplaint = noul(
+  t("この投稿は、運営に対する苦情や不満ですか？", "Is this post a complaint about the organizers?"),
+  {
+    true: t(
+      "困っていること・不満・改善の要望が書かれている",
+      "The writer describes a problem, dissatisfaction, or a request for improvement",
+    ),
+    false: t(
+      "質問・お礼・報告など、不満ではない",
+      "A question, thanks, a report, or anything else that is not a complaint",
+    ),
+  },
+);
 
 /** 仮のしきい値。三段で「自分のデータで測って決める」方法を学ぶ */
 export const AUTO_THRESHOLD = 0.8;
 
-export type Action = "苦情として担当へ回す" | "人が読んで判断する" | "苦情ではない";
+export const ACTIONS = {
+  escalate: t("苦情として担当へ回す", "Send to staff as a complaint"),
+  review: t("人が読んで判断する", "A person reads it and decides"),
+  none: t("苦情ではない", "Not a complaint"),
+} as const;
+
+export type Action = (typeof ACTIONS)[keyof typeof ACTIONS];
 
 /** 確率から行動を決めるのはJevではなくコードの仕事 */
 export function decide(probability: number, threshold = AUTO_THRESHOLD): Action {
-  if (probability >= threshold) return "苦情として担当へ回す";
-  if (probability >= 1 - threshold) return "人が読んで判断する";
-  return "苦情ではない";
+  if (probability >= threshold) return ACTIONS.escalate;
+  if (probability >= 1 - threshold) return ACTIONS.review;
+  return ACTIONS.none;
 }
 
 export const POST_IDS = ["p02", "p06", "p08", "p03", "p12"] as const;
@@ -50,11 +67,16 @@ async function main() {
   const dojo = createDojo(STEP);
   const rows = await run(dojo);
 
-  title("7級 Noul（はい/いいえ）");
-  console.log(`しきい値: ${AUTO_THRESHOLD}（この値以上なら自動で担当へ）\n`);
+  title(t("7級 Noul（はい/いいえ）", "Kyu 7: Noul (yes/no)"));
+  console.log(
+    t(
+      `しきい値: ${AUTO_THRESHOLD}（この値以上なら自動で担当へ）\n`,
+      `Threshold: ${AUTO_THRESHOLD} (at or above this, route to staff automatically)\n`,
+    ),
+  );
   for (const row of rows) {
-    console.log(`${row.post.id} 「${row.post.text}」`);
-    console.log(`    苦情の確率 ${bar(row.probability)} → ${row.action}\n`);
+    console.log(t(`${row.post.id} 「${row.post.text}」`, `${row.post.id} "${row.post.text}"`));
+    console.log(`    ${t("苦情の確率", "P(complaint)")} ${bar(row.probability)} → ${row.action}\n`);
   }
   footer(dojo, sumUsage(...rows.map((r) => r.usage)));
 }

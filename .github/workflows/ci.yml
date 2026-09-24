@@ -25,6 +25,10 @@ jobs:
       - run: npm run check
       - name: demo がキーなしで最後まで動く
         run: npm run demo
+      - name: 英語モードの demo もキーなしで最後まで動く
+        run: npm run demo
+        env:
+          JEV_LANG: en
 
   app:
     name: 応用A アプリのビルド

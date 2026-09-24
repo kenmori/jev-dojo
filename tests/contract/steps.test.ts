@@ -38,8 +38,8 @@ describe("7級", () => {
   it("はっきりした苦情は自動、お礼は苦情ではない", async () => {
     const rows = await k07.run(replay(k07.STEP));
     const byId = Object.fromEntries(rows.map((r) => [r.post.id, r]));
-    expect(byId.p02?.action).toBe("苦情として担当へ回す");
-    expect(byId.p12?.action).toBe("苦情ではない");
+    expect(byId.p02?.action).toBe(k07.ACTIONS.escalate);
+    expect(byId.p12?.action).toBe(k07.ACTIONS.none);
   });
 
   it("確率は許容幅で比べる（完全一致で比べない）", async () => {

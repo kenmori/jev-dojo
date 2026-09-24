@@ -2,6 +2,7 @@
  * 教材本文から PDF 版を作る。
  *
  *   npm run pdf                               # dist/jev-dojo.pdf と dist/jev-dojo.html
+ *   JEV_LANG=en npm run pdf                   # 英語版 dist/jev-dojo.en.pdf
  *   PDF_BROWSER=/path/to/chrome npm run pdf   # ブラウザの場所を指定する
  *
  * ブラウザは Chrome / Chromium を使う。見つからないときは PDF_BROWSER で指定するか、
@@ -13,41 +14,70 @@ import { marked } from "marked";
 import { type Browser, chromium } from "playwright-core";
 import pkg from "../package.json" with { type: "json" };
 import { facts } from "../src/lib/facts.js";
-import { FIXTURES_DIR, ROOT, readFixture } from "../src/lib/fixtures.js";
+import { FIXTURES_DIR, listFixtureDirs, ROOT, readFixture } from "../src/lib/fixtures.js";
+import { LANG, t } from "../src/lib/i18n.js";
 import { runMain } from "../src/lib/print.js";
 
 const REPO_URL = "https://github.com/kenmori/jev-dojo/blob/main";
 
-/** PDF に入れる順番 */
-export const CHAPTERS: { part: string; file: string }[] = [
-  { part: "はじめに", file: "docs/00-index.md" },
-  ...[
-    "10-what-is-jev",
-    "09-setup",
-    "08-first-call",
-    "07-noul",
-    "06-choice",
-    "05-score",
-    "04-batch",
-  ].map((f) => ({ part: "入門（級）", file: `docs/kyu/${f}.md` })),
-  ...["01-state", "02-instructions", "03-confidence", "04-patterns", "05-boundary"].map((f) => ({
-    part: "中級（段）",
-    file: `docs/dan/${f}.md`,
-  })),
-  ...["06-dataset", "07-calibration", "08-japanese-lab", "09-production", "10-limits"].map((f) => ({
-    part: "上級（高段）",
-    file: `docs/kodan/${f}.md`,
-  })),
-  ...["01-mechanism", "02-exam"].map((f) => ({ part: "皆伝", file: `docs/kaiden/${f}.md` })),
-  ...["a-tanstack-cloudflare", "b-two-layer", "c-frameworks", "d-agent-skill"].map((f) => ({
-    part: "発展",
-    file: `docs/advanced/${f}.md`,
-  })),
-  { part: "資料", file: "docs/glossary.md" },
-  { part: "資料", file: "docs/_generated/facts.md" },
-  { part: "資料", file: "docs/_generated/calibration.md" },
-  { part: "資料", file: "docs/_generated/lab-ja-en.md" },
-];
+/** PDF に入れる順番。英語版は docs/en/ の本文と英語の生成ページを使う */
+export function chaptersFor(lang: "ja" | "en"): { part: string; file: string }[] {
+  const d = lang === "ja" ? "docs" : "docs/en";
+  const P =
+    lang === "ja"
+      ? {
+          intro: "はじめに",
+          kyu: "入門（級）",
+          dan: "中級（段）",
+          kodan: "上級（高段）",
+          kaiden: "皆伝",
+          adv: "発展",
+          ref: "資料",
+        }
+      : {
+          intro: "Introduction",
+          kyu: "Beginner (kyu)",
+          dan: "Intermediate (dan)",
+          kodan: "Advanced (upper dan)",
+          kaiden: "Kaiden",
+          adv: "Extensions",
+          ref: "Reference",
+        };
+  const gen = (name: string) => `docs/_generated/${name}${lang === "ja" ? ".md" : ".en.md"}`;
+  return [
+    { part: P.intro, file: `${d}/00-index.md` },
+    ...[
+      "10-what-is-jev",
+      "09-setup",
+      "08-first-call",
+      "07-noul",
+      "06-choice",
+      "05-score",
+      "04-batch",
+    ].map((f) => ({ part: P.kyu, file: `${d}/kyu/${f}.md` })),
+    ...["01-state", "02-instructions", "03-confidence", "04-patterns", "05-boundary"].map((f) => ({
+      part: P.dan,
+      file: `${d}/dan/${f}.md`,
+    })),
+    ...["06-dataset", "07-calibration", "08-japanese-lab", "09-production", "10-limits"].map(
+      (f) => ({
+        part: P.kodan,
+        file: `${d}/kodan/${f}.md`,
+      }),
+    ),
+    ...["01-mechanism", "02-exam"].map((f) => ({ part: P.kaiden, file: `${d}/kaiden/${f}.md` })),
+    ...["a-tanstack-cloudflare", "b-two-layer", "c-frameworks", "d-agent-skill"].map((f) => ({
+      part: P.adv,
+      file: `${d}/advanced/${f}.md`,
+    })),
+    { part: P.ref, file: `${d}/glossary.md` },
+    { part: P.ref, file: gen("facts") },
+    { part: P.ref, file: gen("calibration") },
+    { part: P.ref, file: gen("lab-ja-en") },
+  ];
+}
+
+export const CHAPTERS = chaptersFor("ja");
 
 const idFor = (file: string) => `ch-${file.replace(/^docs\//, "").replace(/[^\w]+/g, "-")}`;
 
@@ -76,7 +106,7 @@ export function rewrite(markdown: string, file: string, known: Set<string>): str
 }
 
 function syntheticFixtures(): boolean {
-  for (const dir of readdirSync(FIXTURES_DIR)) {
+  for (const dir of listFixtureDirs()) {
     for (const f of readdirSync(join(FIXTURES_DIR, dir))) {
       if (readFixture(join(FIXTURES_DIR, dir, f)).meta.source === "synthetic") return true;
     }
@@ -127,11 +157,12 @@ pre.mermaid { background: none; border: 0; text-align: center; }
 `;
 
 export function buildHtml(): string {
-  const known = new Set(CHAPTERS.map((c) => c.file));
+  const chapters = chaptersFor(LANG);
+  const known = new Set(chapters.map((c) => c.file));
   const date = new Date().toISOString().slice(0, 10);
   const synthetic = syntheticFixtures();
 
-  const sections = CHAPTERS.map(({ part, file }) => {
+  const sections = chapters.map(({ part, file }) => {
     const md = rewrite(readFileSync(join(ROOT, file), "utf8"), file, known);
     const html = (marked.parse(md, { async: false }) as string).replace(
       /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
@@ -143,37 +174,39 @@ export function buildHtml(): string {
   const titleOf = (file: string) =>
     (readFileSync(join(ROOT, file), "utf8").match(/^# (.+)$/m)?.[1] ?? file).trim();
   let lastPart = "";
-  const toc = CHAPTERS.map(({ part, file }) => {
-    const head = part !== lastPart ? `<li class="toc-part">${part}</li>` : "";
-    lastPart = part;
-    return `${head}<li><a href="#${idFor(file)}">${titleOf(file)}</a></li>`;
-  }).join("\n");
+  const toc = chapters
+    .map(({ part, file }) => {
+      const head = part !== lastPart ? `<li class="toc-part">${part}</li>` : "";
+      lastPart = part;
+      return `${head}<li><a href="#${idFor(file)}">${titleOf(file)}</a></li>`;
+    })
+    .join("\n");
 
   return `<!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><title>jev-dojo</title>
+<html lang="${LANG}"><head><meta charset="utf-8"><title>jev-dojo</title>
 ${FONT_CSS.map((href) => `<link rel="stylesheet" href="${href}">`).join("\n")}
 <style>${CSS}</style></head>
 <body>
 <div class="cover">
   <h1>jev-dojo</h1>
-  <div class="sub">Jev（TypeSafe AI の System One モデル）を級・段で学ぶ</div>
+  <div class="sub">${t("Jev（TypeSafe AI の System One モデル）を級・段で学ぶ", "Learn Jev (TypeSafe AI's System One model) through kyu and dan ranks")}</div>
   <div class="meta">
-    版: ${pkg.version}（${date} 生成）<br>
-    内容の最終検証: ${facts.lastVerified} ／ 対象モデル: ${facts.model.pinned} ／ SDK: ${facts.sdk.js} ${facts.sdk.jsVersion}<br>
-    コード: ${REPO_URL.replace("/blob/main", "")}
+    ${t(`版: ${pkg.version}（${date} 生成）`, `Version ${pkg.version} (built ${date})`)}<br>
+    ${t("内容の最終検証", "Content last verified")}: ${facts.lastVerified} / ${t("対象モデル", "Model")}: ${facts.model.pinned} / SDK: ${facts.sdk.js} ${facts.sdk.jsVersion}<br>
+    ${t("コード", "Code")}: ${REPO_URL.replace("/blob/main", "")}
   </div>
   <p class="meta">
-    © 2026 kenmori. この PDF の再配布・転売はできません。<br>
-    本教材は TypeSafe AI の公式教材ではなく、TypeSafe AI とは関係がありません。<br>
-    料金・レート制限・モデルなどの変わりやすい情報は、必ず公式ドキュメントで確認してください。
+    © 2026 kenmori. ${t("この PDF の再配布・転売はできません。", "This PDF may not be redistributed or resold.")}<br>
+    ${t("本教材は TypeSafe AI の公式教材ではなく、TypeSafe AI とは関係がありません。", "This is not an official TypeSafe AI course and is not affiliated with TypeSafe AI.")}<br>
+    ${t("料金・レート制限・モデルなどの変わりやすい情報は、必ず公式ドキュメントで確認してください。", "Always check prices, rate limits, models and other changing facts in the official docs.")}
   </p>
   ${
     synthetic
-      ? `<p class="notice">この版の実行例・レポートの数値には、手で作った見本データ（合成）が含まれています。実APIの測定結果ではありません。</p>`
+      ? `<p class="notice">${t("この版の実行例・レポートの数値には、手で作った見本データ（合成）が含まれています。実APIの測定結果ではありません。", "Sample outputs and report numbers in this edition include hand-made sample data (synthetic). They are NOT real API measurements.")}</p>`
       : ""
   }
 </div>
-<section class="chapter toc"><h1>目次</h1><ol>${toc}</ol></section>
+<section class="chapter toc"><h1>${t("目次", "Contents")}</h1><ol>${toc}</ol></section>
 ${sections.join("\n")}
 </body></html>`;
 }
@@ -198,7 +231,8 @@ async function main() {
   const out = join(ROOT, "dist");
   mkdirSync(out, { recursive: true });
   const html = buildHtml();
-  const htmlPath = join(out, "jev-dojo.html");
+  const base = LANG === "ja" ? "jev-dojo" : "jev-dojo.en";
+  const htmlPath = join(out, `${base}.html`);
   writeFileSync(htmlPath, html);
 
   const browser = await launch();
@@ -229,7 +263,7 @@ async function main() {
       await document.fonts.ready;
     });
     await page.pdf({
-      path: join(out, "jev-dojo.pdf"),
+      path: join(out, `${base}.pdf`),
       format: "A4",
       printBackground: true,
       displayHeaderFooter: true,
@@ -242,7 +276,10 @@ async function main() {
     await browser.close();
   }
   console.log(
-    `作成: ${relative(ROOT, join(out, "jev-dojo.pdf"))}（プレビュー用 HTML: ${relative(ROOT, htmlPath)}）`,
+    t(
+      `作成: ${relative(ROOT, join(out, `${base}.pdf`))}（プレビュー用 HTML: ${relative(ROOT, htmlPath)}）`,
+      `Built: ${relative(ROOT, join(out, `${base}.pdf`))} (preview HTML: ${relative(ROOT, htmlPath)})`,
+    ),
   );
 }
 

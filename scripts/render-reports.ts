@@ -7,12 +7,14 @@
  *
  * ラベルは常に作者の例（data/labels.json）を使う。自分のラベルでの結果は npm run d7 / d8 で見る。
  */
+
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import { exampleLabels } from "../src/lib/board.js";
 import { createDojo } from "../src/lib/client.js";
 import { boardDojo, predictAll, summarize } from "../src/lib/evaluate.js";
 import { ROOT } from "../src/lib/fixtures.js";
+import { LANG, t } from "../src/lib/i18n.js";
 import { runMain } from "../src/lib/print.js";
 import {
   calibrationReport,
@@ -32,19 +34,25 @@ async function build(): Promise<Map<string, string>> {
   const pen = await predictAll(en, "en");
   const synthetic = [...ja.replayed, ...en.replayed].some((m) => m.source === "synthetic");
 
-  const cal = calibrationReport(summarize(pja, exampleLabels.items), "ja", "example", synthetic);
-  files.set("calibration.md", cal.markdown);
+  // 英語モードでは、英語の投稿で測ったレポートを .en.md として書き出す
+  const ext = LANG === "ja" ? ".md" : ".en.md";
+  const own = LANG === "ja" ? pja : pen;
+  const cal = calibrationReport(summarize(own, exampleLabels.items), LANG, "example", synthetic);
+  files.set(`calibration${ext}`, cal.markdown);
   for (const [name, svg] of Object.entries(cal.charts)) files.set(`charts/${name}`, svg);
 
   const lab = languageReport(compareLanguages(pja, pen, exampleLabels.items), "example", synthetic);
-  files.set("lab-ja-en.md", lab.markdown);
+  files.set(`lab-ja-en${ext}`, lab.markdown);
   for (const [name, svg] of Object.entries(lab.charts)) files.set(`charts/${name}`, svg);
 
   const k06Dojo = createDojo(k06.STEP, { mode: "replay" });
   for (const row of await k06.run(k06Dojo)) {
     files.set(
-      `charts/k06-${row.post.id}.svg`,
-      choiceChart(`${row.post.id} の担当の確率`, row.answer.probabilities),
+      `charts/k06-${row.post.id}${LANG === "ja" ? "" : "-en"}.svg`,
+      choiceChart(
+        t(`${row.post.id} の担当の確率`, `${row.post.id}: probability per team`),
+        row.answer.probabilities,
+      ),
     );
   }
   return files;

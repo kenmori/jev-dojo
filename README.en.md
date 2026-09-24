@@ -1,0 +1,128 @@
+# jev-dojo
+
+[日本語](README.md) | English
+
+**A hands-on course for learning Jev (TypeSafe AI's System One model), grade by grade, like martial-arts ranks.**
+You start by cloning the repository and seeing your first result in 5 minutes, with no API key.
+
+<!-- facts:start -->
+```
+Last verified: 2026-09-24 | Model: jev-1.13.0 | SDK: @typesafe-ai/sdk 0.6.0
+Official docs diff check: not run yet
+```
+
+Estimated Jev cost of sending every English sample request once in live mode: about $0.0043 (101,472 input tokens, 0.085% of the $5 sign-up credit). Estimated from the token counts of the sample (synthetic) data. Claude usage in Advanced B is billed separately
+<!-- facts:end -->
+
+## Get started in 5 minutes
+
+```bash
+git clone https://github.com/kenmori/jev-dojo
+cd jev-dojo
+npm install
+cp .env.example .env  # the place for your key later
+echo "JEV_LANG=en" >> .env   # samples print English
+npm run demo          # replays recorded results. No API key, no cost
+npm run k10           # calls the real API (put your key in TYPESAFE_API_KEY in .env first)
+```
+
+`JEV_LANG=en` makes every sample print English. You can also prefix a single command instead: `JEV_LANG=en npm run demo`.
+
+If you do not want to install Node.js locally, open the repository with "Code → Codespaces" and you get a ready-to-run environment.
+If you get stuck, `npm run doctor` checks your setup.
+
+## Grade map
+
+Kyu are beginner grades that count down from 10 to 4; Dan are expert ranks that count up from 1st to 10th.
+
+```mermaid
+flowchart LR
+  subgraph Beginner["Beginner (Kyu)"]
+    K10["Kyu 10<br/>What is Jev?"] --> K9["Kyu 9<br/>Set up"] --> K8["Kyu 8<br/>Your first call"] --> K7["Kyu 7<br/>Noul"] --> K6["Kyu 6<br/>Choice"] --> K5["Kyu 5<br/>Score"] --> K4["Kyu 4<br/>Ask in one batch"]
+  end
+  subgraph Intermediate["Intermediate (Dan)"]
+    D1["1st Dan state"] --> D2["2nd Dan instructions"] --> D3["3rd Dan confidence"] --> D4["4th Dan patterns"] --> D5["5th Dan code boundary"]
+  end
+  subgraph Advanced["Advanced (high Dan)"]
+    D6["6th Dan dataset"] --> D7["7th Dan calibration"] --> D8["8th Dan Japanese lab"] --> D9["9th Dan production"] --> D10["10th Dan limits and misuse"]
+  end
+  subgraph Mastery["Mastery"]
+    O["Okugi mechanism"] --> E["Final exam"]
+  end
+  K4 --> D1
+  D5 --> D6
+  D10 --> O
+```
+
+The full list of chapters is in [docs/en/00-index.md](docs/en/00-index.md).
+
+## What makes this course different
+
+- **Layered design** … Every section is written in the same three layers, from "In one line" that a 13-year-old can read to "Going deeper (for pros)"
+- **Backed by commands and tests** … Of all 23 chapters, 21 have a command to run and 19 have automated tests (see "How to run each chapter" below). `npm test` passes without an API key
+- **One running example that grows** … You sort posts on "the local festival message board," adding features chapter by chapter
+- **Built not to go stale** … Prices, rate limits and model IDs are collected in [data/facts.json](data/facts.json) and never written directly in the text. A weekly CI job detects changes in the official docs
+- **Primary sources come first** … Every section ends with a link to the official docs. This course provides an order to learn in and a place to practice; it does not replace the official docs
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run demo` | Replays the samples of 17 chapters in a row (no API key needed) |
+| `npm run doctor` | Checks Node, your key and connectivity |
+| `npm run k10` to `npm run k04` | Runs the Kyu samples |
+| `npm run d1` to `npm run d10` | Runs the Dan and high Dan samples |
+| `npm run ob` | Advanced B (Jev + Claude) |
+| `npm run okugi` | Checks properties of the "shape" of answers from recorded responses (Okugi) |
+| `npm run exam` | Grades the final exam |
+| `JEV_LANG=en npm run pdf` | Builds the English PDF from the course text (`dist/jev-dojo.en.pdf`; needs Chrome / Chromium). Without `JEV_LANG=en` it builds the Japanese PDF |
+| `npm run label` | Label the evaluation dataset yourself (6th Dan) |
+| `npm run reports` | Rebuilds the 7th and 8th Dan reports and charts from fixtures |
+| `npm test` | Unit + contract tests (no API key needed) |
+| `npm run test:eval` | Live evaluation against the real API (only when you have a key) |
+| `npm run check` | Runs types, lint, freshness of generated files and tests together |
+| `npm run record` | Re-records fixtures against the real API |
+| `npm run facts` | Updates generated files from `data/facts.json` |
+
+## How to run each chapter
+
+| Group | Chapters | How to run | Automated tests |
+|---|---|---|---|
+| Replayed by `npm run demo` | Kyu 10 to Kyu 4 (6 chapters, excluding Kyu 9), 1st to 10th Dan (10 chapters), Advanced B | Each can also be run on its own, e.g. `npm run k10` | Yes |
+| Run with a separate command | [Kyu 9](docs/en/kyu/09-setup.md) | `npm run doctor` (checks your setup) | No |
+| | [Okugi](docs/en/kaiden/01-mechanism.md) | `npm run okugi` | Yes |
+| | [Kaiden](docs/en/kaiden/02-exam.md) | `npm run exam` | Yes (checks that the model answers score full marks) |
+| | [Advanced A](docs/en/advanced/a-tanstack-cloudflare.md) | `cd app && npm run dev` | No (CI only builds and type-checks) |
+| No command (reading only) | [Advanced C](docs/en/advanced/c-frameworks.md), [Advanced D](docs/en/advanced/d-agent-skill.md) | — | No |
+
+## Directory layout
+
+```
+docs/        Course text (kyu, dan, kodan = high Dan, advanced). docs/en/ is the English version. _generated/ is generated
+src/lib/     Thin SDK wrapper, cost calculation, record/replay, evaluation metrics, chart generation
+src/steps/   Runnable sample for each chapter
+data/        Message board posts, facts.json (the single source for volatile facts)
+fixtures/    Recorded API responses
+tests/       unit / contract / eval
+exam/        Final exam (tasks = problems, solutions = model answers, tests = grading)
+scripts/     Fact checks, official docs diffing, fixture re-recording, report generation
+app/         Advanced A web app (TanStack Start + Cloudflare Workers; its UI is in Japanese only)
+```
+
+## Status
+
+The text of all 23 chapters is complete: Beginner (Kyu), Intermediate (Dan), Advanced (high Dan), Mastery (Kaiden) and Extensions (Advanced A to D). For the overall plan, see [plan.md](plan.md) (in Japanese).
+
+The fixtures that ship with the course are **hand-made samples (synthetic data), not real API results**.
+Replays say so when they run. The numbers in the 7th and 8th Dan reports are also computed from those samples and do not represent Jev's performance.
+Put in an API key and run `npm run record` → `npm run reports` to replace them with real measurements.
+
+## License
+
+- Code: MIT
+- Course text (`docs/`): [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may read and share it freely for non-commercial purposes. You may not sell it, include it in a paid course, or distribute modified versions
+- PDF edition: sold by the copyright holder (generated with `npm run pdf`, or `JEV_LANG=en npm run pdf` for English)
+
+See [LICENSE](LICENSE) for details.
+
+This is not an official TypeSafe AI course and is not affiliated with TypeSafe AI.

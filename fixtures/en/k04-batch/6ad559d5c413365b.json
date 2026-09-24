@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "Last night so many cars were parked on the road behind the shrine that I couldn't get my car out of my house. Please do something about it.",
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "Is this post a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement",
+            "false": "A question, thanks, a report, or anything else that is not a complaint"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.94
+        }
+      },
+      "usage": {
+        "input_tokens": 317,
+        "output_tokens": 0
+      }
+    }
+  }
+}

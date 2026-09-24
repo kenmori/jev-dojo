@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "Found a phone with a black case under the tower stage!",
+      "questions": {
+        "direction": {
+          "type": "choice",
+          "instructions": "Did the writer of this post lose something or find something?",
+          "criteria": {
+            "lost": "Lost it, dropped it, or is looking for it",
+            "found": "Picked it up, found it, or is holding it",
+            "neither": "Not about a lost item"
+          }
+        },
+        "item": {
+          "type": "choice",
+          "instructions": "What item is this post about?",
+          "criteria": {
+            "bottle": "Water bottle or plastic bottle",
+            "phone": "Smartphone or mobile phone",
+            "key": "Key",
+            "wallet": "Wallet",
+            "other": "Something not listed above"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "direction": {
+          "type": "choice",
+          "choice": "found",
+          "confidence": 0.7,
+          "probabilities": {
+            "lost": 0.04,
+            "found": 0.92,
+            "neither": 0.04
+          }
+        },
+        "item": {
+          "type": "choice",
+          "choice": "phone",
+          "confidence": 0.76,
+          "probabilities": {
+            "bottle": 0.02,
+            "phone": 0.92,
+            "key": 0.02,
+            "wallet": 0.02,
+            "other": 0.02
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 300,
+        "output_tokens": 0
+      }
+    }
+  }
+}

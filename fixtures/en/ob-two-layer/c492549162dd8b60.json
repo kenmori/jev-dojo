@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "It was fun again this year! Thank you to everyone who ran it.",
+      "questions": {
+        "isComplaint": {
+          "type": "noul",
+          "instructions": "Is this post a complaint about the organizers?",
+          "criteria": {
+            "true": "The writer describes a problem, dissatisfaction, or a request for improvement. Includes indirect wording and sarcasm",
+            "false": "A question, thanks, a report, an ad, or anything else that is not a complaint"
+          }
+        },
+        "department": {
+          "type": "choice",
+          "instructions": "Which team should handle this post?",
+          "criteria": {
+            "honbu": "Main office. Overall schedule, volunteers, trash, toilets, thanks and general feedback",
+            "yatai": "Food stalls. Which stalls are open, prices, food",
+            "kotsu": "Traffic and parking. Cars, bicycles, roads, buses",
+            "otoshimono": "Lost and found. Things lost or found, runaway pets",
+            "kyugo": "First aid and safety. Injuries, feeling unwell, lost children, danger",
+            "sonota": "None of the above. Ads or anything unrelated to the festival"
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "instructions": "How urgently should the organizers respond to this post?",
+          "criteria": [
+            "Not urgent. A later follow-up or a reply when someone is free is fine",
+            "Should be handled today. Someone is stuck right now, or it will get worse if left alone",
+            "Needs action right now. Someone's safety or health is involved"
+          ]
+        },
+        "intent": {
+          "type": "choice",
+          "instructions": "What does the writer of this post want the organizers to do?",
+          "criteria": {
+            "answer": "Answer a question",
+            "fix": "Fix a problem or improve something",
+            "lostItem": "Help find a lost item, or hand in a found item",
+            "thanks": "Share thanks or impressions. No action needed",
+            "none": "Not a request to the organizers (ads, etc.)"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "isComplaint": {
+          "type": "noul",
+          "noul": 0.19
+        },
+        "department": {
+          "type": "choice",
+          "choice": "honbu",
+          "confidence": 0.5,
+          "probabilities": {
+            "honbu": 0.76,
+            "yatai": 0.04,
+            "kotsu": 0.08,
+            "otoshimono": 0.01,
+            "kyugo": 0.03,
+            "sonota": 0.08
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.18,
+          "confidence": 0.54,
+          "legend": {
+            "0": "Not urgent. A later follow-up or a reply when someone is free is fine",
+            "1": "Should be handled today. Someone is stuck right now, or it will get worse if left alone",
+            "2": "Needs action right now. Someone's safety or health is involved"
+          },
+          "probabilities": {
+            "0": 0.84,
+            "1": 0.14,
+            "2": 0.02
+          }
+        },
+        "intent": {
+          "type": "choice",
+          "choice": "thanks",
+          "confidence": 0.87,
+          "probabilities": {
+            "answer": 0.01,
+            "fix": 0.01,
+            "lostItem": 0,
+            "thanks": 0.96,
+            "none": 0.02
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 787,
+        "output_tokens": 0
+      }
+    }
+  }
+}

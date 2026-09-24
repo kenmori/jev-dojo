@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "source": "synthetic",
+    "recordedAt": null,
+    "note": "手で作った見本。実APIの結果ではない。npm run record で本物に置き換える"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "It was fun again this year! Thank you to everyone who ran it.",
+      "questions": {
+        "intent": {
+          "type": "choice",
+          "instructions": "What does the writer of this post want the organizers to do?",
+          "criteria": {
+            "answer": "Answer a question",
+            "fix": "Fix a problem or improve something",
+            "lostItem": "Help find a lost item, or hand in a found item",
+            "thanks": "Share thanks or impressions. No action needed",
+            "none": "Not a request to the organizers (ads, etc.)"
+          }
+        },
+        "lostItemFound": {
+          "type": "choice",
+          "instructions": "If this post is about a lost item, did the writer lose it or find it?",
+          "criteria": {
+            "lost": "Lost it",
+            "found": "Found it or saw it",
+            "notApplicable": "Not about a lost item"
+          }
+        },
+        "fixNeedsStaffNow": {
+          "type": "noul",
+          "instructions": "If this post reports a problem, does staff need to go to the spot?",
+          "criteria": {
+            "true": "Cleanup, guidance, or repair is needed on site",
+            "false": "An explanation or a fix next time is enough"
+          }
+        },
+        "answerFromFaq": {
+          "type": "score",
+          "instructions": "If this post is a question, can the FAQ answer it?",
+          "criteria": [
+            "The FAQ cannot answer it. Needs an individual check",
+            "The FAQ answers part of it",
+            "The FAQ answers it as is"
+          ]
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {},
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "intent": {
+          "type": "choice",
+          "choice": "thanks",
+          "confidence": 0.87,
+          "probabilities": {
+            "answer": 0.01,
+            "fix": 0.01,
+            "lostItem": 0,
+            "thanks": 0.96,
+            "none": 0.02
+          }
+        },
+        "lostItemFound": {
+          "type": "choice",
+          "choice": "notApplicable",
+          "confidence": 0.9,
+          "probabilities": {
+            "lost": 0.01,
+            "found": 0.01,
+            "notApplicable": 0.98
+          }
+        },
+        "fixNeedsStaffNow": {
+          "type": "noul",
+          "noul": 0.03
+        },
+        "answerFromFaq": {
+          "type": "score",
+          "score": 1.1,
+          "confidence": 0.01,
+          "legend": {
+            "0": "The FAQ cannot answer it. Needs an individual check",
+            "1": "The FAQ answers part of it",
+            "2": "The FAQ answers it as is"
+          },
+          "probabilities": {
+            "0": 0.3,
+            "1": 0.3,
+            "2": 0.4
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 559,
+        "output_tokens": 0
+      }
+    }
+  }
+}

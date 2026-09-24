@@ -1,5 +1,7 @@
 # jev-dojo
 
+日本語 | [English](README.en.md)
+
 **Jev（TypeSafe AI の System One モデル）を、級・段で学ぶハンズオン教材。**
 クローンして、APIキーなしで、5分で最初の判定結果を見るところから始めます。
 
@@ -55,6 +57,7 @@ flowchart LR
 - **実行コマンドとテストで裏付け** … 全23章のうち21章に実行コマンドがあり、19章に自動テストがあります（内訳は下の「章ごとの動かし方」）。`npm test` は APIキーなしで通ります
 - **共通題材を育てる** … 「地域のお祭り掲示板」の投稿を、章ごとに機能を足しながら仕分けていきます
 - **古くならない仕組み** … 料金・レート制限・モデルIDは [data/facts.json](data/facts.json) に集め、本文には直接書きません。公式ドキュメントの変化は週次のCIで検出します
+- **英語でも進められる** … 英語の本文（[docs/en](docs/en/00-index.md)、[README.en.md](README.en.md)）があり、`.env` に `JEV_LANG=en` と書くとサンプルの質問・投稿・表示も英語になります
 - **一次情報が正典** … 各セクションの最後に公式ドキュメントへのリンクがあります。この教材の役割は「順序」と「手を動かす場」で、公式ドキュメントの代わりではありません
 
 ## コマンド
@@ -68,7 +71,7 @@ flowchart LR
 | `npm run ob` | 応用B（Jev ＋ Claude） |
 | `npm run okugi` | 記録済みの応答から、答えの「形」の性質を検証する（奥義） |
 | `npm run exam` | 免許皆伝の最終試験を採点する |
-| `npm run pdf` | 教材本文から PDF 版を作る（`dist/jev-dojo.pdf`。Chrome / Chromium が必要） |
+| `npm run pdf` | 教材本文から PDF 版を作る（`dist/jev-dojo.pdf`。Chrome / Chromium が必要）。`JEV_LANG=en` を付けると英語版（`dist/jev-dojo.en.pdf`） |
 | `npm run label` | 評価データに自分でラベルを付ける（六段） |
 | `npm run reports` | fixture から七段・八段のレポートと図を作り直す |
 | `npm test` | unit ＋ contract テスト（APIキー不要） |

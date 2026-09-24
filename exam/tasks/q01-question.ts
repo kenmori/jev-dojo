@@ -6,10 +6,19 @@
  * - 選択肢（criteria）は honbu / yatai / kotsu / otoshimono / kyugo と、
  *   どれにも当てはまらないときの逃げ道 sonota の6つ
  * - すべての選択肢に、空でない説明を付ける
+ *
+ * ----
+ * Q1 (2nd Dan) Define the team Choice.
+ *
+ * Requirements:
+ * - instructions is a non-empty string
+ * - the options (criteria) are honbu / yatai / kotsu / otoshimono / kyugo, plus
+ *   sonota as the "none of the above" option: six in total
+ * - every option has a non-empty description
  */
 import { type ChoiceQuestion, choice } from "@typesafe-ai/sdk";
 
 export function departmentQuestion(): ChoiceQuestion {
   void choice;
-  throw new Error("未実装: 第1問");
+  throw new Error("未実装 / not implemented: 第1問 / Q1");
 }

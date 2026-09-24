@@ -1,7 +1,7 @@
 /**
  * 第10問（総合）投稿を仕分けよ。
  *
- * createDojo("board-ja") で記録済みの応答を使い（テストでは replay で動く）、
+ * createDojo(boardStep(LANG)) で記録済みの応答を使い（テストでは replay で動く）、
  * 教材の本番用の質問（src/lib/board.ts の boardQuestions）で投稿を判定し、次を返す。
  *
  * - department: Jev が選んだ担当
@@ -15,5 +15,5 @@ export async function triage(
   _dojo: Dojo,
   _text: string,
 ): Promise<{ department: string; lane: Lane; callNow: boolean }> {
-  throw new Error("未実装: 第10問");
+  throw new Error("未実装 / not implemented: 第10問 / Q10");
 }
