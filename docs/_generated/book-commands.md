@@ -2,6 +2,7 @@
 # 『ハンズオン Jev 入門』のコマンド一覧
 
 書籍『ハンズオン Jev 入門』の「▶ やってみよう」などのコマンドを、章ごとに並べたページです（コマンド 36 か所、自分で作るファイル 2 個）。
+Playground に貼る JSON も載せています。
 電子書籍のアプリによっては、本からコピーすると引用符（“ ”）や書名が付け足されます。コマンドは、このページからコピーしてください。
 GitHub では、コマンドの枠の右上にあるボタンでコピーできます。
 
@@ -106,6 +107,33 @@ curl https://api.typesafe.ai/v1/systemone \
       }
     }
   }'
+```
+
+### Playground で同じ注文票を試す
+
+Playground: [console.typesafe.ai/playground](https://console.typesafe.ai/playground)
+
+① State を書き換える。
+
+```json
+{
+  "post": "ボランティアの集合時間は何時ですか？"
+}
+```
+
+② Questions を書き換える。
+
+```json
+{
+  "isQuestion": {
+    "type": "noul",
+    "instructions": "この投稿は、運営への質問ですか？",
+    "criteria": {
+      "true": "運営に何かを尋ねている",
+      "false": "質問ではない、または運営あてではない"
+    }
+  }
+}
 ```
 
 ### 同じことを TypeScript で書く
