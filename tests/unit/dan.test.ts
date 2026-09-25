@@ -33,11 +33,11 @@ describe("三段 1位と2位の差", () => {
   });
 
   it("1位が高く、2位を引き離しているときだけ自動にする", () => {
-    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.91, kotsu: 0.06 } }))).toBe(
+    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.88, kotsu: 0.08 } }))).toBe(
       true,
     );
     // 1位は同じ本部でも、2位と接戦
-    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.46, kotsu: 0.44 } }))).toBe(
+    expect(isClearWinner(pred({ departmentProbabilities: { honbu: 0.48, kotsu: 0.45 } }))).toBe(
       false,
     );
     // 1位が 0.8 に届かない
