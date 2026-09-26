@@ -12,6 +12,7 @@
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { APIError } from "@typesafe-ai/sdk";
 import { boardQuestions, postsFor } from "../lib/board.js";
 import type { Dojo } from "../lib/client.js";
 import { costUSD, formatUSD } from "../lib/cost.js";
@@ -79,7 +80,8 @@ export async function run(dojo: Dojo, options: ProductionOptions = DEFAULT_OPTIO
           step: STEP,
           itemId: post.id,
           model: dojo.model,
-          requestId: undefined,
+          // エラーでも、Jev の側で付いたやりとりの番号は残す（問い合わせの手がかり）
+          requestId: err instanceof APIError ? err.requestId : undefined,
           inputTokens: 0,
           outputTokens: 0,
           costUSD: 0,

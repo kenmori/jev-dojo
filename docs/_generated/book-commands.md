@@ -21,7 +21,7 @@ cd jev-dojo
 npm install
 ```
 
-### 2 つの動き方を先に知っておく
+### この本を全部動かすと、いくらかかるか
 
 ```bash
 export JEV_MODE=replay

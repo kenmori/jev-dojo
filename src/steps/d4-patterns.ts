@@ -90,6 +90,9 @@ type IntentAnswers = {
   answerFromFaq: number;
 };
 
+/** 目的の判定の confidence がこれより低ければ、どの処理にも回さず人が読む（仮の値） */
+export const INTENT_MIN_CONFIDENCE = 0.5;
+
 /** intent ごとの処理。使うのは、その intent に関係する答えだけ */
 export const handlers: Record<string, Handler> = {
   answer: (a) =>
@@ -103,7 +106,9 @@ export const handlers: Record<string, Handler> = {
   lostItem: (a) =>
     a.lostItemFound === "found"
       ? t("拾得物リストに登録する", "Add to the found-items list")
-      : t("落とし物の照合リストに登録する", "Add to the lost-items matching list"),
+      : a.lostItemFound === "lost"
+        ? t("落とし物の照合リストに登録する", "Add to the lost-items matching list")
+        : t("本部が読む", "The main office reads it"),
   thanks: () => t("「いいね」を付けて終わり", "Give it a like and close it"),
   none: () => t("非表示候補にする", "Mark as a candidate to hide"),
 };
@@ -137,7 +142,11 @@ export async function run(intentDojo: Dojo, board: Dojo) {
     const r = await intentDojo.client.systemOne({ state: post.text, questions: intentQuestions });
     const a = r.answers;
     const intent = a.intent.choice;
-    const handler = handlers[intent] ?? (() => t("本部が読む", "The main office reads it"));
+    // 目的の判定に迷ったら、処理を選ばずに人が読む（公式の Intent routing の例と同じ）
+    const handler =
+      a.intent.confidence < INTENT_MIN_CONFIDENCE
+        ? () => t("本部が読む", "The main office reads it")
+        : (handlers[intent] ?? (() => t("本部が読む", "The main office reads it")));
     intents.push({
       post,
       intent,
