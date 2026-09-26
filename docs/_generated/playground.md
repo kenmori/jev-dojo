@@ -4,12 +4,16 @@
 書籍『ハンズオン Jev 入門』のサンプルが Jev に送った中身を、TypeSafe の [Playground](https://console.typesafe.ai/playground) にそのまま貼れる形で並べたページです。
 コードを書かずに、画面から同じ質問を試せます。使い方は、書籍の第 4 章「Playground で同じ注文票を試す」を見てください。
 
+> **費用について:** Playground の「Run request」は、本物の Jev に送ります。**押すたびに、あなたの TypeSafe のアカウントに費用がかかります。** 投稿 1 件に質問 1 つなら、入力は 300〜400 トークンほどで、1 回あたり 0.01 円に満たない程度です（現時点の料金。[facts.md](facts.md)）。state や質問が長いほど高くなります。使った量は、Playground の左の「Usage」で確かめられます。
+
 ## 使い方
 
+![Playground の画面。① State の欄に投稿、② Questions の欄に質問を貼り、③ 右下の Run request で送る](../images/playground-steps.png)
+
 1. [console.typesafe.ai/playground](https://console.typesafe.ai/playground) を開く（ログインが必要です）
-2. **Questions** の欄の中身をすべて消して、各節の「Questions に貼る」の JSON を貼る
-3. **State** の欄の中身をすべて消して、試したい投稿の JSON を貼る
-4. 右下の「Run request」を押す。**本物の Jev に送るので、少額の費用がかかります**
+2. **① State** の欄（左）の中身をすべて消して、試したい投稿の JSON を貼る
+3. **② Questions** の欄（右）の中身をすべて消して、各節の「Questions に貼る」の JSON を貼る
+4. **③** 右下の「Run request」を押す（Mac では ⌘ + Enter でも送れる）。答えは画面の下の Response の欄に出ます
 
 気をつけること:
 
