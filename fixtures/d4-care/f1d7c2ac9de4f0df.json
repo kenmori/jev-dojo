@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "source": "live",
+    "recordedAt": "2026-09-26T12:11:47.137Z"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "写真撮影のルールはありますか？SNSに載せてもいいですか？",
+      "questions": {
+        "needsCare": {
+          "type": "noul",
+          "instructions": "この投稿は、人の安全や体調にかかわる内容ですか？",
+          "criteria": {
+            "true": "けが、体調不良、迷子、倒れている人、事故やその恐れがある",
+            "false": "安全や体調にはかかわらない"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-typesafe-request-id": "req_01a0dda0efae737eabf57d2cc9bb36e5"
+    },
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "needsCare": {
+          "type": "noul",
+          "noul": 0.03
+        }
+      },
+      "usage": {
+        "input_tokens": 374,
+        "output_tokens": 21
+      }
+    }
+  }
+}

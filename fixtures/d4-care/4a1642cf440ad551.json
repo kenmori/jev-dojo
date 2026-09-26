@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "source": "live",
+    "recordedAt": "2026-09-26T12:11:41.495Z"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "娘が迷子です。赤い浴衣の5歳の女の子です。見かけた方は本部まで！",
+      "questions": {
+        "needsCare": {
+          "type": "noul",
+          "instructions": "この投稿は、人の安全や体調にかかわる内容ですか？",
+          "criteria": {
+            "true": "けが、体調不良、迷子、倒れている人、事故やその恐れがある",
+            "false": "安全や体調にはかかわらない"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-typesafe-request-id": "req_01a0dda0d9c6704cba709875b4150914"
+    },
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "needsCare": {
+          "type": "noul",
+          "noul": 0.98
+        }
+      },
+      "usage": {
+        "input_tokens": 379,
+        "output_tokens": 21
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "source": "live",
+    "recordedAt": "2026-09-26T12:11:48.881Z"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "焼きとうもろこし、生焼けでした。子どもが食べてしまったんですが大丈夫でしょうか。",
+      "questions": {
+        "needsCare": {
+          "type": "noul",
+          "instructions": "この投稿は、人の安全や体調にかかわる内容ですか？",
+          "criteria": {
+            "true": "けが、体調不良、迷子、倒れている人、事故やその恐れがある",
+            "false": "安全や体調にはかかわらない"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-typesafe-request-id": "req_01a0dda0f68976f9914d4069124f595e"
+    },
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "needsCare": {
+          "type": "noul",
+          "noul": 0.91
+        }
+      },
+      "usage": {
+        "input_tokens": 387,
+        "output_tokens": 21
+      }
+    }
+  }
+}

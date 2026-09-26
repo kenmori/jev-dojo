@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "source": "live",
+    "recordedAt": "2026-09-26T12:11:40.427Z"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/systemone",
+    "body": {
+      "state": "財布が落ちていたので、本部テントに届けておきました。",
+      "questions": {
+        "needsCare": {
+          "type": "noul",
+          "instructions": "この投稿は、人の安全や体調にかかわる内容ですか？",
+          "criteria": {
+            "true": "けが、体調不良、迷子、倒れている人、事故やその恐れがある",
+            "false": "安全や体調にはかかわらない"
+          }
+        }
+      },
+      "model": "jev-1.13.0"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-typesafe-request-id": "req_01a0dda0d5b37350b3ff41dbe9b98333"
+    },
+    "body": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "needsCare": {
+          "type": "noul",
+          "noul": 0.05
+        }
+      },
+      "usage": {
+        "input_tokens": 373,
+        "output_tokens": 21
+      }
+    }
+  }
+}
