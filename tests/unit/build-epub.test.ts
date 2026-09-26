@@ -11,6 +11,7 @@ import {
   highlightCode,
   insertKeyVisual,
   markTryItAim,
+  mermaidAlt,
   navXhtml,
   prepareMarkdown,
   resolveChapters,
@@ -220,5 +221,13 @@ describe("resolveSection", () => {
     expect(resolveSection(md, "しきい値はまだ仮の値")).toBe("sec-2");
     expect(resolveSection(md, "sec-5")).toBe("sec-5");
     expect(() => resolveSection(md, "ない見出し")).toThrow();
+  });
+});
+
+describe("mermaidAlt", () => {
+  it("箱の中の文字を順に → でつなぎ、矢印のラベルと重複は入れない", () => {
+    const code =
+      'flowchart TB\n  A["投稿<br/>本文"] --> B{"Jev"}\n  B -->|"迷い"| C("人")\n  C --> A';
+    expect(mermaidAlt(code)).toBe("流れ図: 投稿 本文 → Jev → 人");
   });
 });

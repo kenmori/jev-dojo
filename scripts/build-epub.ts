@@ -222,6 +222,19 @@ export function highlightCode(html: string): string {
   );
 }
 
+/**
+ * 流れ図（mermaid）の代替テキスト。箱の中の文字を、書かれた順に「→」でつなぐ。
+ * 画像を読み上げる読者にも、図の流れが伝わるようにする
+ */
+export function mermaidAlt(code: string): string {
+  const text = unescapeHtml(code);
+  const labels = [...text.matchAll(/[[({]+"?([^"\])}]+)"?[\])}]+/g)]
+    .map((m) => m[1]!.replace(/<br\s*\/?>/g, " ").trim())
+    .filter((l, i, all) => l && all.indexOf(l) === i);
+  const alt = labels.length ? `流れ図: ${labels.join(" → ")}` : "流れ図";
+  return alt.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
 /** 「▶ やってみよう」の下の「確かめたいこと／予想してみよう」の引用を、囲みの見た目にする */
 export function markTryItAim(html: string): string {
   return html.replace(
@@ -544,7 +557,8 @@ async function main() {
         highlightCode(
           (marked.parse(prepared.markdown, { async: false }) as string).replace(
             /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-            (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+            (_m, code: string) =>
+              `<pre class="mermaid" data-alt="${mermaidAlt(code)}">${code}</pre>`,
           ),
         ),
       );
