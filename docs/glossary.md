@@ -132,9 +132,10 @@ Noul では true/false の説明、Choice ではラベル → 説明のマップ
 <!-- freshness: semi-stable -->
 
 
-TODO: 公式ドキュメントで定義を確認してから記入する。推測で書かない。
+Reinforcement Learning for Calibrated Decisions（較正された判断のための強化学習）。Jev の学習の方法です。
+文章を書く AI が人の好む返事（RLHF）を学ぶのに対し、RLCD は、文章を書かずに「決まった形の判断」と「較正された確率」を返すように学習します。較正されているとは、たくさんの答えをまとめたとき、確率 0.8 と言った答えがおよそ 80% 当たる、という意味です（1 つの答えが正しい保証ではありません）。
 
-> 一次情報: https://docs.typesafe.ai/
+> 一次情報: https://docs.typesafe.ai/introduction/machine-learning-primer
 
 ## fan-out（投機的ファンアウト）
 

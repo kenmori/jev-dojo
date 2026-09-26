@@ -132,9 +132,10 @@ How well predicted probabilities match the actual rate of correct answers. Measu
 <!-- freshness: semi-stable -->
 
 
-TODO: check the definition in the official docs before filling this in. Do not guess.
+Reinforcement Learning for Calibrated Decisions. This is how Jev is trained.
+Where chat models learn replies people prefer (RLHF), RLCD trains the model to return typed decisions and calibrated probabilities instead of text. Calibrated means that across many answers, those given probability 0.8 are right about 80% of the time (it does not guarantee any single answer).
 
-> Primary source: https://docs.typesafe.ai/
+> Primary source: https://docs.typesafe.ai/introduction/machine-learning-primer
 
 ## fan-out (speculative fan-out)
 

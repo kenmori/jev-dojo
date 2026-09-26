@@ -78,7 +78,15 @@ normalized entropy = H ÷ log(number of options)   (1 if perfectly flat, 0 if al
 concentration = 1 − normalized entropy
 ```
 
-**[Unknown]** Which formula Jev actually uses to compute confidence. The formula above is a yardstick for comparison; nothing says it is Jev's formula.
+**[Confirmed]** Confidence is computed from the returned probability distribution (the official Confidence page). The official three-option explanation approximates it as "(3 × top probability − 1) ÷ 2". With K options, that is:
+
+```
+confidence ≈ (K × top probability − 1) ÷ (K − 1)
+```
+
+The recorded Choice answers match this form closely (`npm run okugi -- --live-only`). It is a different yardstick from the entropy formula above.
+
+**[Unknown]** The exact formula. The official page itself calls it an approximation, and some Score answers do not fit it.
 
 This course's functions are in [src/lib/mechanics.ts](../../../src/lib/mechanics.ts).
 
@@ -86,7 +94,7 @@ This course's functions are in [src/lib/mechanics.ts](../../../src/lib/mechanics
 
 - A Noul has no confidence **[Confirmed]**. A Noul of 0.5 means "yes" and "no" are about equally likely, not "medium strength" **[Confirmed]**
 - The top probability and confidence are different quantities. With many options, the whole distribution can be flat even when the top option has a fair probability
-- Because of rounding, probabilities can add up to slightly more or less than 1. When a test compares the sum, allow some tolerance
+- Probabilities come back rounded to 2 decimals. In the 616 recorded answer sets every sum was 1.00, but since rounded values are added, an exact 1 is not guaranteed. When a test compares the sum, allow some tolerance
 
 </details>
 
@@ -131,8 +139,9 @@ Jev is an AI that specializes in the fast kind of judgment only.
 - **[Confirmed]** Jev is the first flagship model among TypeSafe's System One models. It understands natural language and, instead of generating text, returns typed answers and probabilities (SKILL.md)
 - **[Confirmed]** System One models are trained to make calibrated judgments. Even so, verify performance in your own domain (SKILL.md)
 - **[Confirmed]** English is the main training language, and other languages are not necessarily as good. If you use it in a language other than English, test it on your own content (the Models page of the official docs)
+- **[Confirmed]** Jev is trained with RLCD (reinforcement learning for calibrated decisions) to return decisions and calibrated probabilities instead of text. It is not fine-tuned on customer data, and every account uses the same model (the Models and AI primer pages of the official docs)
 - **[General]** "System 1 / System 2" is a distinction made by the psychologist Daniel Kahneman
-- **[Unknown]** The model's architecture, number of parameters, training data, training method (including RLCD in the glossary), the formula for confidence, and how the text of criteria is used
+- **[Unknown]** The model's architecture, number of parameters, training data, the details of training, the exact formula for confidence, and how the text of criteria is used
 
 We do not fill in the unknown parts with guesses. When they can be confirmed in the official docs, we will update this chapter and the glossary.
 
