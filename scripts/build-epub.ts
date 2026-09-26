@@ -230,6 +230,31 @@ export function markTryItAim(html: string): string {
   );
 }
 
+/** 見出しを比べるための形。空白と記号を取り除く */
+export const headingKey = (text: string) => text.replace(/[\s`*()[\]]/g, "");
+
+/**
+ * 章へのリンクの「#」の後ろを、その章の h2 の ID（sec-N）に直す。
+ * 「#見出しの文字」と書けば、見出しが並び替わってもリンクが正しい節を指す。見つからなければ止める
+ */
+export function resolveSection(mdPath: string, hash: string): string {
+  if (/^sec-\d+$/.test(hash)) return hash;
+  const headings = readFileSync(mdPath, "utf8")
+    .replace(/^```[\s\S]*?^```/gm, "")
+    .split("\n")
+    .filter((l) => l.startsWith("## "))
+    .map((l) => headingKey(l.slice(3)));
+  let wanted = hash;
+  try {
+    wanted = decodeURIComponent(hash);
+  } catch {
+    // 「%」を含む見出しは、そのまま比べる
+  }
+  const i = headings.indexOf(headingKey(wanted));
+  if (i < 0) throw new Error(`${mdPath} に見出し「${hash}」がありません`);
+  return `sec-${i + 1}`;
+}
+
 export function prepareMarkdown(
   markdown: string,
   path: string,
@@ -255,7 +280,8 @@ export function prepareMarkdown(
           return `<img class="figure-src" data-src="${target}" alt="${text}"/>`;
         }
         const chapter = byPath.get(target);
-        if (chapter) return `[${text}](${chapter})`;
+        if (chapter)
+          return `[${text}](${chapter}${hash ? `#${resolveSection(target, hash)}` : ""})`;
         const rel = relative(ROOT, target);
         if (rel.startsWith("..")) return text; // リポジトリの外（書籍原稿どうし以外）へのリンクは文字だけ残す
         return `[${text}](${REPO_URL}/${rel}${hash ? `#${hash}` : ""})`;

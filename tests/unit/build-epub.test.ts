@@ -1,4 +1,5 @@
-import { existsSync } from "node:fs";
+import { existsSync, mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -13,6 +14,7 @@ import {
   navXhtml,
   prepareMarkdown,
   resolveChapters,
+  resolveSection,
   stableIdentifier,
   tocPageBody,
 } from "../../scripts/build-epub.js";
@@ -204,5 +206,19 @@ describe("markTryItAim", () => {
     const out = markTryItAim(html);
     expect(out).toContain('<blockquote class="aim">\n<p><strong>確かめたいこと');
     expect(out).toContain("<blockquote>\n<p>公式の引用");
+  });
+});
+
+describe("resolveSection", () => {
+  it("見出しの文字（空白や記号を除いたもの）を、その章の h2 の ID に直す。コードの中の ## は数えない", () => {
+    const dir = mkdtempSync(join(tmpdir(), "epub-"));
+    const md = join(dir, "c.md");
+    writeFileSync(
+      md,
+      "# 章\n\n## はじめ\n\n```bash\n## コメント\n```\n\n## しきい値は まだ仮の値\n",
+    );
+    expect(resolveSection(md, "しきい値はまだ仮の値")).toBe("sec-2");
+    expect(resolveSection(md, "sec-5")).toBe("sec-5");
+    expect(() => resolveSection(md, "ない見出し")).toThrow();
   });
 });
