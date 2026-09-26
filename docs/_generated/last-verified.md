@@ -5,4 +5,4 @@
 | 対象 | 最終確認日 | 確認方法 |
 |---|---|---|
 | data/facts.json（モデル・料金・レート制限など） | 2026-09-24 | 手動確認＋ `npm run facts:verify` |
-| 公式ドキュメント一覧（llms.txt） | 未実施 | `npm run docmap`（週次CI） |
+| 公式ドキュメント一覧（llms.txt） | 2026-09-26 | `npm run docmap`（週次CI） |

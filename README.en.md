@@ -8,7 +8,7 @@ You start by cloning the repository and seeing your first result in 5 minutes, w
 <!-- facts:start -->
 ```
 Last verified: 2026-09-24 | Model: jev-1.13.0 | SDK: @typesafe-ai/sdk 0.6.0
-Official docs diff check: not run yet
+Official docs diff check: 2026-09-26
 ```
 
 Estimated Jev cost of sending every English sample request once in live mode: about $0.0043 (101,472 input tokens, 0.085% of the $5 sign-up credit). Estimated from the token counts of the sample (synthetic) data. Claude usage in Advanced B is billed separately
