@@ -279,8 +279,8 @@ h3 { font-size: 1.1em; margin: 1.2em 0 0.4em; }
 ol ul { list-style: none; padding-left: 0.5em; margin: 0.3em 0; }
 /* 表の中の長いコードは、狭い画面では途中で折り返す */
 td code { word-break: break-all; }
-pre { white-space: pre-wrap; word-wrap: break-word; font-size: 0.8em; line-height: 1.4; background: #f4f4f4; padding: 0.6em; }
-code { font-family: monospace; font-size: 0.9em; background: #EEF0F3; padding: 0.05em 0.3em; border-radius: 3px; }
+pre { font-family: monospace, monospace; white-space: pre-wrap; word-wrap: break-word; font-size: 0.85em; line-height: 1.5; background: #EEF0F3; padding: 0.7em 0.9em; border-radius: 4px; border: 1px solid #DDE1E7; }
+code { font-family: monospace, monospace; font-size: 0.9em; background: #EEF0F3; padding: 0.05em 0.3em; border-radius: 3px; }
 pre code, pre code.hljs { font-size: 1em; background: none; padding: 0; border-radius: 0; }
 /* コードの色分け。白黒の端末でも区別できるよう、暗めの色に太字・斜体を組み合わせる */
 .hljs-keyword, .hljs-meta .hljs-keyword { color: #1B3A7A; font-weight: bold; }
