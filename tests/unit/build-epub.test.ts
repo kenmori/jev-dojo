@@ -150,11 +150,11 @@ describe("highlightCode", () => {
 });
 
 describe("insertKeyVisual", () => {
-  it("章の見出しのすぐ下に画像を入れ、ほかの見出しには入れない", () => {
+  it("章の見出しと画像を扉の囲みに入れ、ほかの見出しはそのまま", () => {
     const md = "# 第5章 Noul\n\n本文\n\n## 節\n";
     const out = insertKeyVisual(md, "../images/ch05-key.png", "第5章 Noulの扉の絵");
     expect(out).toBe(
-      "# 第5章 Noul\n\n![第5章 Noulの扉の絵](../images/ch05-key.png)\n\n\n本文\n\n## 節\n",
+      '<div class="chapter-opener">\n\n# 第5章 Noul\n\n![第5章 Noulの扉の絵](../images/ch05-key.png)\n\n</div>\n\n\n本文\n\n## 節\n',
     );
   });
 });

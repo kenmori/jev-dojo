@@ -106,9 +106,15 @@ function keyVisualFor(m: BookManifest, src: string, bookDir: string): { keyVisua
   return existsSync(file) ? { keyVisual: file } : {};
 }
 
-/** 章の見出し（最初の # の行）のすぐ下に、キービジュアルの画像を入れる */
+/**
+ * 章の見出し（最初の # の行）とキービジュアルを、1 ページだけの扉にする。
+ * 囲み（chapter-opener）の後で改ページし、本文は次のページから始まる
+ */
 export function insertKeyVisual(markdown: string, imagePath: string, alt: string): string {
-  return markdown.replace(/^(# .+)$/m, `$1\n\n![${alt}](${imagePath})\n`);
+  return markdown.replace(
+    /^(# .+)$/m,
+    `<div class="chapter-opener">\n\n$1\n\n![${alt}](${imagePath})\n\n</div>\n`,
+  );
 }
 
 /** タイトルと著者から、版をまたいで変わらない urn:uuid を作る */
@@ -253,6 +259,9 @@ export function prepareMarkdown(
 const CSS = `
 body { line-height: 1.7; }
 h1 { font-size: 1.5em; margin: 0 0 1em; }
+/* 章の扉。見出しと扉の絵だけのページにして、本文は次のページから */
+.chapter-opener { text-align: center; padding-top: 12%; page-break-after: always; break-after: page; }
+.chapter-opener h1 { font-size: 1.8em; margin-bottom: 1.2em; }
 .toc-part { font-weight: bold; margin: 1.2em 0 0.3em; }
 ul.toc { list-style: none; margin: 0; padding-left: 1em; }
 ul.toc li { margin: 0.3em 0; }
