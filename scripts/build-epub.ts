@@ -227,7 +227,19 @@ export function highlightCode(html: string): string {
  * 画像を読み上げる読者にも、図の流れが伝わるようにする
  */
 export function mermaidAlt(code: string): string {
-  const text = unescapeHtml(code);
+  // %%{init: …}%% のような設定の行は、図の中身ではないので除く
+  const text = unescapeHtml(code).replace(/^\s*%%.*$/gm, "");
+  if (/^\s*sequenceDiagram/m.test(text)) {
+    // シーケンス図は、登場する相手と、矢印に書いたやりとりを順に並べる
+    const actors = [...text.matchAll(/^\s*participant\s+\S+\s+as\s+(.+)$/gm)].map((m) =>
+      m[1]!.trim(),
+    );
+    const messages = [...text.matchAll(/^\s*\S+\s*-[-)>x]+\s*\S+\s*:\s*(.+)$/gm)].map((m) =>
+      m[1]!.replace(/<br\s*\/?>/g, " ").trim(),
+    );
+    const alt = `やりとりの図: ${[actors.join("と"), ...messages].filter(Boolean).join(" → ")}`;
+    return alt.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  }
   const labels = [...text.matchAll(/[[({]+"?([^"\])}]+)"?[\])}]+/g)]
     .map((m) => m[1]!.replace(/<br\s*\/?>/g, " ").trim())
     .filter((l, i, all) => l && all.indexOf(l) === i);

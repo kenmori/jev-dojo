@@ -22,6 +22,7 @@ Jev に投稿を1つ渡して3つ質問すると、3つの質問は同時に、�
 答えはいつも決まった形（確率つき）で返ってきます。文章は1文字も生成されません。
 
 ```mermaid
+%%{init: {"sequence": {"mirrorActors": false}}}%%
 sequenceDiagram
   participant C as あなたのコード
   participant A as API（/v1/systemone）

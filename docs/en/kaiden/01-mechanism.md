@@ -22,6 +22,7 @@ Give Jev one post and ask three questions, and the three questions are answered 
 Answers always come back in a fixed shape (with probabilities). Not a single character of text is generated.
 
 ```mermaid
+%%{init: {"sequence": {"mirrorActors": false}}}%%
 sequenceDiagram
   participant C as Your code
   participant A as API (/v1/systemone)

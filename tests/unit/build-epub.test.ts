@@ -230,4 +230,11 @@ describe("mermaidAlt", () => {
       'flowchart TB\n  A["投稿<br/>本文"] --> B{"Jev"}\n  B -->|"迷い"| C("人")\n  C --> A';
     expect(mermaidAlt(code)).toBe("流れ図: 投稿 本文 → Jev → 人");
   });
+  it("シーケンス図は、登場する相手と矢印のやりとりを並べる。設定の行は無視する", () => {
+    const code =
+      '%%{init: {"sequence": {"mirrorActors": false}}}%%\nsequenceDiagram\n  participant P as あなたのプログラム\n  participant J as Jev\n  P->>J: state<br/>questions\n  J-->>P: answers';
+    expect(mermaidAlt(code)).toBe(
+      "やりとりの図: あなたのプログラムとJev → state questions → answers",
+    );
+  });
 });
