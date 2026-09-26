@@ -11,7 +11,7 @@ import { join } from "node:path";
 import { loadDotEnv } from "../src/lib/env.js";
 import { FIXTURES_DIR, ROOT, stepDir } from "../src/lib/fixtures.js";
 import { t } from "../src/lib/i18n.js";
-import { STEPS } from "../src/steps/index.js";
+import { stepsForLang } from "../src/steps/index.js";
 
 loadDotEnv();
 if (!process.env.TYPESAFE_API_KEY?.trim()) {
@@ -25,12 +25,16 @@ if (!process.env.TYPESAFE_API_KEY?.trim()) {
 }
 
 const only = process.argv[2];
-const targets = STEPS.filter((s) => !only || s.script === only);
+const targets = stepsForLang().filter((s) => !only || s.script === only);
 if (targets.length === 0) {
   console.error(
     t(
-      `不明な章: ${only}（候補: ${STEPS.map((s) => s.script).join(", ")}）`,
-      `Unknown chapter: ${only} (choose from: ${STEPS.map((s) => s.script).join(", ")})`,
+      `不明な章: ${only}（候補: ${stepsForLang()
+        .map((s) => s.script)
+        .join(", ")}）`,
+      `Unknown chapter: ${only} (choose from: ${stepsForLang()
+        .map((s) => s.script)
+        .join(", ")})`,
     ),
   );
   process.exit(1);

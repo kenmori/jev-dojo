@@ -7,6 +7,7 @@ import { createDojo } from "../../src/lib/client.js";
 import { boardDojo, predictAll, summarize } from "../../src/lib/evaluate.js";
 import { LANG } from "../../src/lib/i18n.js";
 import { compareLanguages } from "../../src/lib/reports.js";
+import * as care from "../../src/steps/care.js";
 import * as d1 from "../../src/steps/d1-state.js";
 import * as d2 from "../../src/steps/d2-instructions.js";
 import * as d3 from "../../src/steps/d3-lanes.js";
@@ -55,6 +56,19 @@ describe("四段", () => {
     for (const r of intents) expect(r.action.length).toBeGreaterThan(0);
     const ranked = d4.rank(predictions);
     expect(ranked[0]?.priority).toBeGreaterThanOrEqual(ranked.at(-1)?.priority ?? 1);
+  });
+});
+
+describe.runIf(LANG === "ja")("四段 もう一歩（救護が要るか・日本語の書籍だけ）", () => {
+  it("救護の Noul と担当の Choice で、先頭に出す投稿を比べられる", async () => {
+    const { rows } = await care.run(replay(care.STEP), boardDojo("ja", { mode: "replay" }));
+    expect(rows).toHaveLength(60);
+    for (const r of rows) expect(r.needsCare).toBeGreaterThanOrEqual(0);
+    // 迷子が見つかったお礼は「救護が要る」が高く出るが、急ぎ度が低いので先頭には出ない
+    const p50 = rows.find((r) => r.id === "p50");
+    expect(p50?.needsCare).toBeGreaterThanOrEqual(care.CARE_MIN);
+    expect(p50?.byNoul).toBe(false);
+    expect(rows.filter((r) => r.byNoul).length).toBeGreaterThan(0);
   });
 });
 

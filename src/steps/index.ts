@@ -3,7 +3,7 @@
  * dirs はその章が使う fixture のディレクトリ（record のとき、ここを消してから録り直す）。
  * dirs が空の章は、八段が録った共有の fixture（board-ja / board-en）を使うので、record でも再生で表示だけする。
  */
-import { t } from "../lib/i18n.js";
+import { LANG, t } from "../lib/i18n.js";
 export interface StepEntry {
   script: string;
   file: string;
@@ -11,6 +11,8 @@ export interface StepEntry {
   dirs: string[];
   /** 録り直しに ANTHROPIC_API_KEY も要る章 */
   needsClaude?: boolean;
+  /** 日本語の書籍だけのサンプル。英語モード（JEV_LANG=en）では demo と record がとばす */
+  jaOnly?: boolean;
 }
 
 export const STEPS: StepEntry[] = [
@@ -77,6 +79,13 @@ export const STEPS: StepEntry[] = [
     dirs: ["d4-intent"],
   },
   {
+    script: "care",
+    file: "care.ts",
+    label: t("四段 もう一歩 救護が要るか", "4th Dan extra: Needs first aid?"),
+    dirs: ["d4-care"],
+    jaOnly: true,
+  },
+  {
     script: "d5",
     file: "d5-boundary.ts",
     label: t("五段 コードとJevの境界", "5th Dan: Where code ends and Jev begins"),
@@ -114,3 +123,6 @@ export const STEPS: StepEntry[] = [
     needsClaude: true,
   },
 ];
+
+/** 今の言語で回す章 */
+export const stepsForLang = (lang = LANG) => STEPS.filter((s) => !(s.jaOnly && lang !== "ja"));

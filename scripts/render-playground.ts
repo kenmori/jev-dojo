@@ -30,6 +30,11 @@ export const SECTIONS = [
     title: "第 10〜15 章 本番用の質問と 60 件の投稿（npm run show、d3、d7）",
   },
   { dir: "d4-intent", anchor: "d4", title: "第 12 章 目的を聞いて振り分ける（npm run d4）" },
+  {
+    dir: "d4-care",
+    anchor: "care",
+    title: "第 12 章 もう一歩: 救護が要るかを Noul で聞く（npm run care）",
+  },
   { dir: "d5-boundary", anchor: "d5", title: "第 13 章 落とし物の照合（npm run d5）" },
   { dir: "board-en", anchor: "board-en", title: "第 16 章 英語の投稿（npm run d8）" },
   { dir: "d10-limits", anchor: "d10", title: "第 17 章 判定を操作しようとする投稿（npm run d10）" },

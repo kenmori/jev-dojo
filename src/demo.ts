@@ -9,7 +9,7 @@ import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { ROOT } from "./lib/fixtures.js";
 import { t } from "./lib/i18n.js";
-import { STEPS } from "./steps/index.js";
+import { stepsForLang } from "./steps/index.js";
 
 console.log(
   t(
@@ -18,7 +18,7 @@ console.log(
   ),
 );
 
-for (const { file } of STEPS) {
+for (const { file } of stepsForLang()) {
   const result = spawnSync("npx", ["tsx", join(ROOT, "src", "steps", file)], {
     stdio: "inherit",
     env: { ...process.env, JEV_MODE: "replay" },

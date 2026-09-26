@@ -1,7 +1,7 @@
 <!-- このファイルは書籍の原稿から自動で作っています。直接編集しないでください -->
 # 『ハンズオン Jev 入門』のコマンド一覧
 
-書籍『ハンズオン Jev 入門』の「▶ やってみよう」などのコマンドを、章ごとに並べたページです（コマンド 36 か所、自分で作るファイル 2 個）。
+書籍『ハンズオン Jev 入門』の「▶ やってみよう」などのコマンドを、章ごとに並べたページです（コマンド 37 か所、自分で作るファイル 2 個）。
 Playground に貼る JSON も載せています。
 電子書籍のアプリによっては、本からコピーすると引用符（“ ”）や書名が付け足されます。コマンドは、このページからコピーしてください。
 GitHub では、コマンドの枠の右上にあるボタンでコピーできます。
@@ -298,6 +298,14 @@ console.log(sortForStaff(predictions).slice(0, 12).map((p) => p.id).join(" "));
 
 ```bash
 JEV_MODE=replay npx tsx src/steps/my-sort.ts
+```
+
+### もう一歩: 「救護が要るか」は Noul で聞く
+
+コード: [`src/steps/care.ts`](../../src/steps/care.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#care)
+
+```bash
+npm run care
 ```
 
 ## 第13章 コードに任せる所、Jev に任せる所
