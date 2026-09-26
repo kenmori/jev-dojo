@@ -1,7 +1,7 @@
 import factsJson from "../../data/facts.json" with { type: "json" };
 
 /**
- * 変わりうる値の単一ソース（plan.md §7.1）。
+ * 変わりうる値の単一ソース。
  * 本文やサンプルコードに数字を直書きせず、必ずここを経由する。
  */
 export interface Facts {

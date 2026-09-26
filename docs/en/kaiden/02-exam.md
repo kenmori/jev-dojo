@@ -65,7 +65,7 @@ Steps for redoing it with your own subject:
 
 <details><summary>Going deeper (for pros)</summary>
 
-- Check whether you can explain, one by one and for your own subject, the 7 learning goals of this course (§3.1 of plan.md)
+- Check whether you can explain, one by one and for your own subject, what this course taught (choosing question shapes, writing criteria, routing by uncertainty, evaluation data, measurement, and production safeguards)
 - If you record your own subject's results the same way as `npm run okugi`, with shape properties kept separate from observations, you can use them for comparison when the model is updated
 
 </details>

@@ -1,5 +1,5 @@
 /**
- * 公式ドキュメントの llms.txt を取得し、前回との差分を出して doc-map.md を作り直す（plan.md §7.3, §9）。
+ * 公式ドキュメントの llms.txt を取得し、前回との差分を出して doc-map.md を作り直す。
  *
  *   npm run docmap                       # 取得して更新
  *   npm run docmap -- --offline          # 取得せず、data/doc-map.json から doc-map.md だけ作り直す

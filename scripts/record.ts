@@ -1,5 +1,5 @@
 /**
- * fixture を本物の API で録り直す。モデル更新時の差分が git diff で見える（plan.md §8）。
+ * fixture を本物の API で録り直す。モデル更新時の差分が git diff で見える。
  *
  *   npm run record            # 登録済みの全サンプル
  *   npm run record k07        # 1章だけ（package.json の script 名）

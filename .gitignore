@@ -8,3 +8,6 @@ data/labels.mine.json
 logs/
 __pycache__/
 book/
+
+# 計画のメモ（公開しない）
+plan.md

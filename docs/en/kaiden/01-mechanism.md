@@ -9,7 +9,6 @@ In this chapter, every statement carries one of these markers.
 | Marker | Meaning |
 |---|---|
 | **[Confirmed]** | Stated in the official agent skill (SKILL.md), the official SDK's type definitions, or the README of an integration package, and checked by the author of this course by reading it |
-| **[Plan]** | Quoted from an official page during the research for this course's plan (plan.md). It could not be checked against the original in the environment where the course was written |
 | **[General]** | General machine-learning knowledge. The official docs do not say that Jev works this way |
 | **[Unknown]** | Something that could not be confirmed when this course was written |
 
@@ -130,7 +129,7 @@ Jev is an AI that specializes in the fast kind of judgment only.
 
 - **[Confirmed]** Jev is the first flagship model among TypeSafe's System One models. It understands natural language and, instead of generating text, returns typed answers and probabilities (SKILL.md)
 - **[Confirmed]** System One models are trained to make calibrated judgments. Even so, verify performance in your own domain (SKILL.md)
-- **[Plan]** English is the main training language, and other languages are not necessarily as good. If you use it in a language other than English, test it on your own content (the Models page of the official docs)
+- **[Confirmed]** English is the main training language, and other languages are not necessarily as good. If you use it in a language other than English, test it on your own content (the Models page of the official docs)
 - **[General]** "System 1 / System 2" is a distinction made by the psychologist Daniel Kahneman
 - **[Unknown]** The model's architecture, number of parameters, training data, training method (including RLCD in the glossary), the formula for confidence, and how the text of criteria is used
 

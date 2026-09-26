@@ -1,4 +1,4 @@
-# 週次の鮮度チェック。公式ドキュメント・モデル・SDK・リンクの変化を検出して Issue にする（plan.md §7.3）
+# 週次の鮮度チェック。公式ドキュメント・モデル・SDK・リンクの変化を検出して Issue にする
 name: freshness
 
 on:
@@ -104,7 +104,7 @@ jobs:
         id: lychee
         with:
           # チェック対象を先に並べる（--exclude-path の後ろに置くと、除外するパスとして読まれる）
-          args: --no-progress README.md plan.md "docs/**/*.md"
+          args: --no-progress README.md "docs/**/*.md"
           fail: false
       - name: リンク切れがあれば Issue
         if: steps.lychee.outputs.exit_code != '0'

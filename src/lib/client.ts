@@ -13,7 +13,7 @@ import { t } from "./i18n.js";
 /**
  * TypeSafeClient の薄いラッパ。
  *
- * - モデルIDは data/facts.json の pinned に固定する（plan.md §7.4）
+ * - モデルIDは data/facts.json の pinned に固定する
  * - JEV_MODE に応じて fetch を差し替え、APIキーなしでも動くようにする
  */
 export interface Dojo {

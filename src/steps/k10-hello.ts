@@ -30,7 +30,7 @@ export async function run(dojo: Dojo) {
 }
 
 async function main() {
-  // 10級だけは最新モデルを使う。初回は最新で動くほうが親切なため（plan.md §7.4）
+  // 10級だけは最新モデルを使う。初回は最新で動くほうが親切なため
   const dojo = createDojo(STEP, { model: "jev-latest" });
   const { post, result } = await run(dojo);
 

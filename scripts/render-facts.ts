@@ -1,5 +1,5 @@
 /**
- * data/facts.json から揮発する情報のページを生成する（plan.md §7.1, §7.5）。
+ * data/facts.json から揮発する情報のページを生成する。
  *
  * - docs/_generated/facts.md
  * - docs/_generated/last-verified.md

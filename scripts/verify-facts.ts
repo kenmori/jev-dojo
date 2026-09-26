@@ -1,5 +1,5 @@
 /**
- * data/facts.json のモデル情報を実APIと照合する（plan.md §7.3）。
+ * data/facts.json のモデル情報を実APIと照合する。
  *
  * 1. 固定モデル（pinned）が使えるか。GET /v1/models に載っていなければ、指定して 1 回送って確かめる → 使えなければ失敗
  * 2. jev-latest が今どのバージョンを指しているか → pinned と違えば「新バージョン」として報告

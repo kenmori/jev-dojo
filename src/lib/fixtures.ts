@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 export type AnyFetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
 /**
- * 記録／再生の切り替え（plan.md §8）。
+ * 記録／再生の切り替え。
  *
  * - replay: fixtures/ に保存したレスポンスを返す。APIキー不要・課金ゼロ
  * - live:   本物の API を叩く

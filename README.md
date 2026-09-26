@@ -63,13 +63,12 @@ npm run k10           # 本物のAPIを叩く
 | `npm run show -- p22` | 1 件の投稿について、記録済みの答えを全部表示する（三段〜八段） |
 | `npm run lab:complaint` | 苦情の質問を直す前と後を、同じリクエストで比べる（APIキーが必要） |
 | `npm run exam` | 免許皆伝の最終試験を採点する |
-| `npm run pdf` | 教材本文から PDF 版を作る（`dist/jev-dojo.pdf`。Chrome / Chromium が必要）。`JEV_LANG=en` を付けると英語版（`dist/jev-dojo.en.pdf`） |
 | `npm run label` | 評価データに自分でラベルを付ける（六段） |
 | `npm run reports` | fixture から七段・八段のレポートと図を作り直す |
 | `npm test` | unit ＋ contract テスト（APIキー不要） |
 | `npm run test:eval` | 実APIを使うライブ評価（キーがある時だけ） |
 | `npm run check` | 型・lint・生成物の鮮度・テストをまとめて確認 |
-| `npm run record` | fixture を実APIで録り直す |
+| `npm run record` | fixture を実APIで録り直す（APIキーが必要。**章を指定しないと、すべての記録を消して録り直す**ので、先に git で保存しておく） |
 | `npm run facts` | `data/facts.json` から生成物を更新 |
 
 ## 章ごとの動かし方
@@ -99,17 +98,16 @@ app/         応用A の Web アプリ（TanStack Start + Cloudflare Workers）
 
 ## 状態
 
-入門（級）・中級（段）・上級（高段）・皆伝・発展（応用A〜D）の全23章の本文がそろっています。計画の全体は [plan.md](plan.md) を参照してください。
+入門（級）・中級（段）・上級（高段）・皆伝・発展（応用A〜D）の全23章の本文がそろっています。
 
-最初に入っている fixture は**手で作った見本（合成データ）で、実APIの結果ではありません**。
-再生時にはその旨が表示されます。七段・八段のレポートの数字も見本から計算したもので、Jev の性能を表すものではありません。
-APIキーを入れて `npm run record` → `npm run reports` を実行すると、本物の測定結果に置き換わります。
+日本語の fixture は、著者が本物の API で記録したものです（モデルのバージョンは [facts.md](docs/_generated/facts.md)）。
+英語で動かすとき（`JEV_LANG=en`）の fixture と応用B は、まだ手で作った見本（合成データ）で、実APIの結果ではありません。再生時にはその旨が表示されます。
 
 ## ライセンス
 
 - コード: MIT
 - 教材本文（`docs/`）: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja)。非営利なら自由に読んで共有できます。販売・有料講座への組み込み・改変版の配布はできません
-- PDF 版: 著作権者が販売します（`npm run pdf` で生成）
+- 書籍『ハンズオン Jev 入門』（Kindle 版）は、この教材とは別の著作物です。書籍の本文はこのリポジトリに含まれません
 
 詳しくは [LICENSE](LICENSE) を参照してください。
 

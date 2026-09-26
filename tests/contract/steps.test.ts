@@ -1,6 +1,6 @@
 /**
  * 記録済みレスポンスを再生して、各章のコードがパース・分岐まで正しく動くかを見る。
- * APIキー不要。CI の主力（plan.md §8）。
+ * APIキー不要。CI の主力。
  */
 import { describe, expect, it } from "vitest";
 import { argmax, isClose, sumsToOne } from "../../src/lib/approx.js";

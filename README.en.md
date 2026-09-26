@@ -66,13 +66,12 @@ The full list of chapters is in [docs/en/00-index.md](docs/en/00-index.md).
 | `npm run show -- p22` | Shows every recorded answer for one post (3rd–8th Dan) |
 | `npm run lab:complaint` | Compares the complaint question before and after a fix, in the same request (needs an API key) |
 | `npm run exam` | Grades the final exam |
-| `JEV_LANG=en npm run pdf` | Builds the English PDF from the course text (`dist/jev-dojo.en.pdf`; needs Chrome / Chromium). Without `JEV_LANG=en` it builds the Japanese PDF |
 | `npm run label` | Label the evaluation dataset yourself (6th Dan) |
 | `npm run reports` | Rebuilds the 7th and 8th Dan reports and charts from fixtures |
 | `npm test` | Unit + contract tests (no API key needed) |
 | `npm run test:eval` | Live evaluation against the real API (only when you have a key) |
 | `npm run check` | Runs types, lint, freshness of generated files and tests together |
-| `npm run record` | Re-records fixtures against the real API |
+| `npm run record` | Re-records fixtures against the real API (needs an API key; **without a chapter name it deletes and re-records every fixture**, so commit them first) |
 | `npm run facts` | Updates generated files from `data/facts.json` |
 
 ## How to run each chapter
@@ -102,17 +101,16 @@ app/         Advanced A web app (TanStack Start + Cloudflare Workers; its UI is 
 
 ## Status
 
-The text of all 23 chapters is complete: Beginner (Kyu), Intermediate (Dan), Advanced (high Dan), Mastery (Kaiden) and Extensions (Advanced A to D). For the overall plan, see [plan.md](plan.md) (in Japanese).
+The text of all 23 chapters is complete: Beginner (Kyu), Intermediate (Dan), Advanced (high Dan), Mastery (Kaiden) and Extensions (Advanced A to D).
 
-The fixtures that ship with the course are **hand-made samples (synthetic data), not real API results**.
-Replays say so when they run. The numbers in the 7th and 8th Dan reports are also computed from those samples and do not represent Jev's performance.
-Put in an API key and run `npm run record` → `npm run reports` to replace them with real measurements.
+The Japanese fixtures were recorded by the author against the real API (model version: [facts.en.md](docs/_generated/facts.en.md)).
+The English-mode fixtures (`JEV_LANG=en`) and Advanced B are still **hand-made samples (synthetic data), not real API results**. Replays say so when they run, and the English 7th and 8th Dan reports computed from them do not represent Jev's performance.
 
 ## License
 
 - Code: MIT
 - Course text (`docs/`): [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may read and share it freely for non-commercial purposes. You may not sell it, include it in a paid course, or distribute modified versions
-- PDF edition: sold by the copyright holder (generated with `npm run pdf`, or `JEV_LANG=en npm run pdf` for English)
+- The book 『ハンズオン Jev 入門』 (Kindle, Japanese) is a separate work from this course. Its text is not in this repository
 
 See [LICENSE](LICENSE) for details.
 
