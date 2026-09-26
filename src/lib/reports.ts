@@ -25,7 +25,7 @@ const CHART_SUFFIX = LANG === "en" ? "-en" : "";
 function syntheticNotice(synthetic: boolean): string {
   return synthetic
     ? [
-        "> ⚠️ **このレポートは見本データ（合成）から作られています。実APIの測定結果ではありません。**",
+        "> **注意:** **このレポートは見本データ（合成）から作られています。実APIの測定結果ではありません。**",
         "> ここの数字から Jev の性能について何も結論しないでください。",
         "> APIキーを設定して `npm run record` → `npm run reports` を実行すると、本物の測定結果に置き換わります。",
       ].join("\n")
@@ -35,7 +35,7 @@ function syntheticNotice(synthetic: boolean): string {
 function syntheticNoticeEn(synthetic: boolean): string {
   return synthetic
     ? [
-        "> ⚠️ **This report is built from hand-made sample data (synthetic). These are NOT real API measurements.**",
+        "> **Note:** **This report is built from hand-made sample data (synthetic). These are NOT real API measurements.**",
         "> Do not draw any conclusion about Jev's performance from these numbers.",
         "> Set your API key and run `npm run record` → `npm run reports` to replace them with real measurements.",
       ].join("\n")

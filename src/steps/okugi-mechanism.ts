@@ -147,7 +147,7 @@ async function main() {
   );
   console.log(t("▼ 答えの「形」の性質", '▼ Properties of the answer\'s "shape"'));
   for (const [name, c] of r.counts) {
-    console.log(`  ${c.ok === c.total ? "✅" : "❌"} ${name}: ${c.ok}/${c.total}`);
+    console.log(`  ${c.ok === c.total ? "[OK]" : "[NG]"} ${name}: ${c.ok}/${c.total}`);
   }
   for (const f of r.failures.slice(0, 5)) {
     console.log(`     × ${f.file} ${f.name}: ${f.invariant}（${f.detail}）`);

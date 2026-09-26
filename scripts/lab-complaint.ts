@@ -96,7 +96,7 @@ async function runOnce(): Promise<Row[]> {
     async (p: Post) => {
       const r = await client.systemOne({ state: p.text, questions: { v1, v2 } });
       if (r.model !== facts.model.pinned) {
-        console.warn(`⚠️ ${p.id}: 指定 ${facts.model.pinned} ／ 応答 ${r.model}`);
+        console.warn(`[!] ${p.id}: 指定 ${facts.model.pinned} ／ 応答 ${r.model}`);
       }
       return { id: p.id, v1: r.answers.v1.noul, v2: r.answers.v2.noul, usage: r.usage };
     },

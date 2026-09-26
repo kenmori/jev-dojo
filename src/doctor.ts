@@ -13,9 +13,9 @@ import { t } from "./lib/i18n.js";
 
 loadDotEnv();
 
-const ok = (msg: string) => console.log(`✅ ${msg}`);
-const ng = (msg: string) => console.log(`❌ ${msg}`);
-const info = (msg: string) => console.log(`ℹ️  ${msg}`);
+const ok = (msg: string) => console.log(`[OK] ${msg}`);
+const ng = (msg: string) => console.log(`[NG] ${msg}`);
+const info = (msg: string) => console.log(`[i]  ${msg}`);
 
 let failed = false;
 

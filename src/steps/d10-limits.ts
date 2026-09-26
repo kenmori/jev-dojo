@@ -113,8 +113,8 @@ async function main() {
     );
     console.log(
       t(
-        `    コードの検査        ${r.flagged ? "⚠️ 操作の疑い → 確率にかかわらず人が読む" : "問題なし"}\n`,
-        `    code check        ${r.flagged ? "⚠️ looks like manipulation → a person reads it regardless of probability" : "ok"}\n`,
+        `    コードの検査        ${r.flagged ? "[!] 操作の疑い → 確率にかかわらず人が読む" : "問題なし"}\n`,
+        `    code check        ${r.flagged ? "[!] looks like manipulation → a person reads it regardless of probability" : "ok"}\n`,
       ),
     );
   }

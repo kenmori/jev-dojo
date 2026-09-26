@@ -65,8 +65,8 @@ async function main() {
     if (ok) score += 1;
     console.log(
       t(
-        `${ok ? "✅" : "❌"} 第${Number(key.slice(1))}問 ${TITLES[key]}（${passed}/${total}）`,
-        `${ok ? "✅" : "❌"} Q${Number(key.slice(1))} ${TITLES[key]} (${passed}/${total})`,
+        `${ok ? "[OK]" : "[NG]"} 第${Number(key.slice(1))}問 ${TITLES[key]}（${passed}/${total}）`,
+        `${ok ? "[OK]" : "[NG]"} Q${Number(key.slice(1))} ${TITLES[key]} (${passed}/${total})`,
       ),
     );
   }

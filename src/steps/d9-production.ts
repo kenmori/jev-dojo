@@ -135,8 +135,8 @@ async function main() {
   if (modelsSeen.some((m) => m !== dojo.model)) {
     console.log(
       t(
-        "⚠️ 指定と違うモデルが答えています。エイリアスを使っていないか確認してください",
-        "⚠️ A different model answered. Check that you are not using an alias",
+        "[!] 指定と違うモデルが答えています。エイリアスを使っていないか確認してください",
+        "[!] A different model answered. Check that you are not using an alias",
       ),
     );
   }
