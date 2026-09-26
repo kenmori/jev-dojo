@@ -222,6 +222,14 @@ export function highlightCode(html: string): string {
   );
 }
 
+/** 「▶ やってみよう」の下の「確かめたいこと／予想してみよう」の引用を、囲みの見た目にする */
+export function markTryItAim(html: string): string {
+  return html.replace(
+    /<blockquote>(\s*<p><strong>確かめたいこと<\/strong>)/g,
+    '<blockquote class="aim">$1',
+  );
+}
+
 export function prepareMarkdown(
   markdown: string,
   path: string,
@@ -285,6 +293,8 @@ table { border-collapse: collapse; margin: 0.8em 0; font-size: 0.9em; }
 th, td { border: 1px solid #999; padding: 0.2em 0.4em; vertical-align: top; }
 th { background: #EDF0F5; font-weight: bold; }
 blockquote { margin: 0.8em 0; padding-left: 0.8em; border-left: 3px solid #999; }
+blockquote.aim { border-left: 4px solid #B8862B; background: #F7F3EA; padding: 0.1em 0.8em; }
+blockquote.aim p { margin: 0.4em 0; }
 .caution { margin: 1em 0; padding: 0.2em 0.9em; border: 2px solid #000; }
 .deeper { border: 1px solid #bbb; padding: 0 0.8em; margin: 1em 0; }
 .deeper-title { font-weight: bold; }
@@ -503,10 +513,12 @@ async function main() {
         c.path,
         byPath,
       );
-      let html = highlightCode(
-        (marked.parse(prepared.markdown, { async: false }) as string).replace(
-          /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
-          (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+      let html = markTryItAim(
+        highlightCode(
+          (marked.parse(prepared.markdown, { async: false }) as string).replace(
+            /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+            (_m, code: string) => `<pre class="mermaid">${code}</pre>`,
+          ),
         ),
       );
       // SVG の画像は、中身をその場に埋め込んでからブラウザで PNG にする

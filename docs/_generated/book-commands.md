@@ -67,7 +67,7 @@ npm run doctor
 
 ### 本物の Jev に質問する
 
-コード: [`src/steps/k10-hello.ts`](../../src/steps/k10-hello.ts)
+コード: [`src/steps/k10-hello.ts`](../../src/steps/k10-hello.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k10)
 
 ```bash
 npm run k10
@@ -138,7 +138,7 @@ Playground: [console.typesafe.ai/playground](https://console.typesafe.ai/playgro
 
 ### 同じことを TypeScript で書く
 
-コード: [`src/steps/k08-raw.ts`](../../src/steps/k08-raw.ts)
+コード: [`src/steps/k08-raw.ts`](../../src/steps/k08-raw.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k08)
 
 ```bash
 npm run k08
@@ -148,7 +148,7 @@ npm run k08
 
 ### 実行する前に、予想してみる
 
-コード: [`src/steps/k07-noul.ts`](../../src/steps/k07-noul.ts)
+コード: [`src/steps/k07-noul.ts`](../../src/steps/k07-noul.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k07)
 
 ```bash
 npm run k07
@@ -158,7 +158,7 @@ npm run k07
 
 ### 実行して、確率の分かれ方を見る
 
-コード: [`src/steps/k06-choice.ts`](../../src/steps/k06-choice.ts)
+コード: [`src/steps/k06-choice.ts`](../../src/steps/k06-choice.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k06)
 
 ```bash
 npm run k06
@@ -168,7 +168,7 @@ npm run k06
 
 ### 実行する前に、予想してみる
 
-コード: [`src/steps/k05-score.ts`](../../src/steps/k05-score.ts)
+コード: [`src/steps/k05-score.ts`](../../src/steps/k05-score.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k05)
 
 ```bash
 npm run k05
@@ -178,7 +178,7 @@ npm run k05
 
 ### まとめると、何が得なのか
 
-コード: [`src/steps/k04-batch.ts`](../../src/steps/k04-batch.ts)
+コード: [`src/steps/k04-batch.ts`](../../src/steps/k04-batch.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#k04)
 
 ```bash
 npm run k04
@@ -222,7 +222,7 @@ npx tsx src/steps/my-triage.ts
 
 ### 同じ投稿を、3 通りの材料で聞く
 
-コード: [`src/steps/d1-state.ts`](../../src/steps/d1-state.ts)
+コード: [`src/steps/d1-state.ts`](../../src/steps/d1-state.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#d1)
 
 ```bash
 npm run d1
@@ -232,7 +232,7 @@ npm run d1
 
 ### 同じ投稿に、3 通りの書き方で聞く
 
-コード: [`src/steps/d2-instructions.ts`](../../src/steps/d2-instructions.ts)
+コード: [`src/steps/d2-instructions.ts`](../../src/steps/d2-instructions.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#d2)
 
 ```bash
 npm run d2
@@ -240,7 +240,7 @@ npm run d2
 
 ### 仕分けボットの本番用の質問
 
-コード: [`scripts/show.ts`](../../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-ja)
 
 ```bash
 npm run show -- p06 p14 p51
@@ -250,7 +250,7 @@ npm run show -- p06 p14 p51
 
 ### 60 件を振り分けてみる
 
-コード: [`src/steps/d3-lanes.ts`](../../src/steps/d3-lanes.ts)、[`src/lib/lanes.ts`](../../src/lib/lanes.ts)
+コード: [`src/steps/d3-lanes.ts`](../../src/steps/d3-lanes.ts)、[`src/lib/lanes.ts`](../../src/lib/lanes.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-ja)
 
 ```bash
 npm run d3
@@ -258,7 +258,7 @@ npm run d3
 
 ### 迷った 8 件を見る
 
-コード: [`scripts/show.ts`](../../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-ja)
 
 ```bash
 npm run show -- p22 p42 p49
@@ -268,7 +268,7 @@ npm run show -- p22 p42 p49
 
 ### 実行して、振り分けを見る
 
-コード: [`src/steps/d4-patterns.ts`](../../src/steps/d4-patterns.ts)
+コード: [`src/steps/d4-patterns.ts`](../../src/steps/d4-patterns.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#d4)
 
 ```bash
 npm run d4
@@ -304,7 +304,7 @@ JEV_MODE=replay npx tsx src/steps/my-sort.ts
 
 ### 実行する
 
-コード: [`src/steps/d5-boundary.ts`](../../src/steps/d5-boundary.ts)
+コード: [`src/steps/d5-boundary.ts`](../../src/steps/d5-boundary.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#d5)
 
 ```bash
 npm run d5
@@ -332,7 +332,7 @@ npm run label
 
 ### 測る
 
-コード: [`src/steps/d7-calibration.ts`](../../src/steps/d7-calibration.ts)、[`src/lib/metrics.ts`](../../src/lib/metrics.ts)
+コード: [`src/steps/d7-calibration.ts`](../../src/steps/d7-calibration.ts)、[`src/lib/metrics.ts`](../../src/lib/metrics.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-ja)
 
 ```bash
 npm run d7
@@ -350,7 +350,7 @@ npm run lab:complaint
 
 ### 同じ 60 件を、日本語と英語で判定する
 
-コード: [`src/steps/d8-ja-en.ts`](../../src/steps/d8-ja-en.ts)
+コード: [`src/steps/d8-ja-en.ts`](../../src/steps/d8-ja-en.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-en)
 
 ```bash
 npm run d8
@@ -358,7 +358,7 @@ npm run d8
 
 ### 日英で答えが分かれた 2 件
 
-コード: [`scripts/show.ts`](../../scripts/show.ts)
+コード: [`scripts/show.ts`](../../scripts/show.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#board-en)
 
 ```bash
 npm run show -- p53 p06 --lang en
@@ -376,7 +376,7 @@ npm run d9
 
 ### 判定を操作しようとする投稿
 
-コード: [`src/steps/d10-limits.ts`](../../src/steps/d10-limits.ts)
+コード: [`src/steps/d10-limits.ts`](../../src/steps/d10-limits.ts)　Playground 用: [貼る JSON](../../docs/_generated/playground.md#d10)
 
 ```bash
 npm run d10

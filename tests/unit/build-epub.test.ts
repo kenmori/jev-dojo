@@ -9,6 +9,7 @@ import {
   groupByPart,
   highlightCode,
   insertKeyVisual,
+  markTryItAim,
   navXhtml,
   prepareMarkdown,
   resolveChapters,
@@ -193,5 +194,15 @@ describe("applyFootnotes", () => {
   });
   it("注がなければ何も足さない", () => {
     expect(applyFootnotes("本文だけ")).toBe("本文だけ");
+  });
+});
+
+describe("markTryItAim", () => {
+  it("「確かめたいこと」で始まる引用だけに囲みの class を付ける", () => {
+    const html =
+      "<blockquote>\n<p><strong>確かめたいこと</strong>　x</p>\n</blockquote><blockquote>\n<p>公式の引用</p>\n</blockquote>";
+    const out = markTryItAim(html);
+    expect(out).toContain('<blockquote class="aim">\n<p><strong>確かめたいこと');
+    expect(out).toContain("<blockquote>\n<p>公式の引用");
   });
 });

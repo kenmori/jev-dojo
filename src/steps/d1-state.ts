@@ -38,7 +38,7 @@ export const TARGET_ID = "p08";
 export function buildStates(targetId = TARGET_ID) {
   const target = getPost(targetId);
   return {
-    /** A: 投稿の文章だけ（文字列） */
+    /** A: 投稿の文章だけ（{ post: { text } }） */
     textOnly: { post: { text: target.text } },
     /** B: 判断に必要な文脈を、名前付きのフィールドで足す */
     structured: {

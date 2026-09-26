@@ -120,7 +120,7 @@ async function main() {
   );
   console.log(
     t(
-      `  （目安: 0.8 以上でかなり一致、0.4 未満だと「何が正解か」の定義がずれている）\n`,
+      `  （目安: 0.8 を超えればほぼ一致、0.6〜0.8 ならかなり一致、0.4 未満だと「何が正解か」の定義がずれている）\n`,
       `  (Rule of thumb: 0.8+ is strong agreement; below 0.4 means your definitions of "correct" differ)\n`,
     ),
   );

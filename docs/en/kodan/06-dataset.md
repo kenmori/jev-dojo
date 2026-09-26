@@ -43,7 +43,8 @@ For the posts that are hard to call, write the rules down in words. Without rule
 
 - Yes: the post describes a problem, dissatisfaction, or a request for improvement. This includes indirect wording ("it would be nice if..."), sarcasm ("What a great festival"), and polite requests
 - No: questions, thanks, impressions, lost-item reports, advertising
-- A report of danger ("a lantern looks like it is about to fall") is "yes", because it asks for something to be fixed
+- A report of a hazard at the venue or its equipment ("a lantern looks like it is about to fall") is "yes", because it asks for something to be fixed
+- A report about a person's health or injury ("someone collapsed") is "no": it is a call for help, not a complaint. Urgency handles it
 
 **Team (department)**
 
