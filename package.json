@@ -22,6 +22,7 @@
     "d3": "tsx src/steps/d3-lanes.ts",
     "d4": "tsx src/steps/d4-patterns.ts",
     "d5": "tsx src/steps/d5-boundary.ts",
+    "care": "tsx src/steps/care.ts",
     "d6": "tsx src/steps/d6-dataset.ts",
     "d7": "tsx src/steps/d7-calibration.ts",
     "d8": "tsx src/steps/d8-ja-en.ts",
